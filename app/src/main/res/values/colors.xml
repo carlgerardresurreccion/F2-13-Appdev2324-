@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!--For gradient background-->
+    <color name="bgreen">#C6FFDD</color>
+    <color name="byellow">#FBD786</color>
+    <color name="bred">#f7797d</color>
+
+    <!--For onboarding screen-->
+    <color name="inactive">#D0D4CA</color>
+
+    <!--Far the rest of the app-->
+    <color name="red">#FF9B9B</color>
+    <color name="orange">#FFD6A5</color>
+    <color name="yellow">#FFFEC4</color>
+    <color name="green">#CBFFA9</color>
+    <color name="light">#FFF5E0</color>
+    <color name="gray">#F3F1F1</color>
+</resources>

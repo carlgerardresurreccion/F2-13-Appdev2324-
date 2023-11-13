@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".User_Authentication_Screen">
+
+    <RelativeLayout
+        android:id="@+id/arch"
+        android:layout_width="379dp"
+        android:layout_height="459dp"
+        android:layout_marginTop="42dp"
+        android:background="@drawable/user_auth_arch"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="315dp"
+            android:layout_height="270dp"
+            android:layout_marginTop="200dp"
+            android:fontFamily="@font/poppinsbold"
+            android:text="Furry Found."
+            android:textColor="@color/red"
+            android:textSize="90dp" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="370dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="52dp"
+        android:background="@drawable/buttons"
+        android:fontFamily="@font/poppinsbold"
+        android:text="Log In"
+        android:textSize="18dp"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/arch" />
+
+    <Button
+        android:id="@+id/signUpButton"
+        android:layout_width="370dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="35dp"
+        android:background="@drawable/buttons"
+        android:fontFamily="@font/poppinsbold"
+        android:text="Sign Up"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginButton" />
+
+    <LinearLayout
+        android:id="@+id/socmedButtons"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginTop="69dp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signUpButton">
+
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/socmed_buttons"
+            android:fontFamily="@font/poppinsbold"
+            android:text="fb"
+            android:textAllCaps="false"
+            android:textColor="@color/red"
+            android:textSize="20sp"
+            android:layout_marginEnd="15dp"/>
+
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/socmed_buttons"
+            android:fontFamily="@font/poppinsbold"
+            android:text="in"
+            android:textAllCaps="false"
+            android:textColor="@color/red"
+            android:textSize="20sp"
+            android:layout_marginEnd="15dp"/>
+
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/socmed_buttons"
+            android:fontFamily="@font/poppinsbold"
+            android:text="g+"
+            android:textAllCaps="false"
+            android:textColor="@color/red"
+            android:textSize="20sp"
+            android:layout_marginEnd="15dp"/>
+
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/socmed_buttons"
+            android:fontFamily="@font/poppinsbold"
+            android:text="tw"
+            android:textAllCaps="false"
+            android:textColor="@color/red"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
