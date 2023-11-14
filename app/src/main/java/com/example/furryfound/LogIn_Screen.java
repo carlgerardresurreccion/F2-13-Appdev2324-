@@ -9,6 +9,6 @@ public class LogIn_Screen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_log_in_screen);
+        setContentView(R.layout.log_in_screen);
     }
 }
