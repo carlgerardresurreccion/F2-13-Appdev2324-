@@ -10,11 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import java.util.Random;
 
 public class Register_Screen extends AppCompatActivity {
-    private EditText firstNameField, lastNameField, registerEmailField,
-            registerPasswordField, registerConfirmPasswordField, registerAddressField;
+    private EditText firstNameField, lastNameField, registerEmailField, registerPasswordField, registerConfirmPasswordField, registerAddressField;
     private Button RegisterFr, RegisterLoginButton;
     private DatabaseHelper databaseHelper;
 
@@ -49,12 +47,8 @@ public class Register_Screen extends AppCompatActivity {
                     long userId = saveUserData(firstName, lastName, email, password, address);
 
                     if (userId != -1) {
-                        String confirmationCode = generateConfirmationCode(6); // Change the length as needed
-                        sendConfirmationEmail(email, confirmationCode);
-
-                        // Navigate to Confirm_Email_Screen with the confirmation code
-                        Intent intent = new Intent(Register_Screen.this, Confirm_Email_Screen.class);
-                        intent.putExtra("CONFIRMATION_CODE", confirmationCode);
+                        Toast.makeText(Register_Screen.this, "Registration success!", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(Register_Screen.this, LogIn_Screen.class);
                         startActivity(intent);
                         finish();
                     } else {
@@ -64,7 +58,6 @@ public class Register_Screen extends AppCompatActivity {
             }
         });
         RegisterLoginButton.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Register_Screen.this, LogIn_Screen.class);
@@ -74,24 +67,6 @@ public class Register_Screen extends AppCompatActivity {
         });
 
     }
-
-    private String generateConfirmationCode(int length) {
-        //mao ni mogenerate ug coode nga isend sa user
-        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        StringBuilder code = new StringBuilder();
-
-        Random random = new Random();
-        for (int i = 0; i < length; i++) {
-            int index = random.nextInt(characters.length());
-            code.append(characters.charAt(index));
-        }
-        return code.toString();
-    }
-
-    private void sendConfirmationEmail(String email, String confirmationCode) {
-       //wala ko kabaw unsaon
-    }
-
     private long saveUserData(String firstName, String lastName, String email, String password, String address) {
         //MOSAVE SA USER INFO
         long userId = -1;

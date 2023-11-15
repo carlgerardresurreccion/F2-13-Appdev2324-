@@ -58,11 +58,10 @@ public class LogIn_Screen extends AppCompatActivity {
         });
     }
     private boolean checkLoginCredentials(String email, String password) {
-    //DILI FINAL
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String storedEmail = sharedPreferences.getString("user_email", "");
         String storedPassword = sharedPreferences.getString("user_password", "");
-
         return email.equals(storedEmail) && password.equals(storedPassword);
     }
+
 }
