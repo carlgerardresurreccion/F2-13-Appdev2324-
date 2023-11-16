@@ -124,7 +124,7 @@
             android:layout_marginTop="50dp">
             
             <Button
-                android:id="@+id/LogInFr"
+                android:id="@+id/Reset_btn"
                 android:layout_width="350dp"
                 android:layout_height="52dp"
                 android:background="@drawable/buttons"
@@ -140,7 +140,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:text="Don't have an account?"
-                android:layout_below="@id/LogInFr"
+                android:layout_below="@id/Reset_btn"
                 android:fontFamily="@font/poppinssemibold"
                 android:gravity="center_horizontal"
                 android:layout_marginTop="15dp"/>

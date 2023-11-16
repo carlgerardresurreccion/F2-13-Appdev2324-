@@ -279,7 +279,11 @@
                 android:textSize="18sp"
                 tools:ignore="TouchTargetSizeCheck" />
         </RelativeLayout>
-
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,34 +1,43 @@
 package com.example.furryfound;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.ContentValues;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.AuthResult;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 public class Register_Screen extends AppCompatActivity {
     private EditText firstNameField, lastNameField, registerEmailField, registerPasswordField, registerConfirmPasswordField, registerAddressField;
     private Button RegisterFr, RegisterLoginButton;
-    private DatabaseHelper databaseHelper;
+    private ProgressBar progressbar;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_screen);
+
+        mAuth = FirebaseAuth.getInstance();
+
         firstNameField = findViewById(R.id.FirstNameField);
         lastNameField = findViewById(R.id.LastNameField);
         registerEmailField = findViewById(R.id.RegisterEmailField);
         registerPasswordField = findViewById(R.id.RegisterPasswordField);
         registerConfirmPasswordField = findViewById(R.id.RegisterConfirmPasswordField);
         registerAddressField = findViewById(R.id.RegisterAddressField);
-        databaseHelper = new DatabaseHelper(this);
-        RegisterFr = (Button) findViewById(R.id.RegisterFr);
-        RegisterLoginButton = (Button) findViewById(R.id.RegisterLoginButton);
+
+        RegisterFr = findViewById(R.id.RegisterFr);
+        RegisterLoginButton = findViewById(R.id.RegisterLoginButton);
         RegisterFr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,20 +52,14 @@ public class Register_Screen extends AppCompatActivity {
                     Toast.makeText(Register_Screen.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
                 } else if (!password.equals(confirmPassword)) {
                     Toast.makeText(Register_Screen.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
+                } else if (password.length() < 6) {
+                    Toast.makeText(Register_Screen.this, "Passwords too short", Toast.LENGTH_SHORT).show();
                 } else {
-                    long userId = saveUserData(firstName, lastName, email, password, address);
-
-                    if (userId != -1) {
-                        Toast.makeText(Register_Screen.this, "Registration success!", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(Register_Screen.this, LogIn_Screen.class);
-                        startActivity(intent);
-                        finish();
-                    } else {
-                        Toast.makeText(Register_Screen.this, "Registration failed", Toast.LENGTH_SHORT).show();
-                    }
+                    registerUser(email, password, firstName, lastName, address);
                 }
             }
         });
+
         RegisterLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,23 +68,20 @@ public class Register_Screen extends AppCompatActivity {
                 finish();
             }
         });
-
     }
-    private long saveUserData(String firstName, String lastName, String email, String password, String address) {
-        //MOSAVE SA USER INFO
-        long userId = -1;
-        try (SQLiteDatabase db = databaseHelper.getWritableDatabase()) {
-            ContentValues values = new ContentValues();
-            values.put(DatabaseHelper.COLUMN_FIRST_NAME, firstName);
-            values.put(DatabaseHelper.COLUMN_LAST_NAME, lastName);
-            values.put(DatabaseHelper.COLUMN_EMAIL, email);
-            values.put(DatabaseHelper.COLUMN_PASSWORD, password);
-            values.put(DatabaseHelper.COLUMN_ADDRESS, address);
 
-            userId = db.insert(DatabaseHelper.TABLE_USERS, null, values);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return userId;
+    private void registerUser(String email, String password, final String firstName, final String lastName, final String address) {
+        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(Register_Screen.this, "Registration success!", Toast.LENGTH_SHORT).show();
+                            // You can save additional user information to Firestore or Realtime Database if needed
+                            // For simplicity, we'll just go to the login screen for now
+                        } else {
+                            Toast.makeText(Register_Screen.this, "Registration failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 }
