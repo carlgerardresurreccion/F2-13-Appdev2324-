@@ -36,6 +36,7 @@ public class LogIn_Screen extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(LogIn_Screen.this, ForgotPassword_Screen.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             }
         });
 
@@ -59,6 +60,7 @@ public class LogIn_Screen extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LogIn_Screen.this, Register_Screen.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();
             }
         });
@@ -73,6 +75,7 @@ public class LogIn_Screen extends AppCompatActivity {
                         Toast.makeText(LogIn_Screen.this, "Login successful!", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(LogIn_Screen.this, LogIn_Screen.class);
                         startActivity(intent);
+                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                         finish();
                     } else {
                         // If sign in fails, display a message to the user.

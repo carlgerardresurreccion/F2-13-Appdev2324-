@@ -73,6 +73,7 @@ public class ForgotPassword_Screen extends AppCompatActivity {
                         Toast.makeText(ForgotPassword_Screen.this, "Reset Password link has been sent to your registered Email", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(ForgotPassword_Screen.this, LogIn_Screen.class);
                         startActivity(intent);
+                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                         finish();
                     }
                 })
