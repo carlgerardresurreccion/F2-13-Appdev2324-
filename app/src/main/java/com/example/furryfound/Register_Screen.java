@@ -65,6 +65,7 @@ public class Register_Screen extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(Register_Screen.this, LogIn_Screen.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();
             }
         });

@@ -5,6 +5,6 @@
         android:startColor="@color/bgreen"
         android:centerColor="@color/byellow"
         android:endColor="@color/bred"
-        android:angle="36"/>
+        android:angle="270"/>
 
 </shape>

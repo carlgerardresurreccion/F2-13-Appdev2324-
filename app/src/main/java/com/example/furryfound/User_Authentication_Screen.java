@@ -18,6 +18,7 @@ public class User_Authentication_Screen extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(User_Authentication_Screen.this, LogIn_Screen.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             }
         });
         signUpButton.setOnClickListener(new View.OnClickListener() {
@@ -25,6 +26,7 @@ public class User_Authentication_Screen extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(User_Authentication_Screen.this, Register_Screen.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             }
         });
     }
