@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "283444505486",
+    "project_id": "furry-found",
+    "storage_bucket": "furry-found.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:283444505486:android:1ef1da187f0bbe0746d2df",
+        "android_client_info": {
+          "package_name": "com.example.furryfound"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnQEQFhVuJu0UpePCDJfMm3kz-Gjab2-k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
