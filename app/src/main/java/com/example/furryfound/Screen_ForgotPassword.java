@@ -17,7 +17,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class ForgotPassword_Screen extends AppCompatActivity {
+public class Screen_ForgotPassword extends AppCompatActivity {
 
     //Declaration
     Button btnReset;
@@ -70,16 +70,17 @@ public class ForgotPassword_Screen extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        Toast.makeText(ForgotPassword_Screen.this, "Reset Password link has been sent to your registered Email", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(ForgotPassword_Screen.this, LogIn_Screen.class);
+                        Toast.makeText(Screen_ForgotPassword.this, "Reset Password link has been sent to your registered Email", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(Screen_ForgotPassword.this, Screen_LogIn.class);
                         startActivity(intent);
+                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                         finish();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(ForgotPassword_Screen.this, "Error :- " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Screen_ForgotPassword.this, "Error :- " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         progressBar.setVisibility(View.INVISIBLE);
                         btnReset.setVisibility(View.VISIBLE);
                     }

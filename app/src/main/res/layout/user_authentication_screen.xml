@@ -4,110 +4,125 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".User_Authentication_Screen">
-
-    <RelativeLayout
-        android:id="@+id/arch"
-        android:layout_width="379dp"
-        android:layout_height="459dp"
-        android:layout_marginTop="42dp"
-        android:background="@drawable/user_auth_arch"
-        android:gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:layout_width="315dp"
-            android:layout_height="270dp"
-            android:layout_marginTop="200dp"
-            android:fontFamily="@font/poppinsbold"
-            android:text="Furry Found."
-            android:textColor="@color/red"
-            android:textSize="90dp" />
-    </RelativeLayout>
-
-    <Button
-        android:id="@+id/loginButton"
-        android:layout_width="370dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="52dp"
-        android:background="@drawable/buttons"
-        android:fontFamily="@font/poppinsbold"
-        android:text="Log In"
-        android:textSize="18dp"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/arch" />
-
-    <Button
-        android:id="@+id/signUpButton"
-        android:layout_width="370dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="35dp"
-        android:background="@drawable/buttons"
-        android:fontFamily="@font/poppinsbold"
-        android:text="Sign Up"
-        android:textColor="@color/white"
-        android:textSize="18dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginButton" />
+    tools:context=".Screen_User_Authentication"
+    android:background="@color/violet"
+    android:paddingLeft="30dp"
+    android:paddingRight="30dp">
 
     <LinearLayout
-        android:id="@+id/socmedButtons"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:layout_marginTop="69dp"
-        android:gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signUpButton">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <Button
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/socmed_buttons"
-            android:fontFamily="@font/poppinsbold"
-            android:text="fb"
-            android:textAllCaps="false"
-            android:textColor="@color/red"
-            android:textSize="20sp"
-            android:layout_marginEnd="15dp"/>
+        <RelativeLayout
+            android:id="@+id/arch"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="70dp">
 
-        <Button
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/socmed_buttons"
-            android:fontFamily="@font/poppinsbold"
-            android:text="in"
-            android:textAllCaps="false"
-            android:textColor="@color/red"
-            android:textSize="20sp"
-            android:layout_marginEnd="15dp"/>
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:src="@drawable/image_logo"/>
 
-        <Button
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/socmed_buttons"
-            android:fontFamily="@font/poppinsbold"
-            android:text="g+"
-            android:textAllCaps="false"
-            android:textColor="@color/red"
-            android:textSize="20sp"
-            android:layout_marginEnd="15dp"/>
+            <TextView
+                android:id="@+id/logotext"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:fontFamily="@font/poppinsregular"
+                android:text="Furry Found"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                android:gravity="center_horizontal"
+                android:layout_below="@+id/logo"/>
 
-        <Button
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/socmed_buttons"
-            android:fontFamily="@font/poppinsbold"
-            android:text="tw"
-            android:textAllCaps="false"
-            android:textColor="@color/red"
-            android:textSize="20sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppinsregular"
+                android:text="Connecting hearts and homes,
+                          one paw at a time"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:gravity="center_horizontal"
+                android:layout_below="@+id/logotext"
+                android:layout_marginTop="20dp"/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/GoogleButton"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:background="@drawable/button_teal"
+                android:fontFamily="@font/poppinsregular"
+                android:text="Continue with Google"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_marginBottom="20dp"/>
+
+            <Button
+                android:id="@+id/FacebookButton"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:background="@drawable/button_beige"
+                android:fontFamily="@font/poppinsregular"
+                android:text="Continue with Facebook"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_below="@+id/GoogleButton"
+                android:layout_marginBottom="20dp"/>
+
+            <Button
+                android:id="@+id/signUpButton"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:background="@drawable/button_white"
+                android:fontFamily="@font/poppinsregular"
+                android:text="Sign Up with Email"
+                android:textColor="@color/violet"
+                android:textSize="18sp"
+                android:layout_below="@id/FacebookButton"
+                android:layout_marginBottom="20dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppinsregular"
+                    android:text="Already have an account?"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"/>
+
+                <TextView
+                    android:id="@+id/loginButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppinssemibold"
+                    android:text="Log In"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:paddingLeft="10dp"
+                    android:clickable="true"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
     </LinearLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,8 +13,9 @@ public class SplashScreen extends AppCompatActivity {
         setContentView(R.layout.splashscreen);
 
         new Handler().postDelayed(() -> {
-            Intent intent = new Intent(SplashScreen.this, Welcome_Screen.class);
+            Intent intent = new Intent(SplashScreen.this, Screen_Welcome.class);
             startActivity(intent);
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
             finish();
         }, 3000);
