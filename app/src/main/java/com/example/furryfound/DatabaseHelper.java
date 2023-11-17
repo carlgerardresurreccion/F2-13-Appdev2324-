@@ -11,21 +11,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // Define your table and column names
     public static final String TABLE_USERS = "users";
     public static final String COLUMN_ID = "id";
-    public static final String COLUMN_FIRST_NAME = "first_name";
-    public static final String COLUMN_LAST_NAME = "last_name";
+    public static final String COLUMN_USERNAME = "username";
     public static final String COLUMN_EMAIL = "email";
-    public static final String COLUMN_PASSWORD = "password"; // NOTE: Avoid storing plain text passwords
-    public static final String COLUMN_ADDRESS = "address";
+    public static final String COLUMN_PASSWORD = "password";
 
     // Create table query
     private static final String CREATE_TABLE_USERS =
             "CREATE TABLE " + TABLE_USERS + "(" +
                     COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    COLUMN_FIRST_NAME + " TEXT," +
-                    COLUMN_LAST_NAME + " TEXT," +
+                    COLUMN_USERNAME + " TEXT," +
                     COLUMN_EMAIL + " TEXT," +
                     COLUMN_PASSWORD + " TEXT," +
-                    COLUMN_ADDRESS + " TEXT" +
                     ")";
 
     public DatabaseHelper(Context context) {

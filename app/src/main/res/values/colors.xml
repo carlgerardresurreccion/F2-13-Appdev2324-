@@ -17,5 +17,10 @@
     <color name="yellow">#FFFEC4</color>
     <color name="green">#CBFFA9</color>
     <color name="light">#FFF5E0</color>
-    <color name="gray">#F3F1F1</color>
+
+    <!--New Colors-->
+    <color name="violet">#6868AE</color>
+    <color name="teal">#82D1D9</color>
+    <color name="beige">#FCEEE1</color>
+    <color name="grey">#7C7C7C</color>
 </resources>

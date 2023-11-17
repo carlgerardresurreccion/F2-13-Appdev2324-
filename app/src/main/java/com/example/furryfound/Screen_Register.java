@@ -8,7 +8,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -16,9 +18,12 @@ import com.google.firebase.auth.AuthResult;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
-public class Register_Screen extends AppCompatActivity {
-    private EditText firstNameField, lastNameField, registerEmailField, registerPasswordField, registerConfirmPasswordField, registerAddressField;
-    private Button RegisterFr, RegisterLoginButton;
+public class Screen_Register extends AppCompatActivity {
+    private EditText registerUsernameField, registerEmailField, registerPasswordField;
+    private Button RegisterFr;
+
+    private ImageButton backButton;
+    private TextView RegisterLoginButton;
     private ProgressBar progressbar;
     private FirebaseAuth mAuth;
 
@@ -29,33 +34,35 @@ public class Register_Screen extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        firstNameField = findViewById(R.id.FirstNameField);
-        lastNameField = findViewById(R.id.LastNameField);
+        registerUsernameField = findViewById(R.id.RegisterUsernameField);
         registerEmailField = findViewById(R.id.RegisterEmailField);
         registerPasswordField = findViewById(R.id.RegisterPasswordField);
-        registerConfirmPasswordField = findViewById(R.id.RegisterConfirmPasswordField);
-        registerAddressField = findViewById(R.id.RegisterAddressField);
+
+        backButton = (ImageButton) findViewById(R.id.backButton);
 
         RegisterFr = findViewById(R.id.RegisterFr);
         RegisterLoginButton = findViewById(R.id.RegisterLoginButton);
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
         RegisterFr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String firstName = firstNameField.getText().toString();
-                String lastName = lastNameField.getText().toString();
                 String email = registerEmailField.getText().toString();
                 String password = registerPasswordField.getText().toString();
-                String confirmPassword = registerConfirmPasswordField.getText().toString();
-                String address = registerAddressField.getText().toString();
+                String username = registerUsernameField.getText().toString();
 
-                if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || address.isEmpty()) {
-                    Toast.makeText(Register_Screen.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
-                } else if (!password.equals(confirmPassword)) {
-                    Toast.makeText(Register_Screen.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
+                if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
+                    Toast.makeText(Screen_Register.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
                 } else if (password.length() < 6) {
-                    Toast.makeText(Register_Screen.this, "Passwords too short", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Screen_Register.this, "Passwords too short", Toast.LENGTH_SHORT).show();
                 } else {
-                    registerUser(email, password, firstName, lastName, address);
+                    registerUser(username, email, password);
                 }
             }
         });
@@ -63,7 +70,7 @@ public class Register_Screen extends AppCompatActivity {
         RegisterLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Register_Screen.this, LogIn_Screen.class);
+                Intent intent = new Intent(Screen_Register.this, Screen_LogIn.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();
@@ -71,16 +78,18 @@ public class Register_Screen extends AppCompatActivity {
         });
     }
 
-    private void registerUser(String email, String password, final String firstName, final String lastName, final String address) {
+    private void registerUser(String username, String email, String password) {
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(Register_Screen.this, "Registration success!", Toast.LENGTH_SHORT).show();
-                            // You can save additional user information to Firestore or Realtime Database if needed
-                            // For simplicity, we'll just go to the login screen for now
+                            Toast.makeText(Screen_Register.this, "Registration success!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(Screen_Register.this, Screen_LogIn.class);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                            finish();
                         } else {
-                            Toast.makeText(Register_Screen.this, "Registration failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Screen_Register.this, "Registration failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

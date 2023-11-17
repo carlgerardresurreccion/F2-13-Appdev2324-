@@ -8,22 +8,22 @@
 
     <ImageView
         android:id="@+id/imageOnboarding"
-        android:layout_width="264dp"
-        android:layout_height="173dp"
+        android:layout_width="350dp"
+        android:layout_height="300dp"
         android:layout_marginTop="350dp"
         android:adjustViewBounds="true"
         android:contentDescription="@string/app_name" />
 
     <TextView
         android:id="@+id/textDescription"
-        android:layout_width="317dp"
+        android:layout_width="350dp"
         android:layout_height="154dp"
         android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
         android:fontFamily="@font/poppinsregular"
         android:gravity="top|center_horizontal"
-        android:textColor="@color/bred"
-        android:textSize="16sp" />
+        android:textColor="@color/teal"
+        android:textSize="18sp" />
 
 </LinearLayout>
