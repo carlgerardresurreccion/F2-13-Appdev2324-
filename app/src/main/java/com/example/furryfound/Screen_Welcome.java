@@ -66,17 +66,14 @@ public class Screen_Welcome extends AppCompatActivity {
             }
         });
 
-        buttonOnboardingAction.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                /*if (onboardingViewPager.getCurrentItem() + 1 < onboardingAdapter.getItemCount()) {
-                    onboardingViewPager.setCurrentItem(onboardingViewPager.getCurrentItem() + 1);
-                } else {
-                    */startActivity(new Intent(getApplicationContext(), Screen_User_Authentication.class));
-                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                    finish();
-                //}
-            }
+        buttonOnboardingAction.setOnClickListener(view -> {
+            /*if (onboardingViewPager.getCurrentItem() + 1 < onboardingAdapter.getItemCount()) {
+                onboardingViewPager.setCurrentItem(onboardingViewPager.getCurrentItem() + 1);
+            } else {
+                */startActivity(new Intent(getApplicationContext(), Screen_User_Authentication.class));
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                finish();
+            //}
         });
 
     }
