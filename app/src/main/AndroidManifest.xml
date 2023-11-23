@@ -13,6 +13,9 @@
         android:theme="@style/Theme.FurryFound"
         tools:targetApi="31">
         <activity
+            android:name=".FavoritesScreen_Activity"
+            android:exported="false" />
+        <activity
             android:name=".Screen_Dashboard"
             android:exported="false" />
         <activity
@@ -26,10 +29,10 @@
             android:exported="false" />
         <activity
             android:name=".Screen_Register"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".Screen_LogIn"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".Screen_Welcome"
             android:exported="false" />

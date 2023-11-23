@@ -79,6 +79,7 @@ public class Screen_Register extends AppCompatActivity {
     }
 
     private void registerUser(String username, String email, String password) {
+
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
