@@ -22,12 +22,6 @@
             android:name=".Screen_ForgotPassword"
             android:exported="false" />
         <activity
-            android:name=".Confirm_Email_Screen"
-            android:exported="false" />
-        <activity
-            android:name=".Find_Account_Screen"
-            android:exported="false" />
-        <activity
             android:name=".Screen_Register"
             android:exported="true" />
         <activity

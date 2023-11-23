@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Screen_LogIn"
-    android:background="@color/teal"
+    android:background="@drawable/background_teal"
     android:paddingRight="30dp"
     android:paddingLeft="30dp">
 
@@ -68,7 +68,7 @@
                 android:drawableLeft="@drawable/icon_at"
                 android:paddingLeft="15dp"
                 android:drawablePadding="10dp"
-                android:hint="Username"
+                android:hint="Email"
                 android:fontFamily="@font/poppinsregular"
                 android:textSize="18sp"
                 android:textColor="@color/grey"
