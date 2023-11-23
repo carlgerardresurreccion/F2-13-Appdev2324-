@@ -9,6 +9,6 @@ public class Screen_Dashboard extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.dashboard);
+        setContentView(R.layout.home_screen);
     }
 }
