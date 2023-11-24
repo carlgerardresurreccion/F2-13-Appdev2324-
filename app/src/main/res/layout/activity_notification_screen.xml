@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NotificationScreen_Activity"
+    android:background="@drawable/gradient_blue">
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="42dp"
+        android:layout_height="34dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView2"
+        app:layout_constraintTop_toTopOf="@+id/textView2"
+        app:srcCompat="@drawable/back_arrow_white"
+        tools:layout_editor_absoluteX="16dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Notifications"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="22dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.372"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        tools:layout_editor_absoluteY="27dp"
+        tools:ignore="MissingConstraints" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="365dp"
+        android:layout_height="581dp"
+        android:background="@drawable/rounded_corner"
+        android:padding="8dp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="23dp"
+        tools:layout_editor_absoluteY="75dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/notif_roundedcorners"
+            android:orientation="vertical"
+            android:padding="8dp" />
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/NavbarView"
+        android:layout_width="364dp"
+        android:layout_height="58dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/background_navbar"
+        android:elevation="5dp"
+        app:itemIconSize="30dp"
+        app:labelVisibilityMode="unlabeled"
+        app:menu="@menu/navbar_menu"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="24dp"
+        tools:layout_editor_absoluteY="650dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
