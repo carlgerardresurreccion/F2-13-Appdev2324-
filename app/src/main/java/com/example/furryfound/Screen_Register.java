@@ -34,7 +34,7 @@ public class Screen_Register extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        registerUsernameField = findViewById(R.id.RegisterUsernameField);
+        registerUsernameField = findViewById(R.id.FullName);
         registerEmailField = findViewById(R.id.RegisterEmailField);
         registerPasswordField = findViewById(R.id.RegisterPasswordField);
 
