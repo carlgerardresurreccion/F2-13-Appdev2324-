@@ -12,7 +12,7 @@
         android:id="@+id/backButton"
         android:layout_width="42dp"
         android:layout_height="34dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="28dp"
         android:layout_marginEnd="50dp"
         app:layout_constraintEnd_toStartOf="@+id/textView2"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,7 +41,10 @@
         android:background="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/circleView2"
+        app:layout_constraintVertical_bias="0.908" />
 
     <View
         android:id="@+id/circleView"
@@ -50,7 +53,7 @@
         android:layout_centerInParent="true"
         android:layout_gravity="center"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="60dp"
         android:background="@drawable/rounded_corner_white"
         android:clipToOutline="true"
         app:layout_constraintEnd_toStartOf="@+id/imageView_Profile"
@@ -63,7 +66,7 @@
         android:layout_height="198dp"
         android:layout_centerInParent="true"
         android:layout_gravity="center"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="60dp"
         android:background="@drawable/rounded_corner_white"
         android:clipToOutline="true"
         app:layout_constraintEnd_toEndOf="parent"
@@ -74,7 +77,8 @@
         android:id="@+id/imageView_Profile"
         android:layout_width="152dp"
         android:layout_height="151dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="30dp"
+        android:clickable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
@@ -84,7 +88,6 @@
         android:id="@+id/textView_Email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:drawableLeft="@drawable/icon_at_black"
         android:fontFamily="@font/poppinsmedium"
         android:text="seunghanhong"
@@ -99,56 +102,112 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/poppinsregular"
-        android:text="Username"
+        android:text="Name"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/EditField_Username"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_Email" />
 
     <EditText
         android:id="@+id/EditField_Username"
         android:layout_width="327dp"
         android:layout_height="53dp"
-        android:layout_marginBottom="40dp"
         android:background="@drawable/input_box_light_teal"
-        android:drawableLeft="@drawable/icon_at"
+        android:drawableLeft="@android:drawable/ic_menu_myplaces"
         android:drawablePadding="10dp"
         android:fontFamily="@font/poppinsregular"
-        android:hint="seunghanhong"
+        android:text="seunghanhong"
         android:paddingLeft="15dp"
         android:textColor="@color/grey"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/poppinsregular"
+        android:text="Address"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/EditField_Username" />
+
+    <EditText
+        android:id="@+id/EditField_Address"
+        android:layout_width="327dp"
+        android:layout_height="53dp"
+        android:background="@drawable/input_box_light_teal"
+        android:drawableLeft="@android:drawable/ic_dialog_map"
+        android:drawablePadding="10dp"
+        android:fontFamily="@font/poppinsregular"
+        android:paddingLeft="15dp"
+        android:text="seunghanhong"
+        android:textColor="@color/grey"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/poppinsregular"
+        android:text="Phone Number"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/EditField_Address" />
+
+    <EditText
+        android:id="@+id/EditField_PhoneNumber"
+        android:layout_width="327dp"
+        android:layout_height="53dp"
+        android:background="@drawable/input_box_light_teal"
+        android:drawableLeft="@android:drawable/ic_menu_call"
+        android:drawablePadding="10dp"
+        android:fontFamily="@font/poppinsregular"
+        android:paddingLeft="15dp"
+        android:text="seunghanhong"
+        android:textColor="@color/grey"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/poppinsregular"
-        android:text="Email Address"
+        android:text="Email"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/EditField_Email"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/EditField_PhoneNumber" />
 
     <EditText
         android:id="@+id/EditField_Email"
         android:layout_width="327dp"
         android:layout_height="53dp"
-        android:layout_marginBottom="150dp"
         android:background="@drawable/input_box_light_teal"
         android:drawableLeft="@drawable/icon_email"
         android:drawablePadding="10dp"
         android:fontFamily="@font/poppinsregular"
-        android:hint="seunghanhong@gmail.com"
         android:paddingLeft="15dp"
+        android:text="seunghanhong@gmail.com"
         android:textColor="@color/grey"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/Save_btn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <Button
         android:id="@+id/Save_btn"

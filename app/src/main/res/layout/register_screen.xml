@@ -51,12 +51,57 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="150dp"
+                android:layout_marginTop="80dp"
                 android:fontFamily="@font/poppinsregular"
                 android:text="Just a few quick things\nto get started"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:gravity="center_horizontal"/>
+
+            <EditText
+                android:id="@+id/RegisterFullNameField"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@+id/EmailText"
+                android:background="@drawable/input_box"
+                android:drawableLeft="@android:drawable/ic_menu_myplaces"
+                android:paddingLeft="15dp"
+                android:drawablePadding="10dp"
+                android:hint="Full Name"
+                android:fontFamily="@font/poppinsregular"
+                android:textSize="18sp"
+                android:textColor="@color/grey"
+                android:layout_marginTop="50dp"/>
+
+            <EditText
+                android:id="@+id/RegisterAddressField"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@+id/EmailText"
+                android:background="@drawable/input_box"
+                android:drawableLeft="@android:drawable/ic_dialog_map"
+                android:paddingLeft="15dp"
+                android:drawablePadding="10dp"
+                android:hint="Address"
+                android:fontFamily="@font/poppinsregular"
+                android:textSize="18sp"
+                android:textColor="@color/grey"
+                android:layout_marginTop="20dp"/>
+
+            <EditText
+                android:id="@+id/RegisterPhoneNumberField"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@+id/EmailText"
+                android:background="@drawable/input_box"
+                android:drawableLeft="@android:drawable/ic_menu_call"
+                android:paddingLeft="15dp"
+                android:drawablePadding="10dp"
+                android:hint="Phone Number"
+                android:fontFamily="@font/poppinsregular"
+                android:textSize="18sp"
+                android:textColor="@color/grey"
+                android:layout_marginTop="20dp"/>
 
             <EditText
                 android:id="@+id/RegisterEmailField"
@@ -69,21 +114,6 @@
                 android:paddingLeft="15dp"
                 android:drawablePadding="10dp"
                 android:hint="Email"
-                android:fontFamily="@font/poppinsregular"
-                android:textSize="18sp"
-                android:textColor="@color/grey"
-                android:layout_marginTop="50dp"/>
-
-            <EditText
-                android:id="@+id/FullName"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_below="@+id/EmailText"
-                android:background="@drawable/input_box"
-                android:drawableLeft="@drawable/icon_at"
-                android:paddingLeft="15dp"
-                android:drawablePadding="10dp"
-                android:hint="Username"
                 android:fontFamily="@font/poppinsregular"
                 android:textSize="18sp"
                 android:textColor="@color/grey"

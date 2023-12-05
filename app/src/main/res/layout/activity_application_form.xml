@@ -40,7 +40,7 @@
                 android:textColor="@color/black"
                 android:textSize="24sp"
                 android:paddingTop="5dp"
-                android:paddingLeft="0dp"/>
+                android:paddingLeft="40dp"/>
 
 <!--            <ImageView-->
 <!--                android:id="@+id/imageView3"-->
@@ -52,14 +52,14 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="778dp"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="10dp"
                 android:fontFamily="@font/poppinsregular"
                 android:gravity="center_horizontal"
                 android:text="Please fill out this form"
@@ -118,16 +118,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_below="@+id/EmailText"
-                android:layout_marginTop="20dp"
+                android:inputType="textEmailAddress"
                 android:background="@drawable/input_box"
                 android:drawableLeft="@drawable/icon_at"
-                android:drawablePadding="10dp"
-                android:fontFamily="@font/poppinsregular"
-                android:hint="Email"
-                android:inputType="textEmailAddress"
                 android:paddingLeft="15dp"
+                android:drawablePadding="10dp"
+                android:hint="Email"
+                android:fontFamily="@font/poppinsregular"
+                android:textSize="18sp"
                 android:textColor="@color/grey"
-                android:textSize="18sp" />
+                android:layout_marginTop="20dp"/>
 
             <EditText
                 android:id="@+id/FinancialInfo"
@@ -181,13 +181,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="40dp"
                 android:background="@drawable/button_teal"
                 android:fontFamily="@font/poppinsregular"
                 android:text="Send Application"
                 android:textAllCaps="false"
                 android:textColor="@color/black"
                 android:textSize="22sp" />
+
+
         </LinearLayout>
+
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
