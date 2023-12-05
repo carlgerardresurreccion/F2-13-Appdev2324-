@@ -39,8 +39,7 @@
                 android:text="Application Form"
                 android:textColor="@color/black"
                 android:textSize="24sp"
-                android:paddingTop="5dp"
-                android:paddingLeft="40dp"/>
+                android:paddingTop="5dp"/>
 
 <!--            <ImageView-->
 <!--                android:id="@+id/imageView3"-->
