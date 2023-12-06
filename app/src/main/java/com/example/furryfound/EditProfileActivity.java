@@ -21,9 +21,9 @@ import com.google.android.gms.tasks.Task;
 
 public class EditProfileActivity extends AppCompatActivity {
 
-    EditText username, address, phonenum, email;
+    EditText fullname, address, phonenum, email;
     Button save;
-    String _USERNAME, _ADDRESS, _PHONENUM, _EMAIL;
+    String _FULLNAME, _ADDRESS, _PHONENUM, _EMAIL;
 
     DatabaseReference databaseReference;
     @Override
@@ -33,7 +33,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
         databaseReference = FirebaseDatabase.getInstance().getReference("adopters");
 
-        username = findViewById(R.id.EditField_Username);
+        fullname = findViewById(R.id.EditField_Username);
         address = findViewById(R.id.EditField_Address);
         phonenum = findViewById(R.id.EditField_PhoneNumber);
         email = findViewById(R.id.EditField_Email);
@@ -43,12 +43,12 @@ public class EditProfileActivity extends AppCompatActivity {
 
     private void showAllUserData() {
         Intent intent  = getIntent();
-        _USERNAME = intent.getStringExtra("username");
+        _FULLNAME = intent.getStringExtra("fullname");
         _ADDRESS = intent.getStringExtra("address");
         _PHONENUM = intent.getStringExtra("phonenum");
         _EMAIL = intent.getStringExtra("email");
 
-        username.setText(_USERNAME);
+        fullname.setText(_FULLNAME);
         address.setText(_ADDRESS);
         phonenum.setText((_PHONENUM));
         email.setText(_EMAIL);
@@ -91,9 +91,9 @@ public class EditProfileActivity extends AppCompatActivity {
     }
 
     private boolean isUser() {
-        if(!_USERNAME.equals(username.getEditableText().toString())){
-            databaseReference.child(_USERNAME).child("username").setValue(username.getEditableText().toString());
-            _USERNAME = username.getEditableText().toString();
+        if(!_FULLNAME.equals(fullname.getEditableText().toString())){
+            databaseReference.child(_FULLNAME).child("full_name").setValue(fullname.getEditableText().toString());
+            _FULLNAME = fullname.getEditableText().toString();
             return true;
         } else
             return false;
