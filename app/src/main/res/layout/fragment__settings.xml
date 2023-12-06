@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment_Settings"
+    android:background="@drawable/background_beige">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="100dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp">
+
+            <ImageButton
+                android:id="@+id/backButton"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:paddingRight="10dp"
+                android:src="@drawable/back_arrow_black"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/poppinsregular"
+                android:paddingTop="5dp"
+                android:text="Settings"
+                android:textColor="@color/black"
+                android:textSize="24sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:layout_marginTop="100dp">
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/welcome_3" />
+
+            <Button
+                android:id="@+id/Privacy"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/button_teal"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/poppinsregular"
+                android:text="Privacy"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textAllCaps="false"/>
+
+            <Button
+                android:id="@+id/TermsAndConditions"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/button_teal"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/poppinsregular"
+                android:text="Terms and Conditions"
+                android:paddingLeft="15dp"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textAllCaps="false"/>
+
+            <Button
+                android:id="@+id/Logout"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/button_teal"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/poppinsregular"
+                android:text="Log Out"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textAllCaps="false"/>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

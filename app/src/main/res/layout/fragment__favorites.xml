@@ -1,24 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FavoritesScreen_Activity"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragment_Favorites"
     android:background="@drawable/background_beige">
 
-    <!--<LinearLayout
+    <LinearLayout
         android:id="@+id/top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp">
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
             android:id="@+id/backButton"
@@ -37,20 +33,6 @@
             android:textColor="@color/black"
             android:textSize="24sp"
             android:paddingLeft="0dp"/>
-    </LinearLayout>-->
+    </LinearLayout>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/NavbarView"
-        android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/background_navbar"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="30dp"
-        android:elevation="5dp"
-        app:menu="@menu/navbar_menu"
-        app:itemIconSize="30dp"
-        app:labelVisibilityMode="unlabeled" />
 </RelativeLayout>
-
