@@ -17,7 +17,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class Screen_ForgotPassword extends AppCompatActivity {
+public class LogIn_ForgotPassword extends AppCompatActivity {
 
     //Declaration
     Button btnReset;
@@ -30,7 +30,7 @@ public class Screen_ForgotPassword extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_forgot_password_screen);
+        setContentView(R.layout.forgot_password_screen);
 
         //Initializaton
         btnBack = (ImageButton) findViewById(R.id.backButton);
@@ -70,8 +70,8 @@ public class Screen_ForgotPassword extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        Toast.makeText(Screen_ForgotPassword.this, "Reset Password link has been sent to your registered Email", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(Screen_ForgotPassword.this, Screen_LogIn.class);
+                        Toast.makeText(LogIn_ForgotPassword.this, "Reset Password link has been sent to your registered Email", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(LogIn_ForgotPassword.this, LogIn.class);
                         startActivity(intent);
                         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                         finish();
@@ -80,7 +80,7 @@ public class Screen_ForgotPassword extends AppCompatActivity {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(Screen_ForgotPassword.this, "Error :- " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LogIn_ForgotPassword.this, "Error :- " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         progressBar.setVisibility(View.INVISIBLE);
                         btnReset.setVisibility(View.VISIBLE);
                     }

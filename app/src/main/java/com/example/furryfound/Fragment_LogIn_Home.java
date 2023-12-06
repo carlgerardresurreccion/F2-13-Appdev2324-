@@ -9,7 +9,7 @@ import android.view.MenuItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
-public class Screen_Dashboard extends AppCompatActivity {
+public class Fragment_LogIn_Home extends AppCompatActivity {
 
     BottomNavigationView navbar;
 
