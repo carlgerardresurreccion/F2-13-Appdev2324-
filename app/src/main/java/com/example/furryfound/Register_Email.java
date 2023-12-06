@@ -111,6 +111,7 @@ public class Register_Email extends AppCompatActivity {
         DatabaseReference userRef = databaseReference.child(full_name);
 
         userRef.child("user_id").setValue(userId);
+        userRef.child("full_name").setValue(full_name);
         userRef.child("address").setValue(address);
         userRef.child("phone_number").setValue(phone_number);
         userRef.child("email").setValue(email);
