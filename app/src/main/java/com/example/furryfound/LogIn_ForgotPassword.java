@@ -34,7 +34,7 @@ public class LogIn_ForgotPassword extends AppCompatActivity {
 
         //Initializaton
         btnBack = (ImageButton) findViewById(R.id.backButton);
-        btnReset = (Button) findViewById(R.id.Reset_btn);
+        btnReset = (Button) findViewById(R.id.save);
         edtEmail = (EditText) findViewById(R.id.rEmail);
 
         mAuth = FirebaseAuth.getInstance();

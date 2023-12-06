@@ -13,6 +13,12 @@
         android:theme="@style/Theme.FurryFound"
         tools:targetApi="31">
         <activity
+            android:name=".Fragment_Settings_ChangePassword"
+            android:exported="false" />
+        <activity
+            android:name=".Fragment_Home_EditProfile"
+            android:exported="false" />
+        <activity
             android:name=".Fragment_Settings_Privacy"
             android:exported="false" />
         <activity
@@ -55,4 +61,5 @@
             </intent-filter>
         </activity>
     </application>
+
 </manifest>

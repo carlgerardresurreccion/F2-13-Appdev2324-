@@ -30,7 +30,7 @@ public class Fragment_Settings extends Fragment {
         privacy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), Fragment_Settings_Privacy.class);
+                Intent intent = new Intent(getActivity(), Fragment_Settings_ChangePassword.class);
                 startActivity(intent);
             }
         });

@@ -33,7 +33,7 @@ public class LogIn extends AppCompatActivity {
         forgetpass = findViewById(R.id.ForgotPass);
         backButton = (ImageButton) findViewById(R.id.backButton);
 
-        Button LogInFr = findViewById(R.id.Reset_btn);
+        Button LogInFr = findViewById(R.id.save);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
