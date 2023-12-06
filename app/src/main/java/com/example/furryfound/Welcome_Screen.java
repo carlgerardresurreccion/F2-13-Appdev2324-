@@ -17,9 +17,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Screen_Welcome extends AppCompatActivity {
+public class Welcome_Screen extends AppCompatActivity {
 
-    private OnboardingAdapter onboardingAdapter;
+    private Welcome_Screen_OnboardingAdapter welcomeScreenOnboardingAdapter;
     private LinearLayout layoutOnboardingIndicator;
     private Button buttonOnboardingAction;
     TextView skip;
@@ -34,7 +34,7 @@ public class Screen_Welcome extends AppCompatActivity {
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(Screen_Welcome.this, Screen_User_Authentication.class);
+                Intent i = new Intent(Welcome_Screen.this, User_Authentication.class);
                 startActivity(i);
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();
@@ -47,7 +47,7 @@ public class Screen_Welcome extends AppCompatActivity {
         setOnboardingItem();
 
         ViewPager2 onboardingViewPager = findViewById(R.id.onboardingViewPager);
-        onboardingViewPager.setAdapter(onboardingAdapter);
+        onboardingViewPager.setAdapter(welcomeScreenOnboardingAdapter);
 
         setOnboadingIndicator();
         setCurrentOnboardingIndicators(0);
@@ -58,7 +58,7 @@ public class Screen_Welcome extends AppCompatActivity {
                 super.onPageSelected(position);
                 setCurrentOnboardingIndicators(position);
 
-                if (position == onboardingAdapter.getItemCount() - 1) {
+                if (position == welcomeScreenOnboardingAdapter.getItemCount() - 1) {
                     buttonOnboardingAction.setVisibility(View.VISIBLE);
                 } else {
                     buttonOnboardingAction.setVisibility(View.INVISIBLE);
@@ -70,7 +70,7 @@ public class Screen_Welcome extends AppCompatActivity {
             /*if (onboardingViewPager.getCurrentItem() + 1 < onboardingAdapter.getItemCount()) {
                 onboardingViewPager.setCurrentItem(onboardingViewPager.getCurrentItem() + 1);
             } else {
-                */startActivity(new Intent(getApplicationContext(), Screen_User_Authentication.class));
+                */startActivity(new Intent(getApplicationContext(), User_Authentication.class));
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();
             //}
@@ -79,7 +79,7 @@ public class Screen_Welcome extends AppCompatActivity {
     }
 
     private void setOnboadingIndicator() {
-        ImageView[] indicators = new ImageView[onboardingAdapter.getItemCount()];
+        ImageView[] indicators = new ImageView[welcomeScreenOnboardingAdapter.getItemCount()];
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT
         );
@@ -105,7 +105,7 @@ public class Screen_Welcome extends AppCompatActivity {
                 imageView.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.onboarding_indicator_inactive));
             }
         }
-        if (index == onboardingAdapter.getItemCount() - 1){
+        if (index == welcomeScreenOnboardingAdapter.getItemCount() - 1){
             buttonOnboardingAction.setText("Get Started");
         }else {
             buttonOnboardingAction.setText("Next");
@@ -135,7 +135,7 @@ public class Screen_Welcome extends AppCompatActivity {
         onBoardingItems.add(page3);
         onBoardingItems.add(page4);
 
-        onboardingAdapter = new OnboardingAdapter(onBoardingItems);
+        welcomeScreenOnboardingAdapter = new Welcome_Screen_OnboardingAdapter(onBoardingItems);
 
     }
 }

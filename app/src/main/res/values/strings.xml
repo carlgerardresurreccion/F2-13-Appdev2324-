@@ -9,4 +9,6 @@
     <string name="pageTwoText">Discover your future furry friend and embark on a journey of love and endless tail-wagging adventures</string>
     <string name="pageThreeText">Explore our community of animal lovers, dedicated shelters, and pets in need of loving homes</string>
     <string name="pageFourText">Start your pet adoption journey today and be part of a community that believes in giving every pet the chance they deserve.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

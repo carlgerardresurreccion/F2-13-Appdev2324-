@@ -4,11 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class ApplicationForm_Activity extends AppCompatActivity {
+public class Fragment_Settings_Privacy extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_application_form);
+        setContentView(R.layout.edit_profile);
     }
 }
