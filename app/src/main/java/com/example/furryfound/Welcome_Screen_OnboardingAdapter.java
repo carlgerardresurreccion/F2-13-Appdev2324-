@@ -1,25 +1,21 @@
 package com.example.furryfound;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.furryfound.R;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
 import java.util.List;
 
-public class OnboardingAdapter extends RecyclerView.Adapter<OnboardingAdapter.OnboardingViewHolder>{
+public class Welcome_Screen_OnboardingAdapter extends RecyclerView.Adapter<Welcome_Screen_OnboardingAdapter.OnboardingViewHolder>{
 
     private final List<OnBoardingItem> onBoardingItems;
 
-    public OnboardingAdapter(List<OnBoardingItem> onBoardingItems) {
+    public Welcome_Screen_OnboardingAdapter(List<OnBoardingItem> onBoardingItems) {
         this.onBoardingItems = onBoardingItems;
     }
 

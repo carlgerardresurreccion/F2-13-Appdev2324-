@@ -1,13 +1,13 @@
 package com.example.furryfound;
 
-public class User {
+public class User_Class {
     String user_id;
     String full_name;
     String address;
     String phone_number;
     String email;
 
-    public User(String full_name, String address, String phone_number, String email) {
+    public User_Class(String full_name, String address, String phone_number, String email) {
         this.full_name = full_name;
         this.address = address;
         this.phone_number = phone_number;

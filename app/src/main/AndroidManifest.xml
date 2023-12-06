@@ -13,37 +13,37 @@
         android:theme="@style/Theme.FurryFound"
         tools:targetApi="31">
         <activity
-            android:name=".EditProfileActivity"
+            android:name=".Fragment_Settings_Privacy"
             android:exported="false" />
         <activity
-            android:name=".ChangePassword_Activity"
+            android:name=".Fragment_Settings_Privacy_ChangePassword"
             android:exported="false" />
         <activity
-            android:name=".TermsConditions_Activity"
+            android:name=".Fragment_Settings_TermsConditions"
             android:exported="false" />
         <activity
             android:name=".Settings_Activity"
             android:exported="false" />
         <activity
-            android:name=".ApplicationForm_Activity"
+            android:name=".Fragment_Home_ApplicationForm"
             android:exported="false" />
         <activity
-            android:name=".Screen_Dashboard"
+            android:name=".Fragment_LogIn_Home"
             android:exported="false" />
         <activity
-            android:name=".Screen_ForgotPassword"
+            android:name=".LogIn_ForgotPassword"
             android:exported="false" />
         <activity
-            android:name=".Screen_Register"
+            android:name=".Register_Email"
             android:exported="true" />
         <activity
-            android:name=".Screen_LogIn"
+            android:name=".LogIn"
             android:exported="true" />
         <activity
-            android:name=".Screen_Welcome"
+            android:name=".Welcome_Screen"
             android:exported="false" />
         <activity
-            android:name=".Screen_User_Authentication"
+            android:name=".User_Authentication"
             android:exported="false" />
         <activity
             android:name=".SplashScreen"

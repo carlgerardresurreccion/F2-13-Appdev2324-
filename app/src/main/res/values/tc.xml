@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="terms_and_conditions">
-    "1. Using the App\n\n
+    "1. Using the App\n
     By using FurryFound, you agree to follow these terms. If you don\'t agree, please don\'t use the app.\n\n
-    2. Age Requirement\n\n
+    2. Age Requirement\n
     You must be at least 18 years old to use the app. By using it, you confirm that you are of legal age.\n\n
-    3. User Accounts\n\n
+    3. User Accounts\n
     If needed, create an account to use certain features. Keep your account information confidential, and you\'re responsible for all activities on your account.\n\n
-    4. Adoption Process\n\n
+    4. Adoption Process\n
     The app connects users with pets for adoption. Provide accurate information during the adoption process. We\'re not responsible for the accuracy of user or organization information.\n\n
-    5. Adopter Responsibilities\n\n
+    5. Adopter Responsibilities\n
     Meet the adoption criteria, and take good care of the adopted pet. We're not responsible for issues with the adoption process or the pet's behavior.\n\n
-    6. Organization Responsibilities\n\n
+    6. Organization Responsibilities\n
     Organizations must follow laws, provide accurate pet information, and ensure a smooth adoption process.\n\n
-    7. Code of Conduct\n\n
+    7. Code of Conduct\n
     Use the app for legal purposes and respect others' rights and privacy.\n\n
-    8. Termination\n\n
+    8. Termination\n
     We can terminate or suspend accounts at our discretion. You can also close your account anytime.\n\n
-    9. Changes to Terms\n\n
+    9. Changes to Terms\n
     We may change these terms. If you keep using the app after changes, you agree to them.\n\n
-    10. Governing Law\n\n
+    10. Governing Law\n
     These terms follow the laws of FurryFound.
     "</string>
 </resources>
