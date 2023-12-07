@@ -44,4 +44,12 @@
         android:textColor="@color/grey"
         android:layout_marginTop="20dp"/>
 
+    <GridView
+        android:id="@+id/GridDisplayPets"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="2"
+        android:layout_below="@id/SearchBar"
+        android:layout_marginTop="10dp"/>
+
 </RelativeLayout>
