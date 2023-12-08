@@ -1,5 +1,6 @@
 package com.example.furryfound;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,9 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.GridView;
-import android.widget.Toast;
+import android.widget.ImageButton;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,6 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class Fragment_Home extends Fragment {
+    ImageButton avatarImage;
     RecyclerView recyclerView;
     ArrayList<PetItem> dataList;
     MyAdapter adapter;
@@ -33,6 +33,8 @@ public class Fragment_Home extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment__home, container, false);
 
+        avatarImage = view.findViewById(R.id.avatarImage);
+
         recyclerView = view.findViewById(R.id.GridDisplayPets);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
@@ -40,6 +42,14 @@ public class Fragment_Home extends Fragment {
         dataList = new ArrayList<>();
         adapter = new MyAdapter(dataList, getContext());
         recyclerView.setAdapter(adapter);
+
+        avatarImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), Fragment_Home_EditProfile.class);
+                startActivity(intent);
+            }
+        });
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
