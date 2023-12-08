@@ -8,11 +8,50 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
 
-public class MyAdapter extends BaseAdapter {
+public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+    ArrayList<PetItem> dataList;
+    Context context;
+
+    public MyAdapter(ArrayList<PetItem> dataList, Context context) {
+        this.dataList = dataList;
+        this.context = context;
+    }
+
+    @NonNull
+    @Override
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_screen_griditem, parent, false);
+        return new MyViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        Glide.with(context).load(dataList.get(position).getImageUrl()).into(holder.gridImage);
+    }
+
+    @Override
+    public int getItemCount() {
+        return dataList.size();
+    }
+
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        RoundedImageView gridImage;
+        public MyViewHolder(@NonNull View itemView) {
+            super(itemView);
+            gridImage = itemView.findViewById(R.id.GridImage);
+        }
+    }
+}
+
+/*public class MyAdapter extends BaseAdapter {
     private ArrayList<PetItem> dataList;
     private Context context;
     LayoutInflater layoutInflater;
@@ -49,7 +88,6 @@ public class MyAdapter extends BaseAdapter {
 
         ImageView gridImage = view.findViewById(R.id.GridImage);
 
-        //Glide.with(context).load(dataList.get(position).getImageUrl()).into(gridImage);
         Glide.with(context)
                 .load(dataList.get(position).getImageUrl())
                 .placeholder(R.drawable.a_1)
@@ -57,4 +95,4 @@ public class MyAdapter extends BaseAdapter {
                 .into(gridImage);
         return view;
     }
-}
+}*/
