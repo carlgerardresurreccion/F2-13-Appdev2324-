@@ -22,7 +22,7 @@ import com.google.android.gms.tasks.Task;
 
 public class Register_Email extends AppCompatActivity {
 
-    private EditText registerFullNameField, registerAddressField, registerPhoneNumberField, registerEmailField, registerPasswordField;
+    private EditText registerFirstNameField, registerLastNameField , registerAddressField, registerPhoneNumberField, registerEmailField, registerPasswordField;
     private Button RegisterFr;
 
     private ImageButton backButton;
@@ -41,7 +41,8 @@ public class Register_Email extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance("https://furry-found-default-rtdb.asia-southeast1.firebasedatabase.app");
         databaseReference = firebaseDatabase.getReference("adopters"); // Reference to user node in Realtime Database
 
-        registerFullNameField = findViewById(R.id.RegisterFullNameField);
+        registerFirstNameField = findViewById(R.id.RegisterFirstNameField);
+        registerLastNameField = findViewById(R.id.RegisterLastNameField);
         registerAddressField = findViewById(R.id.RegisterAddressField);
         registerPhoneNumberField = findViewById(R.id.RegisterPhoneNumberField);
         registerEmailField = findViewById(R.id.RegisterEmailField);
@@ -78,13 +79,14 @@ public class Register_Email extends AppCompatActivity {
     }
 
     public void signUpUser() {
-        String full_name = registerFullNameField.getText().toString().trim();
+        String firstname = registerFirstNameField.getText().toString().trim();
+        String lastname = registerLastNameField.getText().toString().trim();
         String address = registerAddressField.getText().toString().trim();
         String phone_number = registerPhoneNumberField.getText().toString().trim();
         String email = registerEmailField.getText().toString().trim();
         String password = registerPasswordField.getText().toString();
 
-        if (full_name.isEmpty() || address.isEmpty() || phone_number.isEmpty() || email.isEmpty() || password.isEmpty()) {
+        if (firstname.isEmpty() || lastname.isEmpty() || address.isEmpty() || phone_number.isEmpty() || email.isEmpty() || password.isEmpty()) {
             Toast.makeText(Register_Email.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
         } else if (password.length() < 6) {
             Toast.makeText(Register_Email.this, "Passwords too short", Toast.LENGTH_SHORT).show();
@@ -97,7 +99,7 @@ public class Register_Email extends AppCompatActivity {
                         FirebaseUser user = mAuth.getCurrentUser();
                         if (user != null) {
                             String userId = user.getUid();
-                            saveUserToDatabase(userId, full_name, address, phone_number, email, password);
+                            saveUserToDatabase(userId, firstname, lastname, address, phone_number, email, password);
                         }
                     } else {
                         Toast.makeText(Register_Email.this, "Sign up failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -107,11 +109,12 @@ public class Register_Email extends AppCompatActivity {
         }
     }
 
-    private void saveUserToDatabase(String userId, String full_name, String address, String phone_number, String email, String password) {
-        DatabaseReference userRef = databaseReference.child(full_name);
+    private void saveUserToDatabase(String userId, String firstname, String lastname, String address, String phone_number, String email, String password) {
+        DatabaseReference userRef = databaseReference.child(firstname);
 
         userRef.child("user_id").setValue(userId);
-        userRef.child("full_name").setValue(full_name);
+        userRef.child("firstname").setValue(firstname);
+        userRef.child("lastname").setValue(lastname);
         userRef.child("address").setValue(address);
         userRef.child("phone_number").setValue(phone_number);
         userRef.child("email").setValue(email);

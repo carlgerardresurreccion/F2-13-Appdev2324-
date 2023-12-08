@@ -59,25 +59,37 @@
                 android:gravity="center_horizontal"/>
 
             <EditText
-                android:id="@+id/RegisterFullNameField"
+                android:id="@+id/RegisterFirstNameField"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_below="@+id/EmailText"
                 android:background="@drawable/input_box"
                 android:drawableLeft="@android:drawable/ic_menu_myplaces"
                 android:paddingLeft="15dp"
                 android:drawablePadding="10dp"
-                android:hint="Full Name"
+                android:hint="First Name"
                 android:fontFamily="@font/poppinsregular"
                 android:textSize="18sp"
                 android:textColor="@color/grey"
                 android:layout_marginTop="50dp"/>
 
             <EditText
+                android:id="@+id/RegisterLastNameField"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/input_box"
+                android:drawableLeft="@android:drawable/ic_menu_myplaces"
+                android:paddingLeft="15dp"
+                android:drawablePadding="10dp"
+                android:hint="Last Name"
+                android:fontFamily="@font/poppinsregular"
+                android:textSize="18sp"
+                android:textColor="@color/grey"
+                android:layout_marginTop="20dp"/>
+
+            <EditText
                 android:id="@+id/RegisterAddressField"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_below="@+id/EmailText"
                 android:background="@drawable/input_box"
                 android:drawableLeft="@android:drawable/ic_dialog_map"
                 android:paddingLeft="15dp"
@@ -92,7 +104,6 @@
                 android:id="@+id/RegisterPhoneNumberField"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_below="@+id/EmailText"
                 android:background="@drawable/input_box"
                 android:drawableLeft="@android:drawable/ic_menu_call"
                 android:paddingLeft="15dp"
@@ -107,7 +118,6 @@
                 android:id="@+id/RegisterEmailField"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_below="@+id/EmailText"
                 android:inputType="textEmailAddress"
                 android:background="@drawable/input_box"
                 android:drawableLeft="@drawable/icon_at"
@@ -123,7 +133,6 @@
                 android:id="@+id/RegisterPasswordField"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_below="@+id/EmailText"
                 android:inputType="textPassword"
                 android:background="@drawable/input_box"
                 android:drawableLeft="@drawable/icon_password"

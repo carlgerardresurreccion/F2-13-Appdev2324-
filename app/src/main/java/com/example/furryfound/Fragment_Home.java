@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,16 +25,19 @@ import java.util.ArrayList;
 
 public class Fragment_Home extends Fragment {
     ImageButton avatarImage;
+    TextView usernameT;
     RecyclerView recyclerView;
     ArrayList<PetItem> dataList;
     MyAdapter adapter;
     final private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("pets");
+    final private DatabaseReference userReference = FirebaseDatabase.getInstance().getReference("adopters");
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment__home, container, false);
 
         avatarImage = view.findViewById(R.id.avatarImage);
+        usernameT = view.findViewById(R.id.usernameTextView);
 
         recyclerView = view.findViewById(R.id.GridDisplayPets);
         recyclerView.setHasFixedSize(true);
@@ -42,6 +46,26 @@ public class Fragment_Home extends Fragment {
         dataList = new ArrayList<>();
         adapter = new MyAdapter(dataList, getContext());
         recyclerView.setAdapter(adapter);
+
+        userReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                DataSnapshot alyssaSnapshot = snapshot.child("adopters").child("firstname");
+
+                if (alyssaSnapshot.exists()) {
+                    String username = alyssaSnapshot.child("firstname").getValue(String.class);
+
+                    if (username != null) {
+                        usernameT.setText("Hi, " + username + "!");
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         avatarImage.setOnClickListener(new View.OnClickListener() {
             @Override

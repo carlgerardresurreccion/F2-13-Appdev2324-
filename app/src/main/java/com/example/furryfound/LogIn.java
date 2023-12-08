@@ -9,10 +9,16 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class LogIn extends AppCompatActivity {
     private EditText loginUserField, loginPassField;
@@ -85,13 +91,39 @@ public class LogIn extends AppCompatActivity {
                         // Sign in success, update UI with the signed-in user's information
                         FirebaseUser user = mAuth.getCurrentUser();
                         Toast.makeText(LogIn.this, "Login successful!", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(LogIn.this, Fragment_LogIn_Home.class);
-                        startActivity(intent);
-                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                        finish();
-                    } else {
-                        // If sign in fails, display a message to the user.
-                        Toast.makeText(LogIn.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+
+                        if (user != null) {
+                            String userId = user.getUid();
+
+                            // Assuming your users are stored in a "users" node in the database
+                            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("firstname");
+
+                            userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    String username = snapshot.child("firstname").getValue(String.class);
+
+                                    if (username != null) {
+                                        Intent intent = new Intent(LogIn.this, Fragment_LogIn_Home.class);
+                                        startActivity(intent);
+                                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                                        finish();
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+
+                            //Intent intent = new Intent(LogIn.this, Fragment_LogIn_Home.class);
+                            //startActivity(intent);
+                            //overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                            //finish();
+                        } else {
+                            Toast.makeText(LogIn.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
     }
