@@ -1,7 +1,5 @@
 package com.example.furryfound;
 
-import static android.widget.Toast.*;
-
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,7 +13,6 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 
-import com.example.furryfound.databinding.FragmentHomeBinding;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,46 +22,43 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Fragment_Home extends Fragment {
 
-    FragmentHomeBinding binding;
     GridView gridView;
-    // ...
+    ArrayList<PetItem> dataList;
+    MyAdapter adapter;
+    final private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("pets");
 
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentHomeBinding.inflate(getLayoutInflater());
-        View view = binding.getRoot();
+        View view = inflater.inflate(R.layout.fragment__home, container, false);
 
-        DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("pets");
+        gridView = view.findViewById(R.id.GridDisplayPets);
+        dataList = new ArrayList<>();
+        adapter = new MyAdapter(dataList, getContext());
+        gridView.setAdapter(adapter);
 
-        databaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                List<String> imageUrls = new ArrayList<>();
-
-                for (DataSnapshot petSnapshot : dataSnapshot.getChildren()) {
-                    String imageUrl = petSnapshot.child("imageUrl").getValue(String.class);
-                    if (imageUrl != null) {
-                        imageUrls.add(imageUrl);
-                    }
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot dataSnapshot: snapshot.getChildren()) {
+                    PetItem pet = dataSnapshot.getValue(PetItem.class);
+                    dataList.add(pet);
                 }
-
-                Log.d("ImageUrls", "Image URLs: " + imageUrls);
-                // Create and set the adapter with image URLs
-                PetAdapter petAdapter = new PetAdapter(Fragment_Home.this, imageUrls.toArray(new String[0]));
-                binding.GridDisplayPets.setAdapter(petAdapter);
+                Log.d("DataSize", "Data Size: " + dataList.size());
+                adapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                // Handle error
+
             }
         });
 
         return view;
-
+    }
+}
     /*FragmentHomeBinding binding;
     GridView gridView;
     @Override
@@ -112,6 +106,6 @@ public class Fragment_Home extends Fragment {
         PetAdapter adapter = new PetAdapter(view.getContext(), imageUrls);
         gridView.setAdapter(adapter);
 
-        return view;*/
+        return view;
     }
-}
+}*/
