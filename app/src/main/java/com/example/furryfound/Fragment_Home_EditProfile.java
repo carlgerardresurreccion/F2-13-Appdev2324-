@@ -2,13 +2,93 @@ package com.example.furryfound;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class Fragment_Home_EditProfile extends AppCompatActivity {
 
+    EditText fullname, address, phonenum, email;
+    Button save;
+    String _FULLNAME, _ADDRESS, _PHONENUM, _EMAIL;
+
+    DatabaseReference databaseReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.home_edit_profile);
+        setContentView(R.layout.edit_profile);
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("adopters");
+
+        fullname = findViewById(R.id.EditField_Username);
+        address = findViewById(R.id.EditField_Address);
+        phonenum = findViewById(R.id.EditField_PhoneNumber);
+        email = findViewById(R.id.EditField_Email);
+
+        showAllUserData();
+    }
+
+    private void showAllUserData() {
+        Intent intent  = getIntent();
+        _FULLNAME = intent.getStringExtra("fullname");
+        _ADDRESS = intent.getStringExtra("address");
+        _PHONENUM = intent.getStringExtra("phonenum");
+        _EMAIL = intent.getStringExtra("email");
+
+        fullname.setText(_FULLNAME);
+        address.setText(_ADDRESS);
+        phonenum.setText((_PHONENUM));
+        email.setText(_EMAIL);
+    }
+
+    public void updateprof(View view){
+        
+        if(isUser() || isAddress() || isPhoneNum() || isEmail()){
+            Toast.makeText(this, "Profile has been updated", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Profile has no changes", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private boolean isEmail() {
+        if(!_EMAIL.equals(email.getEditableText().toString())){
+            databaseReference.child(_EMAIL).child("email").setValue(email.getEditableText().toString());
+            _EMAIL = email.getEditableText().toString();
+            return true;
+        } else
+            return false;
+    }
+
+    private boolean isPhoneNum() {
+        if(!_PHONENUM.equals(phonenum.getEditableText().toString())){
+            databaseReference.child(_PHONENUM).child("phone_number").setValue(phonenum.getEditableText().toString());
+            _PHONENUM = phonenum.getEditableText().toString();
+            return true;
+        } else
+            return false;
+    }
+
+    private boolean isAddress() {
+        if(!_ADDRESS.equals(address.getEditableText().toString())){
+            databaseReference.child(_ADDRESS).child("address").setValue(address.getEditableText().toString());
+            _ADDRESS = address.getEditableText().toString();
+            return true;
+        } else
+            return false;
+    }
+
+    private boolean isUser() {
+        if(!_FULLNAME.equals(fullname.getEditableText().toString())){
+            databaseReference.child(_FULLNAME).child("full_name").setValue(fullname.getEditableText().toString());
+            _FULLNAME = fullname.getEditableText().toString();
+            return true;
+        } else
+            return false;
     }
 }
