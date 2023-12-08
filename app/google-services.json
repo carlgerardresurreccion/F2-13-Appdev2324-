@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "283444505486",
+    "firebase_url": "https://furry-found-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "furry-found",
     "storage_bucket": "furry-found.appspot.com"
   },
@@ -12,7 +13,12 @@
           "package_name": "com.example.furryfound"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "283444505486-99ls3tqguanubgjoak311t51jio4o9qo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBnQEQFhVuJu0UpePCDJfMm3kz-Gjab2-k"
@@ -20,7 +26,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "283444505486-99ls3tqguanubgjoak311t51jio4o9qo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
