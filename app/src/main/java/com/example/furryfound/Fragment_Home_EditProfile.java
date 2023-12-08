@@ -22,7 +22,7 @@ public class Fragment_Home_EditProfile extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.edit_profile);
+        setContentView(R.layout.home_edit_profile);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("adopters");
 
