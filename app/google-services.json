@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "283444505486-5o27fjibnhv7chn7fc4ebuvdns1q0pg0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.furryfound",
+            "certificate_hash": "f6914af8ee4e4f3947bcd4fb47e4dfd08f9e9b2d"
+          }
+        },
+        {
           "client_id": "283444505486-99ls3tqguanubgjoak311t51jio4o9qo.apps.googleusercontent.com",
           "client_type": 3
         }

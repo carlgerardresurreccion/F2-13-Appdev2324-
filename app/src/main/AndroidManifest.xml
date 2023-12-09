@@ -22,13 +22,7 @@
             android:name=".Fragment_Settings_Privacy"
             android:exported="false" />
         <activity
-            android:name=".Fragment_Settings_Privacy_ChangePassword"
-            android:exported="false" />
-        <activity
             android:name=".Fragment_Settings_TermsConditions"
-            android:exported="false" />
-        <activity
-            android:name=".Settings_Activity"
             android:exported="false" />
         <activity
             android:name=".Fragment_Home_ApplicationForm"
