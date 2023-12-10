@@ -24,4 +24,5 @@
     <color name="beige">#FCEEE1</color>
     <color name="grey">#7C7C7C</color>
     <color name="light_teal">#DAFFFB</color>
+    <color name="overlayColor">#A2A2A2</color>
 </resources>

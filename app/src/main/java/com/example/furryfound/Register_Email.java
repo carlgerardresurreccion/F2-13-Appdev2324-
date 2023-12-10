@@ -110,15 +110,15 @@ public class Register_Email extends AppCompatActivity {
     }
 
     private void saveUserToDatabase(String userId, String firstname, String lastname, String address, String phone_number, String email, String password) {
-        DatabaseReference userRef = databaseReference.child(firstname);
+        DatabaseReference userRef = databaseReference.child(userId);
 
-        userRef.child("user_id").setValue(userId);
-        userRef.child("firstname").setValue(firstname);
-        userRef.child("lastname").setValue(lastname);
+        userRef.child("first_name").setValue(firstname);
+        userRef.child("last_name").setValue(lastname);
         userRef.child("address").setValue(address);
         userRef.child("phone_number").setValue(phone_number);
         userRef.child("email").setValue(email);
         userRef.child("password").setValue(password);
+        userRef.child("user_id").setValue(userId);
 
         Toast.makeText(Register_Email.this, "User created!", Toast.LENGTH_SHORT).show();
         startActivity(new Intent(Register_Email.this, LogIn.class));

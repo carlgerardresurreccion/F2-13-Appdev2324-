@@ -74,7 +74,7 @@
                 android:textSize="18sp" />
 
             <EditText
-                android:id="@+id/ChangePass"
+                android:id="@+id/Address"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_below="@+id/EmailText"
@@ -90,7 +90,7 @@
                 android:textSize="18sp" />
 
             <EditText
-                android:id="@+id/TermsAndConditions"
+                android:id="@+id/PhoneNumber"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_below="@+id/EmailText"
@@ -106,7 +106,7 @@
                 android:textSize="18sp" />
 
             <EditText
-                android:id="@+id/Logout"
+                android:id="@+id/Email"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_below="@+id/EmailText"

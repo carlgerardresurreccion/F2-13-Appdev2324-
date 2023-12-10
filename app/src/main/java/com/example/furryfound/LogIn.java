@@ -117,10 +117,10 @@ public class LogIn extends AppCompatActivity {
                                 }
                             });
 
-                            //Intent intent = new Intent(LogIn.this, Fragment_LogIn_Home.class);
-                            //startActivity(intent);
-                            //overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                            //finish();
+                            Intent intent = new Intent(LogIn.this, Fragment_LogIn_Home.class);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                            finish();
                         } else {
                             Toast.makeText(LogIn.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                         }

@@ -15,6 +15,9 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,8 +32,10 @@ public class Fragment_Home extends Fragment {
     RecyclerView recyclerView;
     ArrayList<PetItem> dataList;
     MyAdapter adapter;
+    private FirebaseAuth auth = FirebaseAuth.getInstance();
+    FirebaseUser user = auth.getCurrentUser();
     final private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("pets");
-    final private DatabaseReference userReference = FirebaseDatabase.getInstance().getReference("adopters");
+    final private DatabaseReference userReference = FirebaseDatabase.getInstance().getReference("adopters").child(user.getUid());
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -50,13 +55,10 @@ public class Fragment_Home extends Fragment {
         userReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                DataSnapshot alyssaSnapshot = snapshot.child("adopters").child("firstname");
-
-                if (alyssaSnapshot.exists()) {
-                    String username = alyssaSnapshot.child("firstname").getValue(String.class);
-
-                    if (username != null) {
-                        usernameT.setText("Hi, " + username + "!");
+                if (snapshot.exists()) {
+                    User_Class userData = snapshot.getValue(User_Class.class);
+                    if (userData != null) {
+                        usernameT.setText("Hi, " + userData.getFirst_name() + "!");
                     }
                 }
             }

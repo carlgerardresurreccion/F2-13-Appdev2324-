@@ -15,7 +15,6 @@
             android:id="@+id/usernameTextView"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Hi, username"
             android:fontFamily="@font/poppinsregular"
             android:textSize="24sp"
             android:textColor="@color/black" />
