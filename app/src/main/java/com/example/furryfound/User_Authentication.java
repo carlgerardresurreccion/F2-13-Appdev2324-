@@ -106,7 +106,7 @@ public class User_Authentication extends AppCompatActivity {
 
                             User_Class new_user = new User_Class();
                             new_user.setUser_id(user.getUid());
-                            new_user.setFirstname(user.getDisplayName());
+                            new_user.setFirst_name(user.getDisplayName());
                             //new_user.setProfile(user.getPhotoUrl().toString());
 
                             database.getReference().child("Users").child(user.getUid()).setValue(new_user);

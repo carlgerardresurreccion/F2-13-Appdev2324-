@@ -17,7 +17,8 @@
             android:layout_height="match_parent"
             android:fontFamily="@font/poppinsregular"
             android:textSize="24sp"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:layout_weight="1"/>
 
         <ImageButton
             android:id="@+id/avatarImage"
@@ -50,6 +51,7 @@
         android:numColumns="2"
         android:layout_below="@id/SearchBar"
         android:layout_marginTop="10dp"/>-->
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/GridDisplayPets"
