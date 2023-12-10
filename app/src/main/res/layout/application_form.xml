@@ -51,11 +51,41 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="10dp"
                 android:fontFamily="@font/poppinsregular"
                 android:gravity="center_horizontal"
                 android:text="Please fill out this form"
                 android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/PetID"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@+id/EmailText"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/input_box"
+                android:drawableLeft="@android:drawable/ic_menu_myplaces"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/poppinsregular"
+                android:hint="Pet ID"
+                android:paddingLeft="15dp"
+                android:textColor="@color/grey"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/PetName"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@+id/EmailText"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/input_box"
+                android:drawableLeft="@android:drawable/ic_menu_myplaces"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/poppinsregular"
+                android:hint="Pet Name"
+                android:paddingLeft="15dp"
+                android:textColor="@color/grey"
                 android:textSize="18sp" />
 
             <EditText
@@ -84,13 +114,12 @@
                 android:drawablePadding="10dp"
                 android:fontFamily="@font/poppinsregular"
                 android:hint="Address"
-                android:inputType="textPassword"
                 android:paddingLeft="15dp"
                 android:textColor="@color/grey"
                 android:textSize="18sp" />
 
             <EditText
-                android:id="@+id/PhoneNumber"
+                android:id="@+id/phnum"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_below="@+id/EmailText"
@@ -100,13 +129,12 @@
                 android:drawablePadding="10dp"
                 android:fontFamily="@font/poppinsregular"
                 android:hint="Phone Number"
-                android:inputType="textPassword"
                 android:paddingLeft="15dp"
                 android:textColor="@color/grey"
                 android:textSize="18sp" />
 
             <EditText
-                android:id="@+id/Email"
+                android:id="@+id/af_email"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_below="@+id/EmailText"
@@ -122,7 +150,7 @@
                 android:layout_marginTop="20dp"/>
 
             <EditText
-                android:id="@+id/ReasonForAdoption"
+                android:id="@+id/reason"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_below="@+id/EmailText"
@@ -132,7 +160,6 @@
                 android:drawablePadding="10dp"
                 android:fontFamily="@font/poppinsregular"
                 android:hint="Reason for Adoption"
-                android:inputType="textPassword"
                 android:paddingLeft="15dp"
                 android:textColor="@color/grey"
                 android:textSize="18sp" />
@@ -142,7 +169,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="135dp"
+                android:layout_marginTop="25dp"
                 android:background="@drawable/button_teal"
                 android:fontFamily="@font/poppinsregular"
                 android:text="Send Application"
