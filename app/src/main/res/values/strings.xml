@@ -11,4 +11,6 @@
     <string name="pageFourText">Start your pet adoption journey today and be part of a community that believes in giving every pet the chance they deserve.</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="default_web_client_id">283444505486-99ls3tqguanubgjoak311t51jio4o9qo.apps.googleusercontent.com</string>
 </resources>

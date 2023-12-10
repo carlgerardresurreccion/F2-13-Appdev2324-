@@ -72,8 +72,7 @@ public class Fragment_Home_EditProfile extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Handle back button click
-                finish(); // Finish the current activity and go back
+                finish();
             }
         });
 
@@ -163,7 +162,6 @@ public class Fragment_Home_EditProfile extends AppCompatActivity {
         }
     }
 
-
     private void showAndSetUserData() {
         FirebaseUser user = auth.getCurrentUser();
         if (user != null) {
@@ -226,7 +224,6 @@ public class Fragment_Home_EditProfile extends AppCompatActivity {
             currentFocus.clearFocus();
         }
     }
-
 
     private void hideSoftKeyboard() {
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
