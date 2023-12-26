@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.makeramen.roundedimageview.RoundedImageView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +42,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Glide.with(context).load(dataList.get(position).getImageUrl()).into(holder.gridImage);
+        PetItem pet = dataList.get(position);
+
+        Glide.with(context).load(pet.getImageUrl()).into(holder.gridImage);
+        //Glide.with(context).load(dataList.get(position).getImageUrl()).into(holder.gridImage);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navigateToPetDetailsFragment(pet);
+            }
+        });
     }
 
     @Override
@@ -57,60 +67,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         }
     }
 
-    /*@NonNull
-    @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.fragment__pet_details, parent, false);
-        return new ViewHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        PetItem pet = dataList.get(position);
-
-        // Set your pet details to the views in the ViewHolder
-        holder.petNameTextView.setText(pet.getName());
-        holder.petImageView.setImageResource(pet.getImageResource());
-
-        // Set click listener for the pet item
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Handle item click and navigate to the details fragment
-                handleItemClick(pet);
-            }
-        });
-    }
-
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        // Declare your views here
-        public TextView petNameTextView;
-        public ImageView petImageView;
-
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            // Initialize your views here
-            petNameTextView = itemView.findViewById(R.id.petNameTextView);
-            petImageView = itemView.findViewById(R.id.petImageView);
-        }
-    }
-
-    private void handleItemClick(PetItem pet) {
-        // Handle the item click event here
-        // You can navigate to the details fragment or perform any other action
-        // For example, navigate to the details fragment:
-        navigateToPetDetailsFragment(pet);
-    }
-
     private void navigateToPetDetailsFragment(PetItem pet) {
-        Fragment_PetDetails fragment = Fragment_PetDetails.newInstance(pet);
-        FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        Fragment_PetDetails petDetailsFragment = new Fragment_PetDetails();
 
-        // Replace the current fragment with the details fragment
-        transaction.replace(R.id.fragment_container, fragment);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("petDetails", (Serializable) pet);
+        petDetailsFragment.setArguments(bundle);
+
+        FragmentTransaction transaction = ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.FragmentContainer, petDetailsFragment);
         transaction.addToBackStack(null);
         transaction.commit();
-    }*/
+    }
 }

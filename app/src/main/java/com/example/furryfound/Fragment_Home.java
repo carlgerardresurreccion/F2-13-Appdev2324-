@@ -58,7 +58,8 @@ public class Fragment_Home extends Fragment {
                 if (snapshot.exists()) {
                     User_Class userData = snapshot.getValue(User_Class.class);
                     if (userData != null) {
-                        usernameT.setText("Hi, " + userData.getFirst_name() + "!");
+                        String capitalizedFirstName = capitalizeFirstLetter(userData.getFirst_name());
+                        usernameT.setText("Hi, " + capitalizedFirstName + "!");
                     }
                 }
             }
@@ -94,6 +95,13 @@ public class Fragment_Home extends Fragment {
         });
 
         return view;
+    }
+
+    private String capitalizeFirstLetter(String input) {
+        if (input == null || input.isEmpty()) {
+            return input;
+        }
+        return input.substring(0, 1).toUpperCase() + input.substring(1);
     }
 }
 
