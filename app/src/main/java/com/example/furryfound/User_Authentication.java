@@ -7,9 +7,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -107,7 +109,8 @@ public class User_Authentication extends AppCompatActivity {
                             User_Class new_user = new User_Class();
                             new_user.setUser_id(user.getUid());
                             new_user.setFirst_name(user.getDisplayName());
-                            //new_user.setProfile(user.getPhotoUrl().toString());
+                            new_user.setProfile_picture(String.valueOf(user.getPhotoUrl()));
+                            new_user.setPhone_number(user.getPhoneNumber());
 
                             database.getReference().child("Users").child(user.getUid()).setValue(new_user);
 

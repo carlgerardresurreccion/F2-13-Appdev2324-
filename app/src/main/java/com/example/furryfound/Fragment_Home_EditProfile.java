@@ -69,6 +69,18 @@ public class Fragment_Home_EditProfile extends AppCompatActivity {
         setOnClickListenerForEditText(address);
         setOnClickListenerForEditText(phoneNumber);
 
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra("userDetails")) {
+            User_Class user = (User_Class) intent.getSerializableExtra("userDetails");
+
+            if (user != null) {
+                firstName.setText(user.getFirst_name());
+                lastName.setText(user.getLast_name());
+                address.setText(user.getAddress());
+                phoneNumber.setText(user.getPhone_number());
+            }
+        }
+
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,22 +129,18 @@ public class Fragment_Home_EditProfile extends AppCompatActivity {
 
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             Uri selectedImageUri = data.getData();
-            // Upload the image to Firebase Storage
             uploadImageToFirebaseStorage(selectedImageUri);
         }
     }
 
     private void uploadImageToFirebaseStorage(Uri imageUri) {
-        // Create a unique filename for the image
         FirebaseUser user = auth.getCurrentUser();
         if (user != null) {
             StorageReference imageRef = storageReference.child(user.getUid() + ".jpg");
 
             imageRef.putFile(imageUri)
                     .addOnSuccessListener(taskSnapshot -> {
-                        // Image uploaded successfully, get download URL
                         imageRef.getDownloadUrl().addOnSuccessListener(uri -> {
-                            // Update the profile picture URL in the database
                             updateProfilePictureInDatabase(uri.toString());
                         });
                     })
@@ -149,7 +157,6 @@ public class Fragment_Home_EditProfile extends AppCompatActivity {
             DatabaseReference userRef = databaseReference.child(user.getUid());
             userRef.child("profile_picture").setValue(downloadUrl);
 
-            // Set the new image URL to the ImageView
             Glide.with(this)
                     .load(downloadUrl)
                     .placeholder(R.drawable.default_profile_picture)
@@ -178,8 +185,6 @@ public class Fragment_Home_EditProfile extends AppCompatActivity {
                             phoneNumber.setText(userData.getPhone_number());
 
                             if (userData.getProfile_picture() != null) {
-                                // Load the profile picture using a library like Glide or Picasso
-                                // Example using Glide:
                                 Glide.with(Fragment_Home_EditProfile.this)
                                         .load(userData.getProfile_picture())
                                         .into(profilePicture);
@@ -208,7 +213,6 @@ public class Fragment_Home_EditProfile extends AppCompatActivity {
             updates.put("phone_number", phoneNumber.getEditableText().toString());
             userRef.updateChildren(updates);
 
-            // Clear focus from any focused view
             clearFocusFromAllViews();
 
             Toast.makeText(this, "Profile has been updated", Toast.LENGTH_SHORT).show();

@@ -12,7 +12,6 @@ import com.google.android.material.navigation.NavigationBarView;
 public class Fragment_LogIn_Home extends AppCompatActivity {
 
     BottomNavigationView navbar;
-
     Fragment_Home home = new Fragment_Home();
     Fragment_Favorites favorites = new Fragment_Favorites();
     Fragment_Notifications notifications = new Fragment_Notifications();

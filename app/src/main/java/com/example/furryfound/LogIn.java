@@ -88,14 +88,12 @@ public class LogIn extends AppCompatActivity {
         mAuth.signInWithEmailAndPassword(username, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        // Sign in success, update UI with the signed-in user's information
                         FirebaseUser user = mAuth.getCurrentUser();
                         Toast.makeText(LogIn.this, "Login successful!", Toast.LENGTH_SHORT).show();
 
                         if (user != null) {
                             String userId = user.getUid();
 
-                            // Assuming your users are stored in a "users" node in the database
                             DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("firstname");
 
                             userRef.addListenerForSingleValueEvent(new ValueEventListener() {

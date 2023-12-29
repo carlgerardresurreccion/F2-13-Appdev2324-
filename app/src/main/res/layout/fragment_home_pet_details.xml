@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:context=".Fragment_PetDetails"
+    android:layout_height="match_parent"
+    tools:context=".Fragment_Home_PetDetails"
     android:background="@drawable/background_beige"
     android:paddingRight="20dp"
     android:paddingLeft="20dp">
@@ -46,11 +46,6 @@
                 android:layout_gravity="end"/>
 
         </LinearLayout>
-
-        <FrameLayout
-            android:id="@+id/FragmentContainer"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
 
         <ScrollView
             android:id="@+id/scrollviewnibeh"
@@ -134,43 +129,52 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="45dp"
                     android:layout_marginTop="10dp"
                     android:weightSum="3">
 
-                    <TextView
+                    <EditText
                         android:id="@+id/PetAge"
                         android:layout_width="0dp"
                         android:layout_height="40dp"
                         android:layout_weight="1"
                         android:layout_marginEnd="3dp"
+                        android:paddingLeft="10dp"
+                        android:gravity="bottom"
                         android:background="@drawable/inout_box_petdetails"
                         android:textColor="@color/violet"
-                        android:textSize="18sp"
-                        android:fontFamily="@font/poppinslight"/>
+                        android:textSize="20sp"
+                        android:fontFamily="@font/poppinslight"
+                        android:editable="false"/>
 
-                    <TextView
+                    <EditText
                         android:id="@+id/PetColor"
                         android:layout_width="0dp"
                         android:layout_height="40dp"
                         android:layout_weight="1"
                         android:layout_marginStart="3dp"
                         android:layout_marginEnd="3dp"
+                        android:paddingLeft="10dp"
+                        android:gravity="bottom"
                         android:background="@drawable/inout_box_petdetails"
                         android:textColor="@color/violet"
-                        android:textSize="18sp"
-                        android:fontFamily="@font/poppinslight"/>
+                        android:textSize="20sp"
+                        android:fontFamily="@font/poppinslight"
+                        android:editable="false"/>
 
-                    <TextView
+                    <EditText
                         android:id="@+id/PetWeight"
                         android:layout_width="0dp"
                         android:layout_height="40dp"
                         android:layout_weight="1"
                         android:layout_marginStart="3dp"
+                        android:paddingLeft="10dp"
+                        android:gravity="bottom"
                         android:background="@drawable/inout_box_petdetails"
                         android:textColor="@color/violet"
-                        android:textSize="18sp"
-                        android:fontFamily="@font/poppinslight"/>
+                        android:textSize="20sp"
+                        android:fontFamily="@font/poppinslight"
+                        android:editable="false"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -206,27 +210,33 @@
                     android:layout_marginTop="10dp"
                     android:weightSum="2">
 
-                    <TextView
+                    <EditText
                         android:id="@+id/PetDateArrived"
                         android:layout_width="0dp"
                         android:layout_height="40dp"
                         android:layout_weight="1"
                         android:layout_marginEnd="3dp"
+                        android:paddingLeft="10dp"
+                        android:gravity="bottom"
                         android:background="@drawable/inout_box_petdetails"
                         android:textColor="@color/violet"
-                        android:textSize="18sp"
-                        android:fontFamily="@font/poppinslight"/>
+                        android:textSize="20sp"
+                        android:fontFamily="@font/poppinslight"
+                        android:editable="false"/>
 
-                    <TextView
+                    <EditText
                         android:id="@+id/PetDaysAtTheShelter"
                         android:layout_width="0dp"
                         android:layout_height="40dp"
                         android:layout_weight="1"
                         android:layout_marginStart="3dp"
+                        android:paddingLeft="10dp"
+                        android:gravity="bottom"
                         android:background="@drawable/inout_box_petdetails"
                         android:textColor="@color/violet"
-                        android:textSize="18sp"
-                        android:fontFamily="@font/poppinslight"/>
+                        android:textSize="20sp"
+                        android:fontFamily="@font/poppinslight"
+                        android:editable="false"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -243,21 +253,27 @@
                         android:textColor="@color/grey"
                         android:fontFamily="@font/poppinssemibold"/>
 
-                    <TextView
+                    <EditText
                         android:id="@+id/PetDescription"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/inout_box_petdetails"
                         android:textColor="@color/violet"
-                        android:textSize="18sp"
+                        android:textSize="20sp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
                         android:fontFamily="@font/poppinslight"
-                        android:layout_marginTop="10dp"/>
+                        android:layout_marginTop="10dp"
+                        android:editable="false"/>
                 </LinearLayout>
             </LinearLayout>
 
         </ScrollView>
 
         <Button
+            android:id="@+id/AdoptionButton"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_alignBottom="@+id/scrollviewnibeh"
@@ -268,4 +284,5 @@
             android:fontFamily="@font/poppinsregular"
             android:layout_marginBottom="15dp"/>
     </RelativeLayout>
-</RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

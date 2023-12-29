@@ -1,10 +1,12 @@
 package com.example.furryfound;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
@@ -23,10 +25,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.Source;
 
 import java.util.ArrayList;
 
-public class Fragment_Home extends Fragment {
+public class Fragment_Home extends Fragment implements PetDetailsOnClick {
     ImageButton avatarImage;
     TextView usernameT;
     RecyclerView recyclerView;
@@ -49,8 +52,15 @@ public class Fragment_Home extends Fragment {
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
 
         dataList = new ArrayList<>();
-        adapter = new MyAdapter(dataList, getContext());
+        MyAdapter adapter = new MyAdapter(dataList, getContext(), this);
         recyclerView.setAdapter(adapter);
+
+        String GuserPhoto = String.valueOf(user.getPhotoUrl());
+        String Gusername = user.getDisplayName();
+
+        Glide.with(this).load(GuserPhoto).into(avatarImage);
+        String capitalizedFirstName = capitalizeFirstLetter(Gusername);
+        usernameT.setText("Hi, " + capitalizedFirstName + "!");
 
         userReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -79,6 +89,7 @@ public class Fragment_Home extends Fragment {
         });
 
         databaseReference.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot dataSnapshot: snapshot.getChildren()) {
@@ -103,39 +114,11 @@ public class Fragment_Home extends Fragment {
         }
         return input.substring(0, 1).toUpperCase() + input.substring(1);
     }
-}
 
-/*public class Fragment_Home extends Fragment {
-    GridView gridView;
-    ArrayList<PetItem> dataList;
-    MyAdapter adapter;
-    final private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("pets");
-
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment__home, container, false);
-
-        gridView = view.findViewById(R.id.GridDisplayPets);
-        dataList = new ArrayList<>();
-        adapter = new MyAdapter(dataList, getContext());
-        gridView.setAdapter(adapter);
-
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot dataSnapshot: snapshot.getChildren()) {
-                    PetItem pet = dataSnapshot.getValue(PetItem.class);
-                    dataList.add(pet);
-                }
-                adapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("FirebaseError", "Error fetching data: " + error.getMessage());
-            }
-        });
-
-        return view;
+    @Override
+    public void onItemClick(int position, PetItem pet) {
+        Intent intent = new Intent(getContext(), Fragment_Home_PetDetails.class);
+        intent.putExtra("selectedPet", pet);
+        startActivity(intent);
     }
-}*/
+}

@@ -1,43 +1,35 @@
 package com.example.furryfound;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
 
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.makeramen.roundedimageview.RoundedImageView;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+    private final PetDetailsOnClick petDetailsOnClick;
     ArrayList<PetItem> dataList;
     Context context;
-    private ViewGroup parent;
-    private int viewType;
 
-    public MyAdapter(ArrayList<PetItem> dataList, Context context) {
+    public MyAdapter(ArrayList<PetItem> dataList, Context context, PetDetailsOnClick petDetailsOnClick) {
         this.dataList = dataList;
         this.context = context;
+        this.petDetailsOnClick = petDetailsOnClick;
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_screen_griditem, parent, false);
-        return new MyViewHolder(view);
+        return new MyViewHolder(view, dataList, petDetailsOnClick);
     }
 
     @Override
@@ -45,13 +37,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         PetItem pet = dataList.get(position);
 
         Glide.with(context).load(pet.getImageUrl()).into(holder.gridImage);
-        //Glide.with(context).load(dataList.get(position).getImageUrl()).into(holder.gridImage);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navigateToPetDetailsFragment(pet);
-            }
-        });
     }
 
     @Override
@@ -59,24 +44,25 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         return dataList.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
         RoundedImageView gridImage;
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView, ArrayList<PetItem> dataList, PetDetailsOnClick petDetailsOnClick) {
             super(itemView);
             gridImage = itemView.findViewById(R.id.GridImage);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(petDetailsOnClick != null) {
+                        int position = getAdapterPosition();
+
+                        if(position != RecyclerView.NO_POSITION) {
+                            PetItem pet = dataList.get(position);
+                            petDetailsOnClick.onItemClick(position, pet);
+                        }
+                    }
+                }
+            });
         }
-    }
-
-    private void navigateToPetDetailsFragment(PetItem pet) {
-        Fragment_PetDetails petDetailsFragment = new Fragment_PetDetails();
-
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("petDetails", (Serializable) pet);
-        petDetailsFragment.setArguments(bundle);
-
-        FragmentTransaction transaction = ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.FragmentContainer, petDetailsFragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
     }
 }

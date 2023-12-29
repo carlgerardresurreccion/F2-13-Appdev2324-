@@ -3,19 +3,21 @@ package com.example.furryfound;
 import android.os.Build;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class PetItem {
-    private String name, color, type, status, imageUrl, description;
-    private int age
-    private long daysAtShelter;
+public class PetItem implements Parcelable {
+    private String name, color, type, imageUrl, description, dateArrived, gender, age;
+    private int daysAtShelter, status;
     private float weight;
-    private LocalDate arrivalDate;
 
     public PetItem() {
+
     }
 
-    public PetItem(String name, String color, String type, String status, String imageUrl, String description, int age, float weight, LocalDate arrivalDate) {
+    public PetItem(String age, String color, String dateArrived, int daysAtShelter, String description, String imageUrl, String gender, String name, int status, String type, int weight) {
         this.name = name;
         this.color = color;
         this.type = type;
@@ -24,7 +26,21 @@ public class PetItem {
         this.description = description;
         this.age = age;
         this.weight = weight;
-        this.arrivalDate = arrivalDate;
+        this.dateArrived = dateArrived;
+        this.daysAtShelter = daysAtShelter;
+        this.gender = gender;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public void setDaysAtShelter(int daysAtShelter) {
+        this.daysAtShelter = daysAtShelter;
     }
 
     public String getName() {
@@ -51,11 +67,11 @@ public class PetItem {
         this.type = type;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
@@ -75,11 +91,11 @@ public class PetItem {
         this.description = description;
     }
 
-    public int getAge() {
+    public String getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(String age) {
         this.age = age;
     }
 
@@ -95,25 +111,57 @@ public class PetItem {
         this.weight = weight;
     }
 
-    public LocalDate getArrivalDate() {
-        return arrivalDate;
+    public String getDateArrived() {
+        return dateArrived;
     }
 
-    public void setArrivalDate(LocalDate arrivalDate) {
-        this.arrivalDate = arrivalDate;
-        this.daysAtShelter = calculateDaysAtShelter();
+    public void setDateArrived(String dateArrived) {
+        this.dateArrived = dateArrived;
     }
 
-    private long calculateDaysAtShelter() {
-        if (arrivalDate != null) {
-            LocalDate currentDate = null;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                currentDate = LocalDate.now();
-            }
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                return ChronoUnit.DAYS.between(arrivalDate, currentDate);
-            }
-        }
+    protected PetItem(Parcel in) {
+        name = in.readString();
+        color = in.readString();
+        type = in.readString();
+        imageUrl = in.readString();
+        description = in.readString();
+        dateArrived = in.readString();
+        age = in.readString();
+        daysAtShelter = in.readInt();
+        status = in.readInt();
+        weight = in.readFloat();
+        gender = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeString(color);
+        dest.writeString(type);
+        dest.writeString(imageUrl);
+        dest.writeString(description);
+        dest.writeString(dateArrived);
+        dest.writeString(age);
+        dest.writeInt(daysAtShelter);
+        dest.writeInt(status);
+        dest.writeFloat(weight);
+        dest.writeString(gender);
+    }
+
+    @Override
+    public int describeContents() {
         return 0;
     }
+
+    public static final Creator<PetItem> CREATOR = new Creator<PetItem>() {
+        @Override
+        public PetItem createFromParcel(Parcel in) {
+            return new PetItem(in);
+        }
+
+        @Override
+        public PetItem[] newArray(int size) {
+            return new PetItem[size];
+        }
+    };
 }
