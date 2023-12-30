@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,13 +32,13 @@ import java.util.concurrent.Future;
 public class Fragment_Home_ApplicationForm extends AppCompatActivity {
 
     private EditText  reasonEditText, fullNameText, addressText, phoneNumberText, emailText;
-    String  petnameET, petIDET;
     Button sendButton;
     ImageButton backButton;
     FirebaseDatabase fbd;
     DatabaseReference df;
 
     FirebaseAuth auth;
+    private String petId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +61,11 @@ public class Fragment_Home_ApplicationForm extends AppCompatActivity {
             }
         });
 
+        Intent intent = getIntent();
+        if (intent != null) {
+            petId = intent.getStringExtra("petId");
+        }
+
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,7 +86,7 @@ public class Fragment_Home_ApplicationForm extends AppCompatActivity {
 
                 df.child(applicationID).child("application_id").setValue(applicationID);
                 df.child(applicationID).child("adopter_id").setValue(adopterID);
-                //df.child(applicationID).child("pet_id").setValue(petID);
+                df.child(applicationID).child("pet_id").setValue(petId);
                 //df.child(applicationID).child("petName").setValue(petname);
                 df.child(applicationID).child("fullname").setValue(fullname);
                 df.child(applicationID).child("address").setValue(address);

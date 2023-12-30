@@ -92,6 +92,7 @@ public class Fragment_Home extends Fragment implements PetDetailsOnClick {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                dataList.clear();
                 for(DataSnapshot dataSnapshot: snapshot.getChildren()) {
                     PetItem pet = dataSnapshot.getValue(PetItem.class);
                     dataList.add(pet);
