@@ -9,7 +9,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class PetItem implements Parcelable {
-    private String name, color, type, imageUrl, description, dateArrived, gender, age;
+    private String name, color, type, imageUrl, description, dateArrived, gender, age, petID;
     private int daysAtShelter, status;
     private float weight;
 
@@ -17,7 +17,7 @@ public class PetItem implements Parcelable {
 
     }
 
-    public PetItem(String age, String color, String dateArrived, int daysAtShelter, String description, String imageUrl, String gender, String name, int status, String type, int weight) {
+    public PetItem(String age, String color, String dateArrived, int daysAtShelter, String description, String imageUrl, String gender, String name, String petID, int status, String type, int weight) {
         this.name = name;
         this.color = color;
         this.type = type;
@@ -29,6 +29,15 @@ public class PetItem implements Parcelable {
         this.dateArrived = dateArrived;
         this.daysAtShelter = daysAtShelter;
         this.gender = gender;
+        this.petID = petID;
+    }
+
+    public String getPetID() {
+        return petID;
+    }
+
+    public void setPetID(String petID) {
+        this.petID = petID;
     }
 
     public String getGender() {
@@ -131,6 +140,7 @@ public class PetItem implements Parcelable {
         status = in.readInt();
         weight = in.readFloat();
         gender = in.readString();
+        petID = in.readString();
     }
 
     @Override
@@ -146,6 +156,7 @@ public class PetItem implements Parcelable {
         dest.writeInt(status);
         dest.writeFloat(weight);
         dest.writeString(gender);
+        dest.writeString(petID);
     }
 
     @Override

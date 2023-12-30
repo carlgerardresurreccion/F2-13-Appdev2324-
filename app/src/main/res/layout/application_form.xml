@@ -59,36 +59,6 @@
                 android:textSize="18sp" />
 
             <EditText
-                android:id="@+id/PetID"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_below="@+id/EmailText"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/input_box"
-                android:drawableLeft="@android:drawable/ic_menu_myplaces"
-                android:drawablePadding="10dp"
-                android:fontFamily="@font/poppinsregular"
-                android:hint="Pet ID"
-                android:paddingLeft="15dp"
-                android:textColor="@color/grey"
-                android:textSize="18sp" />
-
-            <EditText
-                android:id="@+id/PetName"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_below="@+id/EmailText"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/input_box"
-                android:drawableLeft="@android:drawable/ic_menu_myplaces"
-                android:drawablePadding="10dp"
-                android:fontFamily="@font/poppinsregular"
-                android:hint="Pet Name"
-                android:paddingLeft="15dp"
-                android:textColor="@color/grey"
-                android:textSize="18sp" />
-
-            <EditText
                 android:id="@+id/FullName"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -152,7 +122,7 @@
             <EditText
                 android:id="@+id/reason"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/EmailText"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/input_box"
@@ -161,6 +131,9 @@
                 android:fontFamily="@font/poppinsregular"
                 android:hint="Reason for Adoption"
                 android:paddingLeft="15dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:paddingRight="8dp"
                 android:textColor="@color/grey"
                 android:textSize="18sp" />
         </LinearLayout>

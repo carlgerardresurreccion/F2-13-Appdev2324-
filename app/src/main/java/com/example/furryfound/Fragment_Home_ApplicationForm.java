@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,9 +30,10 @@ import java.util.concurrent.Future;
 
 public class Fragment_Home_ApplicationForm extends AppCompatActivity {
 
-    private EditText  reasonEditText, petnameET, petIDET, fullNameText, addressText, phoneNumberText, emailText;
+    private EditText  reasonEditText, fullNameText, addressText, phoneNumberText, emailText;
+    String  petnameET, petIDET;
     Button sendButton;
-
+    ImageButton backButton;
     FirebaseDatabase fbd;
     DatabaseReference df;
 
@@ -48,9 +50,15 @@ public class Fragment_Home_ApplicationForm extends AppCompatActivity {
         phoneNumberText = findViewById(R.id.phnum);
         emailText = findViewById(R.id.af_email);
         reasonEditText = findViewById(R.id.reason);
-        petnameET = findViewById(R.id.PetName);
-        petIDET = findViewById(R.id.PetID);
         auth = FirebaseAuth.getInstance();
+        backButton = findViewById(R.id.backButton);
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,8 +72,6 @@ public class Fragment_Home_ApplicationForm extends AppCompatActivity {
                 String date_applied = getCurrentDate();
                 int status = 0;
                 String applicationID = SecureRandomIdGenerator.generateSecureRandomId();
-                String petname = petnameET.getEditableText().toString();
-                String petID = petIDET.getEditableText().toString();
                 String fullname = fullNameText.getEditableText().toString();
                 String address = addressText.getEditableText().toString();
                 String phonenum = phoneNumberText.getEditableText().toString();
@@ -74,8 +80,8 @@ public class Fragment_Home_ApplicationForm extends AppCompatActivity {
 
                 df.child(applicationID).child("application_id").setValue(applicationID);
                 df.child(applicationID).child("adopter_id").setValue(adopterID);
-                df.child(applicationID).child("pet_id").setValue(petID);
-                df.child(applicationID).child("petName").setValue(petname);
+                //df.child(applicationID).child("pet_id").setValue(petID);
+                //df.child(applicationID).child("petName").setValue(petname);
                 df.child(applicationID).child("fullname").setValue(fullname);
                 df.child(applicationID).child("address").setValue(address);
                 df.child(applicationID).child("phone_number").setValue(phonenum);

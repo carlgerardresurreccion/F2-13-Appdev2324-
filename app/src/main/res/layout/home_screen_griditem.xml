@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--<com.makeramen.roundedimageview.RoundedImageView
+<com.makeramen.roundedimageview.RoundedImageView
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/GridImage"
@@ -9,9 +9,9 @@
     android:layout_marginTop="15dp"
     app:riv_corner_radius="20dp"
     android:adjustViewBounds="true"
-    android:clickable="true"/>-->
+    android:clickable="true"/>
 
-<androidx.constraintlayout.widget.ConstraintLayout
+<!--<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -40,4 +40,4 @@
         android:layout_marginRight="20dp"
         android:background="@drawable/icon_favorites"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>-->
