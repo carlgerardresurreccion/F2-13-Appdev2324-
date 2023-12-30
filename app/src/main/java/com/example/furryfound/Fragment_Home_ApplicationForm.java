@@ -52,7 +52,6 @@ public class Fragment_Home_ApplicationForm extends AppCompatActivity {
         petIDET = findViewById(R.id.PetID);
         auth = FirebaseAuth.getInstance();
 
-
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

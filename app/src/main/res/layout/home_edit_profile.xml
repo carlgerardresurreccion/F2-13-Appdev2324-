@@ -202,8 +202,8 @@
     <Button
         android:id="@+id/Save_btn"
         android:layout_width="327dp"
-        android:layout_height="53dp"
-        android:layout_marginBottom="30dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/button_teal"
         android:fontFamily="@font/poppinsmedium"
         android:hint="seunghanhong@gmail.com"

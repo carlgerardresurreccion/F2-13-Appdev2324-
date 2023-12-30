@@ -17,14 +17,14 @@
             android:layout_height="match_parent"
             android:fontFamily="@font/poppinsregular"
             android:textSize="24sp"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:layout_weight="1"/>
 
         <ImageButton
             android:id="@+id/avatarImage"
-            android:background="?attr/selectableItemBackgroundBorderless"
             android:layout_width="35dp"
-            android:layout_height="match_parent"
-            android:src="@drawable/icon_home"/>
+            android:layout_height="35dp"
+            android:background="@drawable/circle_background"/>
 
     </LinearLayout>
 
@@ -43,14 +43,6 @@
         android:textColor="@color/grey"
         android:layout_marginTop="20dp"/>
 
-    <!--<GridView
-        android:id="@+id/GridDisplayPets"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:numColumns="2"
-        android:layout_below="@id/SearchBar"
-        android:layout_marginTop="10dp"/>-->
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/GridDisplayPets"
         android:layout_width="match_parent"
@@ -59,6 +51,7 @@
         android:paddingEnd="15dp"
         android:paddingBottom="15dp"
         android:layout_marginTop="20dp"
-        android:layout_below="@+id/SearchBar"/>
+        android:layout_below="@+id/SearchBar"
+        android:clickable="true"/>
 
 </RelativeLayout>
