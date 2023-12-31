@@ -58,66 +58,123 @@
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 
-            <EditText
-                android:id="@+id/FullName"
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/poppinsregular"
+                android:gravity="left"
+                android:text="Living Environment:"
+                android:textColor="@color/black"
+                android:textSize="14sp"/>
+
+            <EditText
+                android:id="@+id/livingEnvironment"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
                 android:layout_below="@+id/EmailText"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/input_box"
-                android:drawableLeft="@android:drawable/ic_menu_myplaces"
+                android:drawableLeft="@android:drawable/btn_star_big_off"
                 android:drawablePadding="10dp"
                 android:fontFamily="@font/poppinsregular"
-                android:hint="Full Name"
                 android:paddingLeft="15dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="8dp"
+                android:paddingRight="8dp"
                 android:textColor="@color/grey"
                 android:textSize="18sp" />
 
-            <EditText
-                android:id="@+id/Address"
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_below="@+id/EmailText"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppinsregular"
+                android:gravity="left"
+                android:text="Own or Rent:"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/ownOrRent"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@+id/EmailText"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/input_box"
-                android:drawableLeft="@android:drawable/ic_dialog_map"
+                android:drawableLeft="@android:drawable/btn_star_big_off"
                 android:drawablePadding="10dp"
                 android:fontFamily="@font/poppinsregular"
-                android:hint="Address"
                 android:paddingLeft="15dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="8dp"
+                android:paddingRight="8dp"
                 android:textColor="@color/grey"
                 android:textSize="18sp" />
 
-            <EditText
-                android:id="@+id/phnum"
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppinsregular"
+                android:gravity="left"
+                android:text="Number of pets owned at the moment:"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/petsOwned"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
                 android:layout_below="@+id/EmailText"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/input_box"
-                android:drawableLeft="@android:drawable/ic_menu_call"
+                android:drawableLeft="@android:drawable/btn_star_big_off"
                 android:drawablePadding="10dp"
                 android:fontFamily="@font/poppinsregular"
-                android:hint="Phone Number"
                 android:paddingLeft="15dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="8dp"
+                android:paddingRight="8dp"
                 android:textColor="@color/grey"
                 android:textSize="18sp" />
 
-            <EditText
-                android:id="@+id/af_email"
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_below="@+id/EmailText"
-                android:inputType="textEmailAddress"
-                android:background="@drawable/input_box"
-                android:drawableLeft="@drawable/icon_at"
-                android:paddingLeft="15dp"
-                android:drawablePadding="10dp"
-                android:hint="Email"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:fontFamily="@font/poppinsregular"
-                android:textSize="18sp"
+                android:gravity="left"
+                android:text="Employment Status:"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/employmentStatus"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@+id/EmailText"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/input_box"
+                android:drawableLeft="@android:drawable/btn_star_big_off"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/poppinsregular"
+                android:paddingLeft="15dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="8dp"
+                android:paddingRight="8dp"
                 android:textColor="@color/grey"
-                android:layout_marginTop="20dp"/>
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppinsregular"
+                android:gravity="left"
+                android:text="Reason for Adoption:"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/reason"
@@ -129,10 +186,9 @@
                 android:drawableLeft="@android:drawable/btn_star_big_off"
                 android:drawablePadding="10dp"
                 android:fontFamily="@font/poppinsregular"
-                android:hint="Reason for Adoption"
                 android:paddingLeft="15dp"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 android:paddingRight="8dp"
                 android:textColor="@color/grey"
                 android:textSize="18sp" />

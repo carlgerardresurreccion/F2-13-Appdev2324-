@@ -31,7 +31,7 @@ import java.util.concurrent.Future;
 
 public class Fragment_Home_ApplicationForm extends AppCompatActivity {
 
-    private EditText  reasonEditText, fullNameText, addressText, phoneNumberText, emailText;
+    private EditText livingEnvironmentText, ownOrRentText, petsOwnedText, employmentStatusText, reasonEditText;
     Button sendButton;
     ImageButton backButton;
     FirebaseDatabase fbd;
@@ -46,11 +46,11 @@ public class Fragment_Home_ApplicationForm extends AppCompatActivity {
         setContentView(R.layout.application_form);
 
         sendButton = findViewById(R.id.SendApplication);
-        fullNameText = findViewById(R.id.FullName);
-        addressText = findViewById(R.id.Address);
-        phoneNumberText = findViewById(R.id.phnum);
-        emailText = findViewById(R.id.af_email);
         reasonEditText = findViewById(R.id.reason);
+        livingEnvironmentText = findViewById(R.id.livingEnvironment);
+        ownOrRentText = findViewById(R.id.ownOrRent);
+        petsOwnedText = findViewById(R.id.petsOwned);
+        employmentStatusText = findViewById(R.id.employmentStatus);
         auth = FirebaseAuth.getInstance();
         backButton = findViewById(R.id.backButton);
 
@@ -78,20 +78,20 @@ public class Fragment_Home_ApplicationForm extends AppCompatActivity {
                 String date_applied = getCurrentDate();
                 int status = 0;
                 String applicationID = SecureRandomIdGenerator.generateSecureRandomId();
-                String fullname = fullNameText.getEditableText().toString();
-                String address = addressText.getEditableText().toString();
-                String phonenum = phoneNumberText.getEditableText().toString();
-                String email = emailText.getEditableText().toString();
+                String livingEnvironment = livingEnvironmentText.getEditableText().toString();
+                String ownOrRent = ownOrRentText.getEditableText().toString();
+                String petsOwned = petsOwnedText.getEditableText().toString();
+                String employmentStatus = employmentStatusText.getEditableText().toString();
                 String reason = reasonEditText.getEditableText().toString();
 
                 df.child(applicationID).child("application_id").setValue(applicationID);
                 df.child(applicationID).child("adopter_id").setValue(adopterID);
                 df.child(applicationID).child("pet_id").setValue(petId);
                 //df.child(applicationID).child("petName").setValue(petname);
-                df.child(applicationID).child("fullname").setValue(fullname);
-                df.child(applicationID).child("address").setValue(address);
-                df.child(applicationID).child("phone_number").setValue(phonenum);
-                df.child(applicationID).child("email").setValue(email);
+                df.child(applicationID).child("living_environment").setValue(livingEnvironment);
+                df.child(applicationID).child("own_rent").setValue(ownOrRent);
+                df.child(applicationID).child("pets_owned").setValue(petsOwned);
+                df.child(applicationID).child("employment_status").setValue(employmentStatus);
                 df.child(applicationID).child("reason").setValue(reason);
                 df.child(applicationID).child("date_applied").setValue(date_applied);
                 df.child(applicationID).child("status").setValue(status);
