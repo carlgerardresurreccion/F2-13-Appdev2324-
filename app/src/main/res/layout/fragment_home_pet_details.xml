@@ -38,11 +38,11 @@
                 android:layout_weight="1"/>
 
             <ImageButton
-                android:id="@+id/avatarImage"
+                android:id="@+id/favoriteButton"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:layout_width="44dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/icon_home"
+                android:src="@drawable/icon_favorites"
                 android:layout_gravity="end"/>
 
         </LinearLayout>
@@ -64,7 +64,8 @@
                 <ImageView
                     android:id="@+id/PetProfile"
                     android:layout_width="350dp"
-                    android:layout_height="255dp" />
+                    android:layout_height="255dp"
+                    android:scaleType="centerCrop"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"

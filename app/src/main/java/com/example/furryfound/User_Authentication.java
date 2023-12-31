@@ -112,7 +112,7 @@ public class User_Authentication extends AppCompatActivity {
                             new_user.setProfile_picture(String.valueOf(user.getPhotoUrl()));
                             new_user.setPhone_number(user.getPhoneNumber());
 
-                            database.getReference().child("Users").child(user.getUid()).setValue(new_user);
+                            database.getReference().child("adopters").child(user.getUid()).setValue(new_user);
 
                             Intent intent = new Intent(User_Authentication.this, Fragment_LogIn_Home.class);
                             startActivity(intent);
