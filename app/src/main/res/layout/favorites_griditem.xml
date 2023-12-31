@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/favoriteItem"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:layout_margin="15dp"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="5dp"
+    android:clickable="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="15dp"
+        android:orientation="vertical"
+        android:background="@color/light_teal"
+        android:clickable="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/favoritePetImage"
+                android:layout_width="130dp"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/favoritePetName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="32sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/poppinsbold"
+                    android:textColor="@color/violet"/>
+
+                <Space
+                    android:id="@+id/Space"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_below="@+id/favoritePetName"/>
+
+                <TextView
+                    android:id="@+id/favoriteGenderAndBreed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/poppinslight"
+                    android:textColor="@color/violet"
+                    android:gravity="bottom"
+                    android:layout_below="@+id/Space"/>
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

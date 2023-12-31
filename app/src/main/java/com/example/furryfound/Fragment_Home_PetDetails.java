@@ -1,5 +1,6 @@
 package com.example.furryfound;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -13,19 +14,38 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.Firebase;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class Fragment_Home_PetDetails extends AppCompatActivity {
-    ImageButton back;
+    ImageButton back, favButton;
     Button adoptButton;
     private String petId;
-
+    FirebaseDatabase fbd;
+    DatabaseReference df;
+    FirebaseAuth auth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_home_pet_details);
 
+        fbd = FirebaseDatabase.getInstance("https://furry-found-default-rtdb.asia-southeast1.firebasedatabase.app");
+        df = fbd.getReference("favorites");
+        auth = FirebaseAuth.getInstance();
+
         back = findViewById(R.id.backButton);
         adoptButton = findViewById(R.id.AdoptionButton);
+        favButton = findViewById(R.id.favoriteButton);
+
         ImageView image = findViewById(R.id.PetProfile);
         TextView name = findViewById(R.id.PetName);
         TextView genderandbreed = findViewById(R.id.PetGenderAndBreed);
@@ -35,6 +55,8 @@ public class Fragment_Home_PetDetails extends AppCompatActivity {
         EditText dateArrived = findViewById(R.id.PetDateArrived);
         EditText daysAtShelter = findViewById(R.id.PetDaysAtTheShelter);
         EditText description = findViewById(R.id.PetDescription);
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,12 +84,79 @@ public class Fragment_Home_PetDetails extends AppCompatActivity {
             description.setText(pet.getDescription());
         }
 
+        df.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String adopter = user.getUid();
+                String pet = petId;
+                Log.d("PET ID:", "PET ID:" + adopter);
+                Log.d("PET ID:", "PET ID:" + petId);
+
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    FavoriteItem favoriteItem = dataSnapshot.getValue(FavoriteItem.class);
+                    if (favoriteItem != null) {
+                        String adopterIdInDatabase = favoriteItem.getAdopterID();
+                        String petIdInDatabase = favoriteItem.getPetID();
+
+                        Log.d("PET ID:", "PET ID:" + adopterIdInDatabase);
+                        Log.d("PET ID:", "PET ID:" + petIdInDatabase);
+
+                        if (adopter.equals(adopterIdInDatabase) && pet.equals(petIdInDatabase)) {
+                            favButton.setSelected(true);
+                            break;
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         adoptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent1 = new Intent(Fragment_Home_PetDetails.this, Fragment_Home_ApplicationForm.class);
                 intent1.putExtra("petId", petId);
                 startActivity(intent1);
+            }
+        });
+
+        favButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean isSelected = !v.isSelected();
+                v.setSelected(isSelected);
+                df = fbd.getReference("favorites");
+                FirebaseUser currentUser = auth.getCurrentUser();
+                String adopterID = currentUser.getUid();
+                String petID = petId;
+
+                Query query = df.orderByChild("adopter_id").equalTo(adopterID);
+                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                            if (dataSnapshot.child("pet_id").getValue(String.class).equals(petID)) {
+                                String favoritesID = dataSnapshot.child("favorites_id").getValue(String.class);
+                                df.child(favoritesID).removeValue();
+                                return;
+                            }
+                        }
+
+                        String favoritesID = SecureRandomIdGenerator.generateSecureRandomId();
+                        df.child(favoritesID).child("favorites_id").setValue(favoritesID);
+                        df.child(favoritesID).child("adopter_id").setValue(adopterID);
+                        df.child(favoritesID).child("pet_id").setValue(petID);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Log.e("FirebaseError", "Error fetching data: " + error.getMessage());
+                    }
+                });
             }
         });
     }

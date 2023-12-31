@@ -36,7 +36,6 @@ public class Fragment_Home_ApplicationForm extends AppCompatActivity {
     ImageButton backButton;
     FirebaseDatabase fbd;
     DatabaseReference df;
-
     FirebaseAuth auth;
     private String petId;
 

@@ -14,6 +14,7 @@ public class PetItem implements Parcelable {
     private String name, color, type, imageUrl, description, dateArrived, gender, age;
     @PropertyName("pet_id")
     private String pet_id;
+    private String shelter_id;
     private int daysAtShelter, status;
     private float weight;
 
@@ -21,7 +22,7 @@ public class PetItem implements Parcelable {
 
     }
 
-    public PetItem(String age, String color, String dateArrived, int daysAtShelter, String description, String imageUrl, String gender, String name, String pet_id, int status, String type, int weight) {
+    public PetItem(String age, String color, String dateArrived, int daysAtShelter, String description, String imageUrl, String gender, String name, String pet_id, String shelter_id, int status, String type, int weight) {
         this.name = name;
         this.color = color;
         this.type = type;
@@ -34,6 +35,15 @@ public class PetItem implements Parcelable {
         this.daysAtShelter = daysAtShelter;
         this.gender = gender;
         this.pet_id = pet_id;
+        this.shelter_id = shelter_id;
+    }
+
+    public String getShelter_id() {
+        return shelter_id;
+    }
+
+    public void setShelter_id(String shelter_id) {
+        this.shelter_id = shelter_id;
     }
 
     @PropertyName("pet_id")
@@ -147,6 +157,7 @@ public class PetItem implements Parcelable {
         weight = in.readFloat();
         gender = in.readString();
         pet_id = in.readString();
+        shelter_id = in.readString();
     }
 
     @Override
@@ -163,6 +174,7 @@ public class PetItem implements Parcelable {
         dest.writeFloat(weight);
         dest.writeString(gender);
         dest.writeString(pet_id);
+        dest.writeString(shelter_id);
     }
 
     @Override

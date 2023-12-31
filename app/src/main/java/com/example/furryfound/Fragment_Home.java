@@ -52,7 +52,7 @@ public class Fragment_Home extends Fragment implements PetDetailsOnClick {
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
 
         dataList = new ArrayList<>();
-        MyAdapter adapter = new MyAdapter(dataList, getContext(), this);
+        adapter = new MyAdapter(dataList, getContext(), this);
         recyclerView.setAdapter(adapter);
 
         String GuserPhoto = String.valueOf(user.getPhotoUrl());
@@ -61,6 +61,8 @@ public class Fragment_Home extends Fragment implements PetDetailsOnClick {
         Glide.with(this).load(GuserPhoto).into(avatarImage);
         String capitalizedFirstName = capitalizeFirstLetter(Gusername);
         usernameT.setText("Hi, " + capitalizedFirstName + "!");
+
+        fetchAndDisplayPets();
 
         userReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -88,7 +90,7 @@ public class Fragment_Home extends Fragment implements PetDetailsOnClick {
             }
         });
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        /*databaseReference.addValueEventListener(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -104,7 +106,7 @@ public class Fragment_Home extends Fragment implements PetDetailsOnClick {
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.e("FirebaseError", "Error fetching data: " + error.getMessage());
             }
-        });
+        });*/
 
         return view;
     }
@@ -121,5 +123,26 @@ public class Fragment_Home extends Fragment implements PetDetailsOnClick {
         Intent intent = new Intent(getContext(), Fragment_Home_PetDetails.class);
         intent.putExtra("selectedPet", pet);
         startActivity(intent);
+    }
+
+    private void fetchAndDisplayPets() {
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                dataList.clear();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    PetItem pet = dataSnapshot.getValue(PetItem.class);
+                    dataList.add(pet);
+                }
+                if (adapter != null) {
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("FirebaseError", "Error fetching data: " + error.getMessage());
+            }
+        });
     }
 }

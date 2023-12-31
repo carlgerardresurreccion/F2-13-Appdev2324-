@@ -42,7 +42,7 @@
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:layout_width="44dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/icon_favorites"
+                android:src="@drawable/heart_selector"
                 android:layout_gravity="end"/>
 
         </LinearLayout>
