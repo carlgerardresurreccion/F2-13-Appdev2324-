@@ -89,17 +89,12 @@ public class Fragment_Home_PetDetails extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String adopter = user.getUid();
                 String pet = petId;
-                Log.d("PET ID:", "PET ID:" + adopter);
-                Log.d("PET ID:", "PET ID:" + petId);
 
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     FavoriteItem favoriteItem = dataSnapshot.getValue(FavoriteItem.class);
                     if (favoriteItem != null) {
                         String adopterIdInDatabase = favoriteItem.getAdopterID();
                         String petIdInDatabase = favoriteItem.getPetID();
-
-                        Log.d("PET ID:", "PET ID:" + adopterIdInDatabase);
-                        Log.d("PET ID:", "PET ID:" + petIdInDatabase);
 
                         if (adopter.equals(adopterIdInDatabase) && pet.equals(petIdInDatabase)) {
                             favButton.setSelected(true);

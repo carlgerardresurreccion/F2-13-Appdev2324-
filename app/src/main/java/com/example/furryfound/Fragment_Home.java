@@ -90,24 +90,6 @@ public class Fragment_Home extends Fragment implements PetDetailsOnClick {
             }
         });
 
-        /*databaseReference.addValueEventListener(new ValueEventListener() {
-            @SuppressLint("NotifyDataSetChanged")
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                dataList.clear();
-                for(DataSnapshot dataSnapshot: snapshot.getChildren()) {
-                    PetItem pet = dataSnapshot.getValue(PetItem.class);
-                    dataList.add(pet);
-                }
-                adapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("FirebaseError", "Error fetching data: " + error.getMessage());
-            }
-        });*/
-
         return view;
     }
 
