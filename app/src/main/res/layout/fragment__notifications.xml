@@ -8,20 +8,53 @@
     android:background="@drawable/background_beige"
     android:layout_centerVertical="true">
 
-    <LinearLayout
-        android:id="@+id/top"
+    <TextView
+        android:id="@+id/TextView"
         android:layout_width="match_parent"
-        android:layout_height="40dp">
+        android:layout_height="match_parent"
+        android:text="Notifications"
+        android:fontFamily="@font/poppinsregular"
+        android:textSize="24sp"
+        android:textColor="@color/black" />
 
-        <TextView
-            android:id="@+id/TextView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Notifications"
-            android:fontFamily="@font/poppinsregular"
-            android:textSize="24sp"
-            android:textColor="@color/black" />
-    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/notificationRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp"/>
+<!--    <LinearLayout-->
+<!--        android:id="@+id/top"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="40dp">-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/TextView"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:text="Notifications"-->
+<!--            android:fontFamily="@font/poppinsregular"-->
+<!--            android:textSize="24sp"-->
+<!--            android:textColor="@color/black" />-->
+<!--    </LinearLayout>-->
+
+<!--    <LinearLayout-->
+<!--        xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:orientation="vertical"-->
+<!--        android:id="@+id/messageContainer">-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/TextView"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:text="Notifications"-->
+<!--            android:fontFamily="@font/poppinsregular"-->
+<!--            android:textSize="24sp"-->
+<!--            android:textColor="@color/black" />-->
+<!--        &lt;!&ndash; Other views in your layout &ndash;&gt;-->
+
+<!--    </LinearLayout>-->
 
     <!--<androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
