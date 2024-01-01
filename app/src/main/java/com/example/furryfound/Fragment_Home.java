@@ -1,12 +1,10 @@
 package com.example.furryfound;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
@@ -25,7 +23,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.Source;
 
 import java.util.ArrayList;
 
@@ -38,7 +35,7 @@ public class Fragment_Home extends Fragment implements PetDetailsOnClick {
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     FirebaseUser user = auth.getCurrentUser();
     final private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("pets");
-    final private DatabaseReference userReference = FirebaseDatabase.getInstance().getReference("adopters").child(user.getUid());
+    private DatabaseReference userReference = FirebaseDatabase.getInstance().getReference("adopters").child(user.getUid());
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -62,6 +59,11 @@ public class Fragment_Home extends Fragment implements PetDetailsOnClick {
         String capitalizedFirstName = capitalizeFirstLetter(Gusername);
         usernameT.setText("Hi, " + capitalizedFirstName + "!");
 
+        if (user != null) {
+            // Initialize reference to user in Firebase Realtime Database
+            userReference = FirebaseDatabase.getInstance().getReference("adopters").child(user.getUid());
+            loadUserProfile();
+        }
         fetchAndDisplayPets();
 
         userReference.addValueEventListener(new ValueEventListener() {
@@ -101,6 +103,11 @@ public class Fragment_Home extends Fragment implements PetDetailsOnClick {
     }
 
     @Override
+    public void onFavoriteChanged() {
+
+    }
+
+    @Override
     public void onItemClick(int position, PetItem pet) {
         Intent intent = new Intent(getContext(), Fragment_Home_PetDetails.class);
         intent.putExtra("selectedPet", pet);
@@ -127,4 +134,40 @@ public class Fragment_Home extends Fragment implements PetDetailsOnClick {
             }
         });
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadUserProfile(); // Refresh user profile when fragment resumes
+        fetchAndDisplayPets(); // Fetch and display pets
+    }
+
+    private void loadUserProfile() {
+        userReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    User_Class userData = snapshot.getValue(User_Class.class);
+                    if (userData != null) {
+                        if (userData.getProfile_picture() != null) {
+                            Glide.with(Fragment_Home.this)
+                                    .load(userData.getProfile_picture())
+                                    .placeholder(R.drawable.default_profile_picture)
+                                    .error(R.drawable.profile)
+                                    .circleCrop() // This will crop the image in a circular shape
+                                    .into(avatarImage);
+                        }
+                        String capitalizedFirstName = capitalizeFirstLetter(userData.getFirst_name());
+                        usernameT.setText("Hi, " + capitalizedFirstName + "!");
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("FirebaseError", "Error fetching user profile", error.toException());
+            }
+        });
+    }
+
 }

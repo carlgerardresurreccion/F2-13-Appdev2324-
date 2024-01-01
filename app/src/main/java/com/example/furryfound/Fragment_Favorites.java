@@ -105,6 +105,11 @@ public class Fragment_Favorites extends Fragment implements PetDetailsOnClick {
     }
 
     @Override
+    public void onFavoriteChanged() {
+
+    }
+
+    @Override
     public void onItemClick(int position, PetItem pet) {
         Intent intent = new Intent(getContext(), Fragment_Home_PetDetails.class);
         intent.putExtra("selectedPet", pet);

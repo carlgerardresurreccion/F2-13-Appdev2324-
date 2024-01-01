@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.target.Target;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
@@ -36,8 +38,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         PetItem pet = dataList.get(position);
 
-        Glide.with(context).load(pet.getImageUrl()).into(holder.gridImage);
+        Glide.with(context.getApplicationContext())
+                .load(pet.getImageUrl())
+                .override(Target.SIZE_ORIGINAL)
+                .into(holder.gridImage);
     }
+
 
     @Override
     public int getItemCount() {
