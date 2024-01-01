@@ -1,26 +1,26 @@
 package com.example.furryfound;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Fragment_Notifications extends Fragment {
-    private FirebaseDatabase databaseReference;
+    private FirebaseDatabase database;
     private DatabaseReference df;
     private List<NotificationItem> notificationList;
     private NotificationAdapter notificationAdapter;
@@ -36,54 +36,82 @@ public class Fragment_Notifications extends Fragment {
         notificationAdapter = new NotificationAdapter(notificationList);
         recyclerView.setAdapter(notificationAdapter);
 
-        setupFirebaseChildEventListener();
+        database = FirebaseDatabase.getInstance("https://furry-found-default-rtdb.asia-southeast1.firebasedatabase.app");
+        updateNotificationList();
 
         return view;
     }
 
-    private void setupFirebaseChildEventListener() {
+    private void updateNotificationList() {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {
-            databaseReference = FirebaseDatabase.getInstance("https://furry-found-default-rtdb.asia-southeast1.firebasedatabase.app");
-            df = databaseReference.getReference("applicationform");
+            String adopterId = currentUser.getUid();
+            DatabaseReference applicationsRef = database.getReference("applicationform");
 
-            df.addChildEventListener(new ChildEventListener() {
-                @Override
-                public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                    updateNotificationList(snapshot);
-                }
+            applicationsRef.orderByChild("adopter_id").equalTo(adopterId)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot applicationSnapshot : dataSnapshot.getChildren()) {
+                            Integer remarks = applicationSnapshot.child("remarks").getValue(Integer.class);
+                            Integer status = applicationSnapshot.child("status").getValue(Integer.class);
+                            String petId = applicationSnapshot.child("pet_id").getValue(String.class);
+                            if (remarks != null && remarks == 1 && petId != null || remarks == 0 && status == 1 && petId != null || remarks == -1 && status == 1 && petId != null) {
+                                DatabaseReference petsRef = database.getReference("pets").child(petId);
+                                petsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot petSnapshot) {
+                                        String shelterId = petSnapshot.child("shelter_id").getValue(String.class);
+                                        if (shelterId != null) {
+                                            DatabaseReference sheltersRef = database.getReference("shelters").child(shelterId);
+                                            sheltersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(@NonNull DataSnapshot shelterSnapshot) {
+                                                    String shelterName = shelterSnapshot.child("shelter_name").getValue(String.class);
+                                                    String profilePictureUrl = shelterSnapshot.child("profile_picture").getValue(String.class);
+                                                    String message;
+                                                    if (remarks == 0) {
+                                                        message = "Your application has been disapproved.";
+                                                    } else if (remarks == 1) {
+                                                        message = "Your application has been approved.";
+                                                    } else if (remarks == -1) {
+                                                        message = "Your application has been cancelled.";
+                                                    } else {
+                                                        message = "";
+                                                    }
 
-                @Override
-                public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                    updateNotificationList(snapshot);
-                }
 
-                @Override
-                public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-                    // Handle child removal
-                }
+                                                    NotificationItem newItem = new NotificationItem(
+                                                            shelterName,
+                                                            profilePictureUrl,
+                                                            message
+                                                    );
+                                                    notificationList.add(newItem);
+                                                    notificationAdapter.notifyDataSetChanged();
+                                                }
 
-                @Override
-                public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                    // Handle child movement
-                }
+                                                @Override
+                                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                                    Log.w("FirebaseDatabase", "loadShelter:onCancelled", databaseError.toException());
+                                                }
+                                            });
+                                        }
+                                    }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    // Handle errors
-                }
-            });
-        }
-    }
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                                        Log.w("FirebaseDatabase", "loadPet:onCancelled", databaseError.toException());
+                                    }
+                                });
+                            }
+                        }
+                    }
 
-    private void updateNotificationList(DataSnapshot snapshot) {
-        if (snapshot.hasChild("remarks")) {
-            Integer remarks = snapshot.child("remarks").getValue(Integer.class);
-            if (remarks != null && remarks == 1) {
-                String message = "Application with ID " + snapshot.getKey() + " has been approved.";
-                notificationList.add(new NotificationItem(message));
-                notificationAdapter.notifyDataSetChanged();
-            }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Log.w("FirebaseDatabase", "loadApplicationForm:onCancelled", databaseError.toException());
+                    }
+                });
         }
     }
 }

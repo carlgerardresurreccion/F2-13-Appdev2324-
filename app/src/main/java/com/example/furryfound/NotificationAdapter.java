@@ -3,9 +3,13 @@ package com.example.furryfound;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.ViewHolder> {
@@ -25,7 +29,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         NotificationItem item = notificationList.get(position);
-        holder.messageTextView.setText(item.getMessage());
+        holder.bind(item);
     }
 
     @Override
@@ -35,18 +39,31 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView messageTextView;
+        private TextView shelterNameTextView;
+        private ImageView shelterProfileImageView;
+        private TextView feedbackTextView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            messageTextView = itemView.findViewById(R.id.messageTextView);
-
-            itemView.setOnClickListener(v -> {
-                int position = getAdapterPosition();
-                if (position != RecyclerView.NO_POSITION) {
-                    NotificationItem item = notificationList.get(position);
-                    // Implement click action
-                }
-            });
+            shelterNameTextView = itemView.findViewById(R.id.shelterNameTextView);
+            shelterProfileImageView = itemView.findViewById(R.id.shelterProfileImageView);
+            feedbackTextView = itemView.findViewById(R.id.messageTextView);
         }
+
+        public void bind(NotificationItem item) {
+            shelterNameTextView.setText(item.getShelterName());
+            feedbackTextView.setText(item.getFirstLineOfMessage());
+
+            if (item.getShelterProfilePictureUrl() != null && !item.getShelterProfilePictureUrl().isEmpty()) {
+                Glide.with(itemView.getContext())
+                        .load(item.getShelterProfilePictureUrl())
+                        .placeholder(R.drawable.profile)
+                        .into(shelterProfileImageView);
+            } else {
+                // If there is no profile picture URL, set a default image
+                shelterProfileImageView.setImageResource(R.drawable.profile);
+            }
+        }
+
     }
 }
