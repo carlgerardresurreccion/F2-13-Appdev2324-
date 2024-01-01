@@ -133,18 +133,38 @@ public class Fragment_Home_PetDetails extends AppCompatActivity {
                 query.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        boolean isFavorite = false;
+                        String favoritesID = "";
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                             if (dataSnapshot.child("pet_id").getValue(String.class).equals(petID)) {
-                                String favoritesID = dataSnapshot.child("favorites_id").getValue(String.class);
-                                df.child(favoritesID).removeValue();
-                                return;
+                                isFavorite = true;
+                                favoritesID = dataSnapshot.child("favorites_id").getValue(String.class);
+                                break;
                             }
                         }
 
-                        String favoritesID = SecureRandomIdGenerator.generateSecureRandomId();
-                        df.child(favoritesID).child("favorites_id").setValue(favoritesID);
-                        df.child(favoritesID).child("adopter_id").setValue(adopterID);
-                        df.child(favoritesID).child("pet_id").setValue(petID);
+                        if (isFavorite) {
+                            // If it was a favorite, remove it
+                            df.child(favoritesID).removeValue().addOnSuccessListener(aVoid -> {
+                                // Notify that unfavoriting was successful
+                                Intent data = new Intent();
+                                data.putExtra("petUnfavorited", true);
+                                setResult(RESULT_OK, data);
+                                // You can finish() here if you want to close the detail view
+                                // finish();
+                            });
+                        } else {
+                            // If it wasn't a favorite, add it
+                            favoritesID = SecureRandomIdGenerator.generateSecureRandomId();
+                            df.child(favoritesID).child("favorites_id").setValue(favoritesID);
+                            df.child(favoritesID).child("adopter_id").setValue(adopterID);
+                            df.child(favoritesID).child("pet_id").setValue(petID).addOnSuccessListener(aVoid -> {
+                                // Notify that favoriting was successful
+                                Intent data = new Intent();
+                                data.putExtra("petFavorited", true);
+                                setResult(RESULT_OK, data);
+                            });
+                        }
                     }
 
                     @Override

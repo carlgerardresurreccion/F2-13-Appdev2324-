@@ -1,5 +1,7 @@
 package com.example.furryfound;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -34,6 +36,8 @@ public class Fragment_Favorites extends Fragment implements PetDetailsOnClick {
     final private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("pets");
     final private DatabaseReference petsReference = FirebaseDatabase.getInstance().getReference("pets");
     final private DatabaseReference favoritePetsReference = FirebaseDatabase.getInstance().getReference("favorites");
+    private static final int PET_DETAILS_REQUEST = 1;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -113,6 +117,19 @@ public class Fragment_Favorites extends Fragment implements PetDetailsOnClick {
     public void onItemClick(int position, PetItem pet) {
         Intent intent = new Intent(getContext(), Fragment_Home_PetDetails.class);
         intent.putExtra("selectedPet", pet);
-        startActivity(intent);
+        startActivityForResult(intent, PET_DETAILS_REQUEST);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PET_DETAILS_REQUEST && resultCode == RESULT_OK) {
+            if (data != null && data.getBooleanExtra("petUnfavorited", false)) {
+                // A pet was unfavorited, refresh the list
+                favoritePets.clear();
+                petIDs.clear();
+                fetchAndDisplayPets();
+            }
+        }
     }
 }

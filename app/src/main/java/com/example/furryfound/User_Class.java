@@ -15,12 +15,13 @@ public class User_Class {
 
     public User_Class() {}
 
-    public User_Class(String first_name, String last_name, String address, String phone_number, String email) {
+    public User_Class(String first_name, String last_name, String address, String phone_number, String email, String profile_picture) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.address = address;
         this.phone_number = phone_number;
         this.email = email;
+        this.profile_picture = profile_picture;
     }
 
     public String getUser_id() {
