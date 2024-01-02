@@ -11,22 +11,21 @@ import android.os.Parcelable;
 import com.google.firebase.database.PropertyName;
 
 public class PetItem implements Parcelable {
-    private String name, color, type, imageUrl, description, dateArrived, gender, age, weight;
+    private String name, breed, color, type, imageUrl, description, dateArrived, gender, age, weight;
     @PropertyName("pet_id")
     private String pet_id;
     private String shelter_id;
-    private int daysAtShelter, status, remarks;
+    private int daysAtShelter, status;
 
     public PetItem() {
 
     }
 
-    public PetItem(String age, String color, String dateArrived, int daysAtShelter, String description, String imageUrl, String gender, String name, String pet_id, String shelter_id, int status, int remarks, String type, String weight) {
+    public PetItem(String age, String color, String breed, String dateArrived, int daysAtShelter, String description, String imageUrl, String gender, String name, String pet_id, String shelter_id, int status, String type, String weight) {
         this.name = name;
         this.color = color;
         this.type = type;
         this.status = status;
-        this.remarks = remarks;
         this.imageUrl = imageUrl;
         this.description = description;
         this.age = age;
@@ -36,6 +35,7 @@ public class PetItem implements Parcelable {
         this.gender = gender;
         this.pet_id = pet_id;
         this.shelter_id = shelter_id;
+        this.breed = breed;
     }
 
     public String getShelter_id() {
@@ -54,6 +54,14 @@ public class PetItem implements Parcelable {
     @PropertyName("pet_id")
     public void setPetID(String pet_id) {
         this.pet_id = pet_id;
+    }
+
+    public String getBreed() {
+        return breed;
+    }
+
+    public void setBreed(String breed) {
+        this.breed = breed;
     }
 
     public String getGender() {
@@ -95,15 +103,9 @@ public class PetItem implements Parcelable {
     public int getStatus() {
         return status;
     }
-    public int getRemarks() {
-        return remarks;
-    }
 
     public void setStatus(int status) {
         this.status = status;
-    }
-    public void setRemarks(int remarks) {
-        this.remarks = remarks;
     }
 
     public String getImageUrl() {

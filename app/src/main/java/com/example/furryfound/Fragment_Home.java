@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
@@ -65,6 +66,25 @@ public class Fragment_Home extends Fragment implements PetDetailsOnClick {
             loadUserProfile();
         }
         fetchAndDisplayPets();
+
+        SearchView searchView = view.findViewById(R.id.searchView);
+
+// Set a query listener for the search view
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                // Handle the search query when the user submits
+                searchPets(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                // Handle the search query as the user types
+                searchPets(newText);
+                return true;
+            }
+        });
 
         userReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -168,6 +188,21 @@ public class Fragment_Home extends Fragment implements PetDetailsOnClick {
                 Log.e("FirebaseError", "Error fetching user profile", error.toException());
             }
         });
+    }
+
+    private void searchPets(String query) {
+        ArrayList<PetItem> searchResults = new ArrayList<>();
+
+        for (PetItem pet : dataList) {
+            // Customize this condition based on your search criteria
+            if (pet.getBreed().toLowerCase().contains(query.toLowerCase()) || pet.getType().toLowerCase().contains(query.toLowerCase())) {
+                searchResults.add(pet);
+            }
+        }
+
+        // Update the RecyclerView with the filtered list
+        adapter.setDataList(searchResults);
+        adapter.notifyDataSetChanged();
     }
 
 }
