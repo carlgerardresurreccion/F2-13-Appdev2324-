@@ -84,7 +84,7 @@ public class Fragment_Notifications extends Fragment {
                                 Integer remarks = applicationSnapshot.child("remarks").getValue(Integer.class);
                                 Integer status = applicationSnapshot.child("status").getValue(Integer.class);
                                 String petId = applicationSnapshot.child("pet_id").getValue(String.class);
-                                if (remarks != null && remarks == 1 && petId != null || remarks == 0 && status == 1 && petId != null || remarks == -1 && status == 1 && petId != null) {
+                                if (remarks != null && remarks == 1 && petId != null || remarks == 0 && status == 1 && petId != null || remarks == -1 && status == 1 && petId != null || remarks == 2 && petId != null) {
                                     DatabaseReference petsRef = database.getReference("pets").child(petId);
                                     petsRef.addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
@@ -104,6 +104,8 @@ public class Fragment_Notifications extends Fragment {
                                                             message = "Your application has been approved.";
                                                         } else if (remarks == -1) {
                                                             message = "Your application has been cancelled.";
+                                                        } else if (remarks == 2) {
+                                                            message = "Please confirm your adoption status.";
                                                         } else {
                                                             message = "";
                                                         }

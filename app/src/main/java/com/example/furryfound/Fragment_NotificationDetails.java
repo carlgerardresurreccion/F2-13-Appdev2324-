@@ -11,6 +11,9 @@ import android.widget.ImageButton;
 
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class Fragment_NotificationDetails extends Fragment {
 
     @Override
@@ -28,6 +31,8 @@ public class Fragment_NotificationDetails extends Fragment {
         View view;
         if (remarks == 1) { // Approved (remarks == 1)
             view = inflater.inflate(R.layout.notification_item, container, false);
+        } else if (remarks == 2) { // To be confirmed (remarks == 2)
+            view = inflater.inflate(R.layout.notification_item_confirm, container, false);
         } else { // Disapproved (remarks == 0) or Cancelled (remarks == -1)
             view = inflater.inflate(R.layout.notification_item_not_approved, container, false);
         }
@@ -83,6 +88,37 @@ public class Fragment_NotificationDetails extends Fragment {
                 }
             });
         }
+
+        Button confirmBtn = view.findViewById(R.id.confirmBtn);
+        if (confirmBtn != null && remarks == 2) {
+            confirmBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    updateStatus(applicationId);
+
+                    Fragment_ConfirmApplication confirmFragment = new Fragment_ConfirmApplication();
+
+                    Bundle confirmBtn = new Bundle();
+                    confirmBtn.putString("application_id", applicationId);
+                    confirmFragment.setArguments(confirmBtn);
+
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.FragmentContainer, confirmFragment)
+                            .addToBackStack(null)
+                            .commit();
+                }
+            });
+        }
         return view;
+    }
+
+    private void updateStatus(String applicationId) {
+        DatabaseReference applicationRef = FirebaseDatabase.getInstance().getReference("applicationform").child(applicationId);
+        applicationRef.child("status").setValue(1)
+                .addOnSuccessListener(aVoid -> {
+                })
+                .addOnFailureListener(e -> {
+                    // Handle failure
+                });
     }
 }
