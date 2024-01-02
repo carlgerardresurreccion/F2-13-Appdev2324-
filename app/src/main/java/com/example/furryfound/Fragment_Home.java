@@ -32,6 +32,7 @@ public class Fragment_Home extends Fragment implements PetDetailsOnClick {
     TextView usernameT;
     RecyclerView recyclerView;
     ArrayList<PetItem> dataList;
+    ArrayList<PetItem> allPetsList;
     MyAdapter adapter;
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     FirebaseUser user = auth.getCurrentUser();
@@ -49,7 +50,8 @@ public class Fragment_Home extends Fragment implements PetDetailsOnClick {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
 
-        dataList = new ArrayList<>();
+        allPetsList = new ArrayList<>(); // Initialize full list
+        dataList = new ArrayList<>(); // List for adapter
         adapter = new MyAdapter(dataList, getContext(), this);
         recyclerView.setAdapter(adapter);
 
@@ -73,14 +75,12 @@ public class Fragment_Home extends Fragment implements PetDetailsOnClick {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                // Handle the search query when the user submits
                 searchPets(query);
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                // Handle the search query as the user types
                 searchPets(newText);
                 return true;
             }
@@ -138,14 +138,16 @@ public class Fragment_Home extends Fragment implements PetDetailsOnClick {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                dataList.clear();
+                allPetsList.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     PetItem pet = dataSnapshot.getValue(PetItem.class);
-                    dataList.add(pet);
+                    if (pet != null) {
+                        allPetsList.add(pet);
+                    }
                 }
-                if (adapter != null) {
-                    adapter.notifyDataSetChanged();
-                }
+                dataList.clear();
+                dataList.addAll(allPetsList);
+                adapter.notifyDataSetChanged();
             }
 
             @Override
@@ -191,18 +193,21 @@ public class Fragment_Home extends Fragment implements PetDetailsOnClick {
     }
 
     private void searchPets(String query) {
-        ArrayList<PetItem> searchResults = new ArrayList<>();
-
-        for (PetItem pet : dataList) {
-            // Customize this condition based on your search criteria
-            if (pet.getBreed().toLowerCase().contains(query.toLowerCase()) || pet.getType().toLowerCase().contains(query.toLowerCase())) {
-                searchResults.add(pet);
+        if (query == null || query.isEmpty()) {
+            dataList.clear();
+            dataList.addAll(allPetsList); // Restore original data if query is empty
+        } else {
+            ArrayList<PetItem> searchResults = new ArrayList<>();
+            for (PetItem pet : allPetsList) {
+                if (pet.getBreed().toLowerCase().contains(query.toLowerCase()) || pet.getType().toLowerCase().contains(query.toLowerCase())) {
+                    searchResults.add(pet);
+                }
             }
+            dataList.clear();
+            dataList.addAll(searchResults); // Filtered results
         }
-
-        // Update the RecyclerView with the filtered list
-        adapter.setDataList(searchResults);
         adapter.notifyDataSetChanged();
     }
+
 
 }

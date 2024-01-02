@@ -12,6 +12,7 @@ public class User_Class {
     private String phone_number;
     private String email;
     private String profile_picture;
+    private String password;
 
     public User_Class() {}
 
@@ -78,6 +79,10 @@ public class User_Class {
 
     public void setProfile_picture(String profile_picture) {
         this.profile_picture = profile_picture;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Map<String, Object> toMap() {
