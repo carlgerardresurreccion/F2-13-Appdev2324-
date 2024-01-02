@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
 
@@ -85,6 +86,19 @@ public class Fragment_NotificationDetails extends Fragment {
                             .replace(R.id.FragmentContainer, cancelFragment)
                             .addToBackStack(null)
                             .commit();
+                }
+            });
+        }
+
+        ImageView backButton = view.findViewById(R.id.backButton);
+        if (backButton != null && remarks == 2) {
+            backButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Pop the back stack to go back to the previous fragment
+                    if (getFragmentManager() != null) {
+                        getFragmentManager().popBackStack();
+                    }
                 }
             });
         }
