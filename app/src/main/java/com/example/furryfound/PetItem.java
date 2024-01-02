@@ -11,18 +11,17 @@ import android.os.Parcelable;
 import com.google.firebase.database.PropertyName;
 
 public class PetItem implements Parcelable {
-    private String name, color, type, imageUrl, description, dateArrived, gender, age;
+    private String name, color, type, imageUrl, description, dateArrived, gender, age, weight;
     @PropertyName("pet_id")
     private String pet_id;
     private String shelter_id;
     private int daysAtShelter, status;
-    private float weight;
 
     public PetItem() {
 
     }
 
-    public PetItem(String age, String color, String dateArrived, int daysAtShelter, String description, String imageUrl, String gender, String name, String pet_id, String shelter_id, int status, String type, int weight) {
+    public PetItem(String age, String color, String dateArrived, int daysAtShelter, String description, String imageUrl, String gender, String name, String pet_id, String shelter_id, int status, String type, String weight) {
         this.name = name;
         this.color = color;
         this.type = type;
@@ -128,11 +127,11 @@ public class PetItem implements Parcelable {
         return daysAtShelter;
     }
 
-    public float getWeight() {
+    public String getWeight() {
         return weight;
     }
 
-    public void setWeight(float weight) {
+    public void setWeight(String  weight) {
         this.weight = weight;
     }
 
@@ -154,7 +153,7 @@ public class PetItem implements Parcelable {
         age = in.readString();
         daysAtShelter = in.readInt();
         status = in.readInt();
-        weight = in.readFloat();
+        weight = in.readString();
         gender = in.readString();
         pet_id = in.readString();
         shelter_id = in.readString();
@@ -171,7 +170,7 @@ public class PetItem implements Parcelable {
         dest.writeString(age);
         dest.writeInt(daysAtShelter);
         dest.writeInt(status);
-        dest.writeFloat(weight);
+        dest.writeString(weight);
         dest.writeString(gender);
         dest.writeString(pet_id);
         dest.writeString(shelter_id);
