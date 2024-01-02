@@ -11,7 +11,7 @@ import android.os.Parcelable;
 import com.google.firebase.database.PropertyName;
 
 public class PetItem implements Parcelable {
-    private String name, color, type, imageUrl, description, dateArrived, gender, age, weight;
+    private String name, breed, color, type, imageUrl, description, dateArrived, gender, age, weight;
     @PropertyName("pet_id")
     private String pet_id;
     private String shelter_id;
@@ -21,7 +21,7 @@ public class PetItem implements Parcelable {
 
     }
 
-    public PetItem(String age, String color, String dateArrived, int daysAtShelter, String description, String imageUrl, String gender, String name, String pet_id, String shelter_id, int status, String type, String weight) {
+    public PetItem(String age, String color, String breed, String dateArrived, int daysAtShelter, String description, String imageUrl, String gender, String name, String pet_id, String shelter_id, int status, String type, String weight) {
         this.name = name;
         this.color = color;
         this.type = type;
@@ -35,6 +35,7 @@ public class PetItem implements Parcelable {
         this.gender = gender;
         this.pet_id = pet_id;
         this.shelter_id = shelter_id;
+        this.breed = breed;
     }
 
     public String getShelter_id() {
@@ -53,6 +54,14 @@ public class PetItem implements Parcelable {
     @PropertyName("pet_id")
     public void setPetID(String pet_id) {
         this.pet_id = pet_id;
+    }
+
+    public String getBreed() {
+        return breed;
+    }
+
+    public void setBreed(String breed) {
+        this.breed = breed;
     }
 
     public String getGender() {
