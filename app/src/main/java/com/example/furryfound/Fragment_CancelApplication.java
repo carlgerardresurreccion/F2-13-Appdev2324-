@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
@@ -24,6 +26,17 @@ public class Fragment_CancelApplication extends Fragment {
 
         EditText reasonForCancellationEditText = view.findViewById(R.id.reasonForCancellation);
         Button cancelApplicationBtn = view.findViewById(R.id.cancelApplicationBtn);
+
+        ImageView backButton = view.findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Pop the back stack to go back to the previous fragment
+                if (getFragmentManager() != null) {
+                    getFragmentManager().popBackStack();
+                }
+            }
+        });
 
         cancelApplicationBtn.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,71 +1,228 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/background_lightteal">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment_NotificationDetails"
+    android:background="@drawable/background_beige"
+    android:paddingRight="20dp"
+    android:paddingLeft="20dp">
 
-
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout
+        android:id="@+id/top"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp"
-        android:background="@drawable/background_lightteal">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:fontFamily="@font/poppinsregular"
-            android:text="APPLICATION FORM \n EVALUATION"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            android:paddingTop="50dp"
-            android:layout_marginLeft="80dp"
-            android:textAlignment="center"/>
-
-        <FrameLayout
+        <LinearLayout
+            android:id="@+id/topgreetings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_corner_white"
-            android:layout_marginTop="100dp"
-            android:paddingTop="50dp"
-            android:paddingBottom="50dp"
-            >
+            android:layout_marginTop="28dp">
 
             <TextView
-                android:id="@+id/notificationText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="YOUR APPLICATION IS APPROVED/DISAPPROVED"
-                android:textSize="18sp"
-                android:textColor="@android:color/black"
-                android:gravity="center"
-                android:padding="16dp"
-                />
-
-        </FrameLayout>
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/poppinsregular"
+                android:text="Application Response"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:layout_marginLeft="50dp"
+                android:paddingTop="5dp"/>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="100dp">
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/topgreetings">
 
+            <!--            <TextView-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="10dp"-->
+            <!--                android:fontFamily="@font/poppinsregular"-->
+            <!--                android:gravity="center_horizontal"-->
+            <!--                android:text="Please fill out this form"-->
+            <!--                android:textColor="@color/black"-->
+            <!--                android:textSize="18sp" />-->
 
-            <Button
-                android:id="@+id/btnDismiss"
-                android:layout_width="0dp"
-                android:layout_weight="1"
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="DISMISS"
-                android:background="@drawable/background_violet"
-                android:textColor="@color/white"/>
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppinsregular"
+                android:gravity="left"
+                android:text="Pet Name:"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/petName"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@+id/EmailText"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/input_box"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/poppinsregular"
+                android:paddingLeft="15dp"
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp"
+                android:paddingRight="8dp"
+                android:textColor="@color/grey"
+                android:textSize="15sp"
+                android:editable="false"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppinsregular"
+                android:gravity="left"
+                android:text="Shelter Name:"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/shelterName"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@+id/EmailText"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/input_box"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/poppinsregular"
+                android:paddingLeft="15dp"
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp"
+                android:paddingRight="8dp"
+                android:textColor="@color/grey"
+                android:textSize="15sp"
+                android:editable="false"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/poppinsregular"
+                android:gravity="left"
+                android:text="Evaluation:"
+                android:textColor="@color/black"
+                android:textSize="14sp"/>
+
+            <EditText
+                android:id="@+id/evaluation"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_below="@+id/EmailText"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/input_box"
+                android:drawablePadding="10dp"
+                android:editable="false"
+                android:fontFamily="@font/poppinsregular"
+                android:paddingLeft="15dp"
+                android:paddingTop="0dp"
+                android:paddingRight="8dp"
+                android:paddingBottom="0dp"
+                android:textColor="@color/grey"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppinsregular"
+                android:gravity="left"
+                android:text="Shelter's Feedback:"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/feedback"
+                android:layout_width="match_parent"
+                android:layout_height="63dp"
+                android:layout_below="@+id/EmailText"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/input_box"
+                android:drawablePadding="10dp"
+                android:editable="false"
+                android:fontFamily="@font/poppinsregular"
+                android:paddingLeft="15dp"
+                android:paddingTop="0dp"
+                android:paddingRight="8dp"
+                android:paddingBottom="0dp"
+                android:textColor="@color/grey"
+                android:textSize="15sp" />
+
+            <!--            <TextView-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="20dp"-->
+            <!--                android:fontFamily="@font/poppinsregular"-->
+            <!--                android:gravity="left"-->
+            <!--                android:text="Number of pets owned at the moment:"-->
+            <!--                android:textColor="@color/black"-->
+            <!--                android:textSize="14sp" />-->
+
+            <!--            <EditText-->
+            <!--                android:id="@+id/petsOwned"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="40dp"-->
+            <!--                android:layout_below="@+id/EmailText"-->
+            <!--                android:layout_marginTop="20dp"-->
+            <!--                android:background="@drawable/input_box"-->
+            <!--                android:drawableLeft="@android:drawable/btn_star_big_off"-->
+            <!--                android:drawablePadding="10dp"-->
+            <!--                android:fontFamily="@font/poppinsregular"-->
+            <!--                android:paddingLeft="15dp"-->
+            <!--                android:paddingTop="0dp"-->
+            <!--                android:paddingBottom="0dp"-->
+            <!--                android:paddingRight="8dp"-->
+            <!--                android:textColor="@color/grey"-->
+            <!--                android:textSize="18sp" />-->
+
 
         </LinearLayout>
-    </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/dismissBtn"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_above="@+id/cancelBtn"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/button_teal"
+        android:fontFamily="@font/poppinsregular"
+        android:text="Dismiss"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="22sp" />
+
+    <Button
+        android:id="@+id/cancelBtn"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignBottom="@+id/top"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/button_teal"
+        android:fontFamily="@font/poppinsregular"
+        android:text="Cancel Application"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="22sp" />
+
+</RelativeLayout>

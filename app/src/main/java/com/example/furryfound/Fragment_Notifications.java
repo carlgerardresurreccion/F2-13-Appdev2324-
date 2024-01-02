@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,13 +34,39 @@ public class Fragment_Notifications extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
 
         notificationList = new ArrayList<>();
-        notificationAdapter = new NotificationAdapter(notificationList);
+        notificationAdapter = new NotificationAdapter(notificationList, new NotificationAdapter.OnNotificationClickListener() {
+            @Override
+            public void onNotificationClick(NotificationItem item) {
+                showNotificationDetails(item);
+            }
+        });
         recyclerView.setAdapter(notificationAdapter);
 
         database = FirebaseDatabase.getInstance("https://furry-found-default-rtdb.asia-southeast1.firebasedatabase.app");
         updateNotificationList();
 
         return view;
+    }
+
+    private void showNotificationDetails(NotificationItem item) {
+        Log.d("NotificationClick", "Remarks value: " + item.getRemarks());
+        Fragment_NotificationDetails detailsFragment = new Fragment_NotificationDetails();
+
+        // Passing data to the new Fragment
+        Bundle bundle = new Bundle();
+        bundle.putString("application_id", item.getApplicationId());
+        bundle.putString("petName", item.getShelterName()); // Ensure these getters exist
+        bundle.putString("shelterName", item.getShelterName());
+        bundle.putString("message", item.getMessage());
+        bundle.putString("feedback", item.getFeedback());
+        bundle.putInt("remarks", item.getRemarks());
+        detailsFragment.setArguments(bundle);
+
+        // Replace the current fragment with detailsFragment
+        requireActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.FragmentContainer, detailsFragment)
+                .addToBackStack(null)
+                .commit();
     }
 
     private void updateNotificationList() {
@@ -49,69 +76,74 @@ public class Fragment_Notifications extends Fragment {
             DatabaseReference applicationsRef = database.getReference("applicationform");
 
             applicationsRef.orderByChild("adopter_id").equalTo(adopterId)
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        for (DataSnapshot applicationSnapshot : dataSnapshot.getChildren()) {
-                            Integer remarks = applicationSnapshot.child("remarks").getValue(Integer.class);
-                            Integer status = applicationSnapshot.child("status").getValue(Integer.class);
-                            String petId = applicationSnapshot.child("pet_id").getValue(String.class);
-                            if (remarks != null && remarks == 1 && petId != null || remarks == 0 && status == 1 && petId != null || remarks == -1 && status == 1 && petId != null) {
-                                DatabaseReference petsRef = database.getReference("pets").child(petId);
-                                petsRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot petSnapshot) {
-                                        String shelterId = petSnapshot.child("shelter_id").getValue(String.class);
-                                        if (shelterId != null) {
-                                            DatabaseReference sheltersRef = database.getReference("shelters").child(shelterId);
-                                            sheltersRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                                                @Override
-                                                public void onDataChange(@NonNull DataSnapshot shelterSnapshot) {
-                                                    String shelterName = shelterSnapshot.child("shelter_name").getValue(String.class);
-                                                    String profilePictureUrl = shelterSnapshot.child("profile_picture").getValue(String.class);
-                                                    String message;
-                                                    if (remarks == 0) {
-                                                        message = "Your application has been disapproved.";
-                                                    } else if (remarks == 1) {
-                                                        message = "Your application has been approved.";
-                                                    } else if (remarks == -1) {
-                                                        message = "Your application has been cancelled.";
-                                                    } else {
-                                                        message = "";
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for (DataSnapshot applicationSnapshot : dataSnapshot.getChildren()) {
+                                String applicationId = applicationSnapshot.getKey();
+                                Integer remarks = applicationSnapshot.child("remarks").getValue(Integer.class);
+                                Integer status = applicationSnapshot.child("status").getValue(Integer.class);
+                                String petId = applicationSnapshot.child("pet_id").getValue(String.class);
+                                if (remarks != null && remarks == 1 && petId != null || remarks == 0 && status == 1 && petId != null || remarks == -1 && status == 1 && petId != null) {
+                                    DatabaseReference petsRef = database.getReference("pets").child(petId);
+                                    petsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot petSnapshot) {
+                                            String shelterId = petSnapshot.child("shelter_id").getValue(String.class);
+                                            if (shelterId != null) {
+                                                DatabaseReference sheltersRef = database.getReference("shelters").child(shelterId);
+                                                sheltersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot shelterSnapshot) {
+                                                        String shelterName = shelterSnapshot.child("shelter_name").getValue(String.class);
+                                                        String profilePictureUrl = shelterSnapshot.child("profile_picture").getValue(String.class);
+                                                        String message;
+                                                        if (remarks == 0) {
+                                                            message = "Your application has been disapproved.";
+                                                        } else if (remarks == 1) {
+                                                            message = "Your application has been approved.";
+                                                        } else if (remarks == -1) {
+                                                            message = "Your application has been cancelled.";
+                                                        } else {
+                                                            message = "";
+                                                        }
+
+
+                                                        NotificationItem newItem = new NotificationItem(
+                                                                shelterName,
+                                                                profilePictureUrl,
+                                                                message,
+                                                                applicationId
+                                                        );
+                                                        newItem.setApplicationId(applicationId);
+                                                        newItem.setFeedback(applicationSnapshot.child("feedback").getValue(String.class));
+                                                        newItem.setRemarks(applicationSnapshot.child("remarks").getValue(Integer.class));
+                                                        notificationList.add(newItem);
+                                                        notificationAdapter.notifyDataSetChanged();
                                                     }
 
-
-                                                    NotificationItem newItem = new NotificationItem(
-                                                            shelterName,
-                                                            profilePictureUrl,
-                                                            message
-                                                    );
-                                                    notificationList.add(newItem);
-                                                    notificationAdapter.notifyDataSetChanged();
-                                                }
-
-                                                @Override
-                                                public void onCancelled(@NonNull DatabaseError databaseError) {
-                                                    Log.w("FirebaseDatabase", "loadShelter:onCancelled", databaseError.toException());
-                                                }
-                                            });
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                                                        Log.w("FirebaseDatabase", "loadShelter:onCancelled", databaseError.toException());
+                                                    }
+                                                });
+                                            }
                                         }
-                                    }
 
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                                        Log.w("FirebaseDatabase", "loadPet:onCancelled", databaseError.toException());
-                                    }
-                                });
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                                            Log.w("FirebaseDatabase", "loadPet:onCancelled", databaseError.toException());
+                                        }
+                                    });
+                                }
                             }
                         }
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                        Log.w("FirebaseDatabase", "loadApplicationForm:onCancelled", databaseError.toException());
-                    }
-                });
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            Log.w("FirebaseDatabase", "loadApplicationForm:onCancelled", databaseError.toException());
+                        }
+                    });
         }
     }
 }
