@@ -14,9 +14,15 @@ import java.util.List;
 
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.ViewHolder> {
     private List<NotificationItem> notificationList;
+    private OnNotificationClickListener listener;
 
-    public NotificationAdapter(List<NotificationItem> notificationList) {
+    public NotificationAdapter(List<NotificationItem> notificationList, OnNotificationClickListener listener) {
         this.notificationList = notificationList;
+        this.listener = listener;
+    }
+
+    public interface OnNotificationClickListener {
+        void onNotificationClick(NotificationItem notificationItem);
     }
 
     @NonNull
@@ -48,6 +54,15 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             shelterNameTextView = itemView.findViewById(R.id.shelterNameTextView);
             shelterProfileImageView = itemView.findViewById(R.id.shelterProfileImageView);
             feedbackTextView = itemView.findViewById(R.id.messageTextView);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null && getAdapterPosition() != RecyclerView.NO_POSITION) {
+                        listener.onNotificationClick(notificationList.get(getAdapterPosition()));
+                    }
+                }
+            });
         }
 
         public void bind(NotificationItem item) {

@@ -19,6 +19,9 @@
         android:theme="@style/Theme.FurryFound"
         tools:targetApi="31">
         <activity
+            android:name=".NotificationDetailActivity" />
+
+        <activity
             android:name=".Fragment_Home_PetDetails"
             android:exported="false" />
         <activity

@@ -15,17 +15,18 @@ public class PetItem implements Parcelable {
     @PropertyName("pet_id")
     private String pet_id;
     private String shelter_id;
-    private int daysAtShelter, status;
+    private int daysAtShelter, status, remarks;
 
     public PetItem() {
 
     }
 
-    public PetItem(String age, String color, String dateArrived, int daysAtShelter, String description, String imageUrl, String gender, String name, String pet_id, String shelter_id, int status, String type, String weight) {
+    public PetItem(String age, String color, String dateArrived, int daysAtShelter, String description, String imageUrl, String gender, String name, String pet_id, String shelter_id, int status, int remarks, String type, String weight) {
         this.name = name;
         this.color = color;
         this.type = type;
         this.status = status;
+        this.remarks = remarks;
         this.imageUrl = imageUrl;
         this.description = description;
         this.age = age;
@@ -94,9 +95,15 @@ public class PetItem implements Parcelable {
     public int getStatus() {
         return status;
     }
+    public int getRemarks() {
+        return remarks;
+    }
 
     public void setStatus(int status) {
         this.status = status;
+    }
+    public void setRemarks(int remarks) {
+        this.remarks = remarks;
     }
 
     public String getImageUrl() {
