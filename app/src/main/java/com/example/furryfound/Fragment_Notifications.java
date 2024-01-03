@@ -55,7 +55,7 @@ public class Fragment_Notifications extends Fragment {
         // Passing data to the new Fragment
         Bundle bundle = new Bundle();
         bundle.putString("application_id", item.getApplicationId());
-        bundle.putString("petName", item.getShelterName()); // Ensure these getters exist
+        bundle.putString("petName", item.getPetName()); // Ensure these getters exist
         bundle.putString("shelterName", item.getShelterName());
         bundle.putString("message", item.getMessage());
         bundle.putString("feedback", item.getFeedback());
