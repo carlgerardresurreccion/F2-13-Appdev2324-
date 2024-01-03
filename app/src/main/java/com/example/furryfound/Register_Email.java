@@ -119,6 +119,7 @@ public class Register_Email extends AppCompatActivity {
         userRef.child("email").setValue(email);
         userRef.child("password").setValue(password);
         userRef.child("user_id").setValue(userId);
+        userRef.child("profile_picture").setValue(R.drawable.default_profile_picture);
 
         Toast.makeText(Register_Email.this, "User created!", Toast.LENGTH_SHORT).show();
         startActivity(new Intent(Register_Email.this, LogIn.class));
