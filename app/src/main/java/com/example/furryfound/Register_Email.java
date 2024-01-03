@@ -119,7 +119,7 @@ public class Register_Email extends AppCompatActivity {
         userRef.child("email").setValue(email);
         userRef.child("password").setValue(password);
         userRef.child("user_id").setValue(userId);
-        userRef.child("profile_picture").setValue(R.drawable.default_profile_picture);
+        userRef.child("profile_picture").setValue("https://firebasestorage.googleapis.com/v0/b/furry-found.appspot.com/o/adopter_profile_pictures%2Fdefault_profile_picture.png?alt=media&token=230c3ff9-da6f-4534-b074-025e7a98e3be");
 
         Toast.makeText(Register_Email.this, "User created!", Toast.LENGTH_SHORT).show();
         startActivity(new Intent(Register_Email.this, LogIn.class));
