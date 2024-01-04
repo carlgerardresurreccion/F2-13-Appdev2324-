@@ -71,18 +71,6 @@
                 android:layout_marginBottom="20dp"/>
 
             <Button
-                android:id="@+id/FacebookButton"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:background="@drawable/button_beige"
-                android:fontFamily="@font/poppinsregular"
-                android:text="Continue with Facebook"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                android:layout_below="@+id/GoogleButton"
-                android:layout_marginBottom="20dp"/>
-
-            <Button
                 android:id="@+id/signUpButton"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
@@ -91,7 +79,7 @@
                 android:text="Sign Up with Email"
                 android:textColor="@color/violet"
                 android:textSize="18sp"
-                android:layout_below="@id/FacebookButton"
+                android:layout_below="@id/GoogleButton"
                 android:layout_marginBottom="20dp"/>
 
             <LinearLayout
