@@ -78,6 +78,7 @@ public class Fragment_Home_ApplicationForm extends AppCompatActivity {
                 FirebaseUser currentUser = auth.getCurrentUser();
 
                 String adopterID = currentUser.getUid();
+                int remarks = 0;
                 String date_applied = getCurrentDate();
                 int status = 0;
                 String applicationID = SecureRandomIdGenerator.generateSecureRandomId();
@@ -113,6 +114,7 @@ public class Fragment_Home_ApplicationForm extends AppCompatActivity {
                         df.child(applicationID).child("reason").setValue(reason);
                         df.child(applicationID).child("date_applied").setValue(date_applied);
                         df.child(applicationID).child("status").setValue(status);
+                        df.child(applicationID).child("remarks").setValue(remarks);
 
                         Toast.makeText(Fragment_Home_ApplicationForm.this, "Application Form Sent!", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(Fragment_Home_ApplicationForm.this, Fragment_LogIn_Home.class));
