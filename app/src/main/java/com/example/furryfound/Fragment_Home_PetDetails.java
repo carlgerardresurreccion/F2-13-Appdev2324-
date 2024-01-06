@@ -48,9 +48,9 @@ public class Fragment_Home_PetDetails extends AppCompatActivity {
 
         ImageView image = findViewById(R.id.PetProfile);
         TextView name = findViewById(R.id.PetName);
-        TextView genderandbreed = findViewById(R.id.PetGenderAndBreed);
+        TextView genderandtype = findViewById(R.id.PetGenderAndType);
         EditText age = findViewById(R.id.PetAge);
-        EditText color = findViewById(R.id.PetColor);
+        EditText breed = findViewById(R.id.PetBreed);
         EditText weight = findViewById(R.id.PetWeight);
         EditText dateArrived = findViewById(R.id.PetDateArrived);
         EditText daysAtShelter = findViewById(R.id.PetDaysAtTheShelter);
@@ -76,9 +76,9 @@ public class Fragment_Home_PetDetails extends AppCompatActivity {
 
             name.setText(pet.getName());
             age.setText(pet.getAge());
-            genderandbreed.setText(pet.getGender() + ", " + pet.getType());
-            color.setText(pet.getColor());
-            weight.setText(String.valueOf(pet.getWeight()));
+            genderandtype.setText(pet.getGender() + ", " + pet.getType());
+            breed.setText(pet.getBreed());
+            weight.setText(pet.getWeight());
             dateArrived.setText(String.valueOf(pet.getDateArrived()));
             daysAtShelter.setText(String.valueOf(pet.getDaysAtShelter()));
             description.setText(pet.getDescription());

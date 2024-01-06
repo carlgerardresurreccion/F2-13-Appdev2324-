@@ -118,6 +118,7 @@ public class Fragment_Notifications extends Fragment {
                                                                 applicationId
                                                         );
                                                         newItem.setApplicationId(applicationId);
+                                                        newItem.setPetName(petSnapshot.child("name").getValue(String.class));
                                                         newItem.setFeedback(applicationSnapshot.child("feedback").getValue(String.class));
                                                         newItem.setRemarks(applicationSnapshot.child("remarks").getValue(Integer.class));
                                                         notificationList.add(newItem);

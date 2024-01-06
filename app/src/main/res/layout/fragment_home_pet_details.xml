@@ -81,7 +81,7 @@
                         android:layout_weight="1"/>
 
                     <TextView
-                        android:id="@+id/PetGenderAndBreed"
+                        android:id="@+id/PetGenderAndType"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="20sp"
@@ -109,7 +109,7 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="Color"
+                        android:text="Breed"
                         android:textSize="16sp"
                         android:textColor="@color/grey"
                         android:fontFamily="@font/poppinssemibold"
@@ -149,7 +149,7 @@
                         android:editable="false"/>
 
                     <EditText
-                        android:id="@+id/PetColor"
+                        android:id="@+id/PetBreed"
                         android:layout_width="0dp"
                         android:layout_height="40dp"
                         android:layout_weight="1"
@@ -265,6 +265,7 @@
                         android:paddingRight="10dp"
                         android:paddingTop="5dp"
                         android:paddingBottom="5dp"
+                        android:layout_marginBottom="100dp"
                         android:fontFamily="@font/poppinslight"
                         android:layout_marginTop="10dp"
                         android:editable="false"/>

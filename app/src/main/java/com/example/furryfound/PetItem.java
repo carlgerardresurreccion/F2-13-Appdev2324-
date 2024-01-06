@@ -21,9 +21,8 @@ public class PetItem implements Parcelable {
 
     }
 
-    public PetItem(String age, String color, String breed, String dateArrived, int daysAtShelter, String description, String imageUrl, String gender, String name, String pet_id, String shelter_id, int status, String type, String weight) {
+    public PetItem(String age, String breed, String dateArrived, int daysAtShelter, String description, String imageUrl, String gender, String name, String pet_id, String shelter_id, int status, String type, String weight) {
         this.name = name;
-        this.color = color;
         this.type = type;
         this.status = status;
         this.imageUrl = imageUrl;
@@ -154,7 +153,7 @@ public class PetItem implements Parcelable {
 
     protected PetItem(Parcel in) {
         name = in.readString();
-        color = in.readString();
+        breed = in.readString();
         type = in.readString();
         imageUrl = in.readString();
         description = in.readString();
@@ -171,7 +170,7 @@ public class PetItem implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(name);
-        dest.writeString(color);
+        dest.writeString(breed);
         dest.writeString(type);
         dest.writeString(imageUrl);
         dest.writeString(description);
