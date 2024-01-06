@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.appcompat.widget.SearchView;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
@@ -49,6 +50,7 @@ public class Fragment_Home extends Fragment implements PetDetailsOnClick {
         recyclerView = view.findViewById(R.id.GridDisplayPets);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+
 
         allPetsList = new ArrayList<>(); // Initialize full list
         dataList = new ArrayList<>(); // List for adapter
@@ -160,6 +162,8 @@ public class Fragment_Home extends Fragment implements PetDetailsOnClick {
     @Override
     public void onResume() {
         super.onResume();
+        recyclerView.setLayoutManager(null);
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         loadUserProfile(); // Refresh user profile when fragment resumes
         fetchAndDisplayPets(); // Fetch and display pets
     }
