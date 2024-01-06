@@ -15,14 +15,36 @@
         android:text="Notifications"
         android:fontFamily="@font/poppinsregular"
         android:textSize="24sp"
-        android:textColor="@color/black" />
+        android:textColor="@color/black"
+        android:minHeight="?attr/actionBarSize"/>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="-40dp"
+        android:minHeight="?attr/actionBarSize">
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="All" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Unread" />
+    </com.google.android.material.tabs.TabLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/notificationRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="8dp"/>
-<!--    <LinearLayout-->
+        android:layout_height="580dp"
+        android:layout_below="@id/tabs" />
+    <!--    <LinearLayout-->
 <!--        android:id="@+id/top"-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="40dp">-->

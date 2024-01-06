@@ -7,9 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -17,27 +18,44 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class Fragment_Notifications extends Fragment {
-    private FirebaseDatabase database;
-    private DatabaseReference df;
+    private RecyclerView recyclerView;
     private List<NotificationItem> notificationList;
     private NotificationAdapter notificationAdapter;
+    private FirebaseDatabase database;
+    private List<NotificationItem> allNotifications = new ArrayList<>();
+    private List<NotificationItem> unreadNotifications = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment__notifications, container, false);
 
-        RecyclerView recyclerView = view.findViewById(R.id.notificationRecyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+        recyclerView = view.findViewById(R.id.notificationRecyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         notificationList = new ArrayList<>();
         notificationAdapter = new NotificationAdapter(notificationList, new NotificationAdapter.OnNotificationClickListener() {
             @Override
             public void onNotificationClick(NotificationItem item) {
                 showNotificationDetails(item);
+
+                // Handle notification click
+                if (item.isRead() == 0) {
+                    item.setRead(1);
+                    unreadNotifications.remove(item); // Remove from unread list
+                    notificationAdapter.notifyItemChanged(notificationList.indexOf(item));
+                    updateNotificationReadStatusInFirebase(item.getApplicationId());
+                }
             }
         });
         recyclerView.setAdapter(notificationAdapter);
@@ -45,8 +63,36 @@ public class Fragment_Notifications extends Fragment {
         database = FirebaseDatabase.getInstance("https://furry-found-default-rtdb.asia-southeast1.firebasedatabase.app");
         updateNotificationList();
 
+        TabLayout tabLayout = view.findViewById(R.id.tabs);
+        tabLayout.bringToFront();
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                filterNotifications(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+                filterNotifications(tab.getPosition());
+            }
+        });
+
         return view;
     }
+
+    private void filterNotifications(int position) {
+        if (position == 0) {
+            notificationAdapter.updateData(new ArrayList<>(allNotifications)); // Use a copy for the adapter
+        } else {
+            notificationAdapter.updateData(new ArrayList<>(unreadNotifications)); // Use a copy for the adapter
+        }
+    }
+
+
 
     private void showNotificationDetails(NotificationItem item) {
         Log.d("NotificationClick", "Remarks value: " + item.getRemarks());
@@ -79,6 +125,10 @@ public class Fragment_Notifications extends Fragment {
                     .addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            // Clear the lists to avoid duplication
+                            allNotifications.clear();
+                            unreadNotifications.clear();
+
                             for (DataSnapshot applicationSnapshot : dataSnapshot.getChildren()) {
                                 String applicationId = applicationSnapshot.getKey();
                                 Integer remarks = applicationSnapshot.child("remarks").getValue(Integer.class);
@@ -117,11 +167,33 @@ public class Fragment_Notifications extends Fragment {
                                                                 message,
                                                                 applicationId
                                                         );
+                                                        newItem.setDateCancelled(applicationSnapshot.child("date_cancelled").getValue(String.class));
+                                                        newItem.setDateDisapproved(applicationSnapshot.child("date_disapproved").getValue(String.class));
+                                                        newItem.setDateApproved(applicationSnapshot.child("date_approved").getValue(String.class));
+                                                        newItem.setDateConfirmationSent(applicationSnapshot.child("date_confirmation_sent").getValue(String.class));
+                                                        newItem.setRead(applicationSnapshot.child("is_read").getValue(Integer.class));
                                                         newItem.setApplicationId(applicationId);
                                                         newItem.setPetName(petSnapshot.child("name").getValue(String.class));
                                                         newItem.setFeedback(applicationSnapshot.child("feedback").getValue(String.class));
                                                         newItem.setRemarks(applicationSnapshot.child("remarks").getValue(Integer.class));
                                                         notificationList.add(newItem);
+
+                                                        // After populating notificationList
+                                                        for (NotificationItem item : notificationList) {
+                                                            Date latestDate = getLatestDate(item);
+                                                            item.setLatestDate(latestDate);
+                                                        }
+
+                                                        allNotifications.add(newItem);
+
+                                                        if (newItem.isRead() == 0) {
+                                                            unreadNotifications.add(newItem);
+                                                        }
+
+                                                        // After populating the lists, sort them
+                                                        sortNotifications(allNotifications);
+                                                        sortNotifications(unreadNotifications);
+
                                                         notificationAdapter.notifyDataSetChanged();
                                                     }
 
@@ -149,4 +221,52 @@ public class Fragment_Notifications extends Fragment {
                     });
         }
     }
+
+    private void sortNotifications(List<NotificationItem> listToSort) {
+        Collections.sort(listToSort, (o1, o2) -> {
+            Date date1 = getLatestDate(o1);
+            Date date2 = getLatestDate(o2);
+            return date2.compareTo(date1); // For descending order
+        });
+    }
+
+    private Date getLatestDate(NotificationItem item) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        Date latestDate = null;
+        try {
+            if (item.getDateApproved() != null) {
+                Date dateApproved = sdf.parse(item.getDateApproved());
+                latestDate = updateLatestDate(latestDate, dateApproved);
+            }
+            if (item.getDateDisapproved() != null) {
+                Date dateDisapproved = sdf.parse(item.getDateDisapproved());
+                latestDate = updateLatestDate(latestDate, dateDisapproved);
+            }
+            if (item.getDateCancelled() != null) {
+                Date dateCancelled = sdf.parse(item.getDateCancelled());
+                latestDate = updateLatestDate(latestDate, dateCancelled);
+            }
+            if (item.getDateConfirmationSent() != null) {
+                Date dateConfirmationSent = sdf.parse(item.getDateConfirmationSent());
+                latestDate = updateLatestDate(latestDate, dateConfirmationSent);
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return latestDate;
+    }
+
+    private Date updateLatestDate(Date currentLatest, Date newDate) {
+        if (currentLatest == null || newDate.after(currentLatest)) {
+            return newDate;
+        }
+        return currentLatest;
+    }
+
+    private void updateNotificationReadStatusInFirebase(String applicationId) {
+        DatabaseReference notificationRef = database.getReference("applicationform").child(applicationId);
+        notificationRef.child("is_read").setValue(1);
+    }
+
+
 }

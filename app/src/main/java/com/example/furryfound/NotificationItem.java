@@ -1,5 +1,7 @@
 package com.example.furryfound;
 
+import java.util.Date;
+
 public class NotificationItem {
 
     private int remarks;
@@ -10,6 +12,12 @@ public class NotificationItem {
     private String message;
     private String feedback;
     private String application_id;
+    private int isRead;
+    private Date latestDate;
+    private String dateApproved;
+    private String dateDisapproved;
+    private String dateCancelled;
+    private String dateConfirmationSent;
 
     public NotificationItem(String shelter_name, String profile_picture, String message, String application_id) {
         this.shelter_name = shelter_name;
@@ -97,6 +105,58 @@ public class NotificationItem {
         } else {
             return ""; // or some default message
         }
+    }
+
+
+
+
+    // Add getters and setters for new fields
+    public int isRead() {
+        return isRead;
+    }
+
+    public void setRead(int isRead) {
+        this.isRead = isRead;
+    }
+
+    public Date getLatestDate() {
+        return latestDate;
+    }
+
+    public void setLatestDate(Date latestDate) {
+        this.latestDate = latestDate;
+    }
+
+    public String getDateApproved() {
+        return dateApproved;
+    }
+
+    public void setDateApproved(String dateApproved) {
+        this.dateApproved = dateApproved;
+    }
+
+    public String getDateDisapproved() {
+        return dateDisapproved;
+    }
+
+    public void setDateDisapproved(String dateDisapproved) {
+        this.dateDisapproved = dateDisapproved;
+    }
+
+    public String getDateCancelled() {
+        return dateCancelled;
+    }
+
+    public void setDateCancelled(String dateCancelled) {
+        this.dateCancelled = dateCancelled;
+    }
+
+    public String getDateConfirmationSent() {
+        return dateConfirmationSent;
+    }
+
+    public void setDateConfirmationSent(String dateConfirmationSent) {
+        this.dateConfirmationSent = dateConfirmationSent;
     }
 
 }

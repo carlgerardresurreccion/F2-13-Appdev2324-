@@ -1,5 +1,7 @@
 package com.example.furryfound;
 
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +15,8 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.ViewHolder> {
-    private List<NotificationItem> notificationList;
-    private OnNotificationClickListener listener;
+    private final List<NotificationItem> notificationList;
+    private final OnNotificationClickListener listener;
 
     public NotificationAdapter(List<NotificationItem> notificationList, OnNotificationClickListener listener) {
         this.notificationList = notificationList;
@@ -36,6 +38,14 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         NotificationItem item = notificationList.get(position);
         holder.bind(item);
+
+        if (item.isRead() == 0) {
+            holder.feedbackTextView.setTypeface(null, Typeface.BOLD);
+            holder.feedbackTextView.setTextColor(Color.BLACK);
+        } else {
+            holder.feedbackTextView.setTypeface(null, Typeface.NORMAL);
+            holder.feedbackTextView.setTextColor(Color.BLACK);
+        }
     }
 
     @Override
@@ -44,7 +54,6 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView messageTextView;
         private TextView shelterNameTextView;
         private ImageView shelterProfileImageView;
         private TextView feedbackTextView;
@@ -80,5 +89,11 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             }
         }
 
+    }
+
+    public void updateData(List<NotificationItem> newNotificationList) {
+        notificationList.clear();
+        notificationList.addAll(newNotificationList);
+        notifyDataSetChanged();
     }
 }
