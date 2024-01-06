@@ -52,7 +52,7 @@ public class Fragment_Notifications extends Fragment {
                 // Handle notification click
                 if (item.isRead() == 0) {
                     item.setRead(1);
-                    unreadNotifications.remove(item); // Remove from unread list
+                    unreadNotifications.remove(item);
                     notificationAdapter.notifyItemChanged(notificationList.indexOf(item));
                     updateNotificationReadStatusInFirebase(item.getApplicationId());
                 }
@@ -86,9 +86,9 @@ public class Fragment_Notifications extends Fragment {
 
     private void filterNotifications(int position) {
         if (position == 0) {
-            notificationAdapter.updateData(new ArrayList<>(allNotifications)); // Use a copy for the adapter
+            notificationAdapter.updateData(new ArrayList<>(allNotifications));
         } else {
-            notificationAdapter.updateData(new ArrayList<>(unreadNotifications)); // Use a copy for the adapter
+            notificationAdapter.updateData(new ArrayList<>(unreadNotifications));
         }
     }
 
@@ -101,7 +101,7 @@ public class Fragment_Notifications extends Fragment {
         // Passing data to the new Fragment
         Bundle bundle = new Bundle();
         bundle.putString("application_id", item.getApplicationId());
-        bundle.putString("petName", item.getPetName()); // Ensure these getters exist
+        bundle.putString("petName", item.getPetName());
         bundle.putString("shelterName", item.getShelterName());
         bundle.putString("message", item.getMessage());
         bundle.putString("feedback", item.getFeedback());
@@ -160,13 +160,13 @@ public class Fragment_Notifications extends Fragment {
                                                             message = "";
                                                         }
 
-
                                                         NotificationItem newItem = new NotificationItem(
                                                                 shelterName,
                                                                 profilePictureUrl,
                                                                 message,
                                                                 applicationId
                                                         );
+
                                                         newItem.setDateCancelled(applicationSnapshot.child("date_cancelled").getValue(String.class));
                                                         newItem.setDateDisapproved(applicationSnapshot.child("date_disapproved").getValue(String.class));
                                                         newItem.setDateApproved(applicationSnapshot.child("date_approved").getValue(String.class));
@@ -190,7 +190,8 @@ public class Fragment_Notifications extends Fragment {
                                                             unreadNotifications.add(newItem);
                                                         }
 
-                                                        // After populating the lists, sort them
+                                                        // Sort all lists
+                                                        sortNotifications(notificationList);
                                                         sortNotifications(allNotifications);
                                                         sortNotifications(unreadNotifications);
 
@@ -223,10 +224,19 @@ public class Fragment_Notifications extends Fragment {
     }
 
     private void sortNotifications(List<NotificationItem> listToSort) {
-        Collections.sort(listToSort, (o1, o2) -> {
-            Date date1 = getLatestDate(o1);
-            Date date2 = getLatestDate(o2);
-            return date2.compareTo(date1); // For descending order
+        Collections.sort(listToSort, new Comparator<NotificationItem>() {
+            @Override
+            public int compare(NotificationItem o1, NotificationItem o2) {
+                Date date1 = getLatestDate(o1);
+                Date date2 = getLatestDate(o2);
+                if (date1 == null) {
+                    return (date2 == null) ? 0 : 1;
+                }
+                if (date2 == null) {
+                    return -1;
+                }
+                return date2.compareTo(date1); // For descending order
+            }
         });
     }
 

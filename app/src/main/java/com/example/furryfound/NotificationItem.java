@@ -33,7 +33,7 @@ public class NotificationItem {
 
     }
 
-    // Getters
+    // GETTERS
     public int getRemarks() {
         return remarks;
     }
@@ -66,7 +66,32 @@ public class NotificationItem {
         return application_id;
     }
 
-    // Setters
+    public int isRead() {
+        return isRead;
+    }
+
+    public Date getLatestDate() {
+        return latestDate;
+    }
+
+    public String getDateApproved() {
+        return dateApproved;
+    }
+
+    public String getDateDisapproved() {
+        return dateDisapproved;
+    }
+
+    public String getDateCancelled() {
+        return dateCancelled;
+    }
+
+    public String getDateConfirmationSent() {
+        return dateConfirmationSent;
+    }
+
+
+    // SETTERS
     public void setRemarks(int remarks) {
         this.remarks = remarks;
     }
@@ -90,6 +115,7 @@ public class NotificationItem {
     public void setMessage(String message) {
         this.message = message;
     }
+
     public void setFeedback(String feedback) {
         this.feedback = feedback;
     }
@@ -98,7 +124,32 @@ public class NotificationItem {
         this.application_id = application_id;
     }
 
+    public void setRead(int isRead) {
+        this.isRead = isRead;
+    }
 
+    public void setLatestDate(Date latestDate) {
+        this.latestDate = latestDate;
+    }
+
+    public void setDateApproved(String dateApproved) {
+        this.dateApproved = dateApproved;
+    }
+
+    public void setDateDisapproved(String dateDisapproved) {
+        this.dateDisapproved = dateDisapproved;
+    }
+
+    public void setDateCancelled(String dateCancelled) {
+        this.dateCancelled = dateCancelled;
+    }
+
+    public void setDateConfirmationSent(String dateConfirmationSent) {
+        this.dateConfirmationSent = dateConfirmationSent;
+    }
+
+
+    // METHODS
     public String getFirstLineOfMessage() {
         if (message != null && !message.isEmpty()) {
             return message.split("\n", 2)[0];
@@ -106,57 +157,4 @@ public class NotificationItem {
             return ""; // or some default message
         }
     }
-
-
-
-
-    // Add getters and setters for new fields
-    public int isRead() {
-        return isRead;
-    }
-
-    public void setRead(int isRead) {
-        this.isRead = isRead;
-    }
-
-    public Date getLatestDate() {
-        return latestDate;
-    }
-
-    public void setLatestDate(Date latestDate) {
-        this.latestDate = latestDate;
-    }
-
-    public String getDateApproved() {
-        return dateApproved;
-    }
-
-    public void setDateApproved(String dateApproved) {
-        this.dateApproved = dateApproved;
-    }
-
-    public String getDateDisapproved() {
-        return dateDisapproved;
-    }
-
-    public void setDateDisapproved(String dateDisapproved) {
-        this.dateDisapproved = dateDisapproved;
-    }
-
-    public String getDateCancelled() {
-        return dateCancelled;
-    }
-
-    public void setDateCancelled(String dateCancelled) {
-        this.dateCancelled = dateCancelled;
-    }
-
-    public String getDateConfirmationSent() {
-        return dateConfirmationSent;
-    }
-
-    public void setDateConfirmationSent(String dateConfirmationSent) {
-        this.dateConfirmationSent = dateConfirmationSent;
-    }
-
 }

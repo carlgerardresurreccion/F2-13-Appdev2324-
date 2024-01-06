@@ -115,6 +115,7 @@ public class Fragment_Home_ApplicationForm extends AppCompatActivity {
                         df.child(applicationID).child("date_applied").setValue(date_applied);
                         df.child(applicationID).child("status").setValue(status);
                         df.child(applicationID).child("remarks").setValue(remarks);
+                        df.child(applicationID).child("is_read").setValue(0);
 
                         Toast.makeText(Fragment_Home_ApplicationForm.this, "Application Form Sent!", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(Fragment_Home_ApplicationForm.this, Fragment_LogIn_Home.class));
