@@ -58,7 +58,8 @@
                 android:gravity="left"
                 android:text="Pet Name:"
                 android:textColor="@color/black"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                />
 
             <EditText
                 android:id="@+id/petName"

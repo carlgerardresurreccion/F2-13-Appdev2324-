@@ -80,6 +80,7 @@ public class Fragment_NotificationDetails extends Fragment {
             cancelBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    cancelUpdateStatus(applicationId, true);
                     Fragment_CancelApplication cancelFragment = new Fragment_CancelApplication();
 
                     Bundle cancelBundle = new Bundle();
@@ -112,7 +113,7 @@ public class Fragment_NotificationDetails extends Fragment {
             confirmBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    updateStatus(applicationId);
+                    confirmUpdateStatus(applicationId);
 
                     Fragment_ConfirmApplication confirmFragment = new Fragment_ConfirmApplication();
 
@@ -130,7 +131,42 @@ public class Fragment_NotificationDetails extends Fragment {
         return view;
     }
 
-    private void updateStatus(String applicationId) {
+    private void cancelUpdateStatus(String applicationId, boolean isCancellation) {
+        DatabaseReference applicationRef = FirebaseDatabase.getInstance().getReference("applicationform").child(applicationId);
+
+        applicationRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot applicationSnapshot) {
+                if (applicationSnapshot.exists()) {
+                    // Get the pet_id from the application data
+                    String petId = applicationSnapshot.child("pet_id").getValue(String.class);
+
+                    if (isCancellation && petId != null && !petId.isEmpty()) {
+                        // Update the pet status in the pets node to 0 (available)
+                        DatabaseReference petRef = FirebaseDatabase.getInstance().getReference("pets").child(petId);
+                        petRef.child("status").setValue(0)
+                                .addOnSuccessListener(aVoid -> {
+                                    // Handle success for pet status update
+                                })
+                                .addOnFailureListener(e -> {
+                                    // Handle failure
+                                });
+
+                        // Update the application status to 1 and remarks to -1
+                        applicationRef.child("status").setValue(1);
+                        applicationRef.child("remarks").setValue(-1);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Handle error
+            }
+        });
+    }
+
+    private void confirmUpdateStatus(String applicationId) {
         DatabaseReference applicationRef = FirebaseDatabase.getInstance().getReference("applicationform").child(applicationId);
 
         applicationRef.addListenerForSingleValueEvent(new ValueEventListener() {
