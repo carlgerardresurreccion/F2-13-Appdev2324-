@@ -10,10 +10,14 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Fragment_NotificationDetails extends Fragment {
 
@@ -128,11 +132,31 @@ public class Fragment_NotificationDetails extends Fragment {
 
     private void updateStatus(String applicationId) {
         DatabaseReference applicationRef = FirebaseDatabase.getInstance().getReference("applicationform").child(applicationId);
-        applicationRef.child("status").setValue(1)
-                .addOnSuccessListener(aVoid -> {
-                })
-                .addOnFailureListener(e -> {
-                    // Handle failure
-                });
+
+        // First, retrieve the pet_id from the applicationform
+        applicationRef.child("pet_id").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    String petId = snapshot.getValue(String.class);
+                    if (petId != null && !petId.isEmpty()) {
+                        // Update the pet status in the pets node
+                        DatabaseReference petRef = FirebaseDatabase.getInstance().getReference("pets").child(petId);
+                        petRef.child("status").setValue(1)
+                                .addOnSuccessListener(aVoid -> {
+                                    // Handle success
+                                })
+                                .addOnFailureListener(e -> {
+                                    // Handle failure
+                                });
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Handle error
+            }
+        });
     }
 }
