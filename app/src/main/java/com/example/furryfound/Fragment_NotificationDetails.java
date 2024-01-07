@@ -133,18 +133,27 @@ public class Fragment_NotificationDetails extends Fragment {
     private void updateStatus(String applicationId) {
         DatabaseReference applicationRef = FirebaseDatabase.getInstance().getReference("applicationform").child(applicationId);
 
-        // First, retrieve the pet_id from the applicationform
-        applicationRef.child("pet_id").addListenerForSingleValueEvent(new ValueEventListener() {
+        applicationRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    String petId = snapshot.getValue(String.class);
+            public void onDataChange(@NonNull DataSnapshot applicationSnapshot) {
+                if (applicationSnapshot.exists()) {
+                    // Update the application status
+                    applicationRef.child("status").setValue(1)
+                            .addOnSuccessListener(aVoid -> {
+                                // Handle success for application status update
+                            })
+                            .addOnFailureListener(e -> {
+                                // Handle failure
+                            });
+
+                    // Get the pet_id from the application data
+                    String petId = applicationSnapshot.child("pet_id").getValue(String.class);
                     if (petId != null && !petId.isEmpty()) {
                         // Update the pet status in the pets node
                         DatabaseReference petRef = FirebaseDatabase.getInstance().getReference("pets").child(petId);
-                        petRef.child("status").setValue(1)
+                        petRef.child("status").setValue(2)
                                 .addOnSuccessListener(aVoid -> {
-                                    // Handle success
+                                    // Handle success for pet status update
                                 })
                                 .addOnFailureListener(e -> {
                                     // Handle failure
