@@ -143,7 +143,7 @@ public class Fragment_Home extends Fragment implements PetDetailsOnClick {
                 allPetsList.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     PetItem pet = dataSnapshot.getValue(PetItem.class);
-                    if (pet != null) {
+                    if (pet != null && pet.getStatus() == 0) {
                         allPetsList.add(pet);
                     }
                 }

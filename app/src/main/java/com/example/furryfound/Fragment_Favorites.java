@@ -70,7 +70,6 @@ public class Fragment_Favorites extends Fragment implements PetDetailsOnClick {
                             String petId = dataSnapshot.child("pet_id").getValue(String.class);
                             if (petId != null) {
                                 petIDs.add(petId);
-                                Log.d("PETID", "PET ID:" + petId);
                             }
                         }
                         fetchPetsDetails(petIDs);
@@ -91,7 +90,7 @@ public class Fragment_Favorites extends Fragment implements PetDetailsOnClick {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     PetItem pet = snapshot.getValue(PetItem.class);
-                    if (pet != null) {
+                    if (pet != null && pet.getStatus() == 0) {
                         favoritePets.add(pet);
 
                         if (adapter != null) {
