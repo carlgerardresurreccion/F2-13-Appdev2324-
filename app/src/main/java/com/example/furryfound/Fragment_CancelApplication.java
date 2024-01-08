@@ -19,7 +19,27 @@ public class Fragment_CancelApplication extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.notification_cancel_application, container, false);
 
-        Bundle args = getArguments();
+        Button dismissBtn = view.findViewById(R.id.dismissBtn);
+        if (dismissBtn != null) {
+            dismissBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Fragment_Notifications notificationsFragment = new Fragment_Notifications();
+
+                    // Assuming you're using the support FragmentManager and R.id.FragmentContainer is your container ID
+                    if (getFragmentManager() != null) {
+                        getFragmentManager().beginTransaction()
+                                .replace(R.id.FragmentContainer, notificationsFragment)
+                                .commit();
+                    }
+                }
+            });
+
+        }
+
+        return view;
+    }
+        /*Bundle args = getArguments();
         String applicationId = args != null ? args.getString("application_id", "") : "";
 
         EditText reasonForCancellationEditText = view.findViewById(R.id.reasonForCancellation);
@@ -59,5 +79,5 @@ public class Fragment_CancelApplication extends Fragment {
                 .addOnFailureListener(e -> {
                     // Handle failure
                 });
-    }
+    }*/
 }

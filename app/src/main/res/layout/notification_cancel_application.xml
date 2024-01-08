@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Fragment_NotificationDetails"
-    android:background="@drawable/background_beige"
+    android:background="@drawable/thankyou"
     android:paddingRight="20dp"
     android:paddingLeft="20dp">
 
@@ -15,118 +15,73 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:layout_marginTop="100dp"
+            android:src="@drawable/welcome_4" />
+
         <LinearLayout
             android:id="@+id/topgreetings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp">
+            android:layout_marginTop="310dp">
 
-            <ImageButton
-                android:id="@+id/backButton"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:paddingRight="10dp"
-                android:src="@drawable/back_arrow_black"
-                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="70dp"
                 android:fontFamily="@font/poppinsregular"
-                android:text="Cancel Application"
+                android:paddingTop="5dp"
+                android:text="Adoption Cancelled!"
+                android:textAlignment="center"
                 android:textColor="@color/black"
-                android:textSize="24sp"
-                android:paddingTop="5dp"/>
+                android:textSize="24sp" />
+
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/top1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center_horizontal"
-            android:layout_marginTop="50dp"
-            android:layout_below="@+id/topgreetings">
-
-            <!--            <TextView-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_marginTop="10dp"-->
-            <!--                android:fontFamily="@font/poppinsregular"-->
-            <!--                android:gravity="center_horizontal"-->
-            <!--                android:text="Please fill out this form"-->
-            <!--                android:textColor="@color/black"-->
-            <!--                android:textSize="18sp" />-->
+            android:layout_marginTop="350dp">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
                 android:fontFamily="@font/poppinsregular"
-                android:gravity="left"
-                android:text="Reason for cancellation:"
+                android:paddingTop="5dp"
+                android:text="Your pets won't be going anywhere. See you around.🐾"
+                android:textAlignment="center"
                 android:textColor="@color/black"
-                android:textSize="14sp" />
-
-            <EditText
-                android:id="@+id/reasonForCancellation"
-                android:layout_width="match_parent"
-                android:layout_height="344dp"
-                android:layout_below="@+id/EmailText"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/input_box"
-                android:drawablePadding="10dp"
-                android:fontFamily="@font/poppinsregular"
-                android:paddingLeft="15dp"
-                android:paddingTop="0dp"
-                android:paddingRight="8dp"
-                android:paddingBottom="0dp"
-                android:textColor="@color/grey"
-                android:textSize="15sp" />
-
-            <!--            <TextView-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_marginTop="20dp"-->
-            <!--                android:fontFamily="@font/poppinsregular"-->
-            <!--                android:gravity="left"-->
-            <!--                android:text="Number of pets owned at the moment:"-->
-            <!--                android:textColor="@color/black"-->
-            <!--                android:textSize="14sp" />-->
-
-            <!--            <EditText-->
-            <!--                android:id="@+id/petsOwned"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="40dp"-->
-            <!--                android:layout_below="@+id/EmailText"-->
-            <!--                android:layout_marginTop="20dp"-->
-            <!--                android:background="@drawable/input_box"-->
-            <!--                android:drawableLeft="@android:drawable/btn_star_big_off"-->
-            <!--                android:drawablePadding="10dp"-->
-            <!--                android:fontFamily="@font/poppinsregular"-->
-            <!--                android:paddingLeft="15dp"-->
-            <!--                android:paddingTop="0dp"-->
-            <!--                android:paddingBottom="0dp"-->
-            <!--                android:paddingRight="8dp"-->
-            <!--                android:textColor="@color/grey"-->
-            <!--                android:textSize="18sp" />-->
-
+                android:textSize="18sp" />
 
         </LinearLayout>
+
+
     </RelativeLayout>
 
     <Button
-        android:id="@+id/cancelApplicationBtn"
+        android:id="@+id/dismissBtn"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="25dp"
+        android:layout_alignBottom="@+id/top"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="50dp"
         android:background="@drawable/button_teal"
         android:fontFamily="@font/poppinsregular"
-        android:text="Cancel Application"
+        android:text="Dismiss"
         android:textAllCaps="false"
         android:textColor="@color/black"
         android:textSize="22sp"
-        android:layout_alignBottom="@+id/top"
-        android:layout_marginBottom="15dp"/>
+        />
 
 </RelativeLayout>
